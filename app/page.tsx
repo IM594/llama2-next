@@ -1,3 +1,4 @@
+import Chat from '@/pages/chat'
 import Image from 'next/image'
 
 export default function Home() {
