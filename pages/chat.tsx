@@ -1,73 +1,75 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
+import { Card } from "antd";
+import MessageList from "../components/MessageList";
+import ChatInput from "../components/ChatInput";
 
-function Chat() {
+const Chat = () => {
   const [messages, setMessages] = useState([]);
-  const [inputText, setInputText] = useState('');
+  const [inputText, setInputText] = useState("");
+
+  useEffect(() => {
+    const eventSource = new EventSource("http://127.0.0.1:6006/v1/chat/completions");
+
+    eventSource.onmessage = (event) => {
+      const assistantMessage = JSON.parse(event.data);
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        assistantMessage
+      ]);
+    };
+
+    eventSource.onerror = (error) => {
+      console.error("Error with EventSource:", error);
+    };
+
+    return () => {
+      eventSource.close();
+    };
+  }, []);
 
   const handleSubmit = async () => {
-    // 发送用户输入的消息到后端接口
-    const response = await fetch('https://u212727-bf3c-ddcb5d53.beijinga.seetacloud.com/chat', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        messages: [
-          { role: 'user', content: inputText },
-        ],
-      }),
-    });
+    const userMessage = { role: "user", content: inputText };
 
-    if (response.ok) {
-      const data = await response.json();
-      // 提取助手生成的回复内容
-      const assistantMessage = data.choices[0].message.content;
-      // 更新消息列表
-      setMessages([...messages, { role: 'user', content: inputText }, { role: 'assistant', content: assistantMessage }]);
-      setInputText('');
-    }
+    setMessages((prevMessages) => [...prevMessages, userMessage]);
+    setInputText("");
+
+    await fetch("http://127.0.0.1:6006/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userMessage)
+    });
   };
 
   // 清空对话历史
   const handleClear = async () => {
-    // 清空前端消息列表
     setMessages([]);
-    // 调用后端清空对话接口
-    await fetch('https://u212727-bf3c-ddcb5d53.beijinga.seetacloud.com/clear', {
-      method: 'POST',
+    await fetch("https://u212727-bf3c-ddcb5d53.beijinga.seetacloud.com/clear", {
+      method: "POST",
     });
   };
 
   return (
-    <div>
-      <div>
-        {messages.map((message, index) => (
-          <div
-            key={index}
-            style={{
-              padding: '8px',
-              borderRadius: '8px',
-              margin: '4px',
-              backgroundColor: message.role === 'user' ? '#E0E0E0' : '#66BB6A',
-              alignSelf: message.role === 'user' ? 'flex-end' : 'flex-start',
-            }}
-          >
-            {message.content}
+    <Card title="Next Llama 2" style={{ width: "80%", height: "80%", margin: "auto" }}>
+      <div style={{ display: "flex", height: "100%" }}>
+        <div style={{ flex: 3, padding: "10px" }}>
+          <div style={{ overflowY: "auto" }}>
+            <MessageList messages={messages} />
           </div>
-        ))}
+          <br />
+          <div style={{ height: "auto" }}>
+            <ChatInput
+              inputText={inputText}
+              setInputText={setInputText}
+              handleSubmit={handleSubmit}
+              handleClear={handleClear}
+            />
+          </div>
+        </div>
       </div>
-      <div>
-        <input
-          type="text"
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
-          placeholder="Type your message..."
-        />
-        <button onClick={handleSubmit}>Send</button>
-        <button onClick={handleClear}>Clear</button> {/* 添加清空按钮 */}
-      </div>
-    </div>
+    </Card>
   );
-}
+};
 
 export default Chat;
