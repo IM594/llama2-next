@@ -1,11 +1,11 @@
 import { OpenAIApi, Configuration } from "openai";
 import { ChatRequest } from "./typing";
 
-// const apiKey = process.env.OPENAI_API_KEY;
+const apiKey = process.env.OPENAI_API_KEY;
 
 const openai = new OpenAIApi(
   new Configuration({
-    // apiKey,
+    apiKey,
   })
 );
 

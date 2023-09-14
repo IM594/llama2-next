@@ -51,24 +51,24 @@ const Settings = dynamic(async () => (await import("./settings")).Settings, {
   loading: () => <Loading noLogo />,
 });
 
-// const Emoji = dynamic(async () => (await import("emoji-picker-react")).Emoji, {
-//   loading: () => <LoadingIcon />,
-// });
+const Emoji = dynamic(async () => (await import("emoji-picker-react")).Emoji, {
+  loading: () => <LoadingIcon />,
+});
 
 // Avatar 组件
-// export function Avatar(props: { role: Message["role"] }) {
-//   const config = useChatStore((state) => state.config);
+export function Avatar(props: { role: Message["role"] }) {
+  const config = useChatStore((state) => state.config);
 
-//   if (props.role === "assistant") {
-//     return <BotIcon className={styles["user-avtar"]} />;
-//   }
+  if (props.role === "assistant") {
+    return <BotIcon className={styles["user-avtar"]} />;
+  }
 
-//   return (
-//     <div className={styles["user-avtar"]}>
-//       <Emoji unified={config.avatar} size={18} />
-//     </div>
-//   );
-// }
+  return (
+    <div className={styles["user-avtar"]}>
+      <Emoji unified={config.avatar} size={18} />
+    </div>
+  );
+}
 
 // ChatItem 组件
 export function ChatItem(props: {
@@ -320,9 +320,9 @@ export function Chat(props: { showSideBar?: () => void }) {
               }
             >
               <div className={styles["chat-message-container"]}>
-                {/* <div className={styles["chat-message-avatar"]}>
+                <div className={styles["chat-message-avatar"]}>
                   <Avatar role={message.role} />
-                </div> */}
+                </div>
                 {/* {(message.preview || message.streaming) && (
                   <div className={styles["chat-message-status"]}>
                     {Locale.Chat.Typing}

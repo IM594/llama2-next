@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 
-// import EmojiPicker, { Theme as EmojiTheme } from "emoji-picker-react";
+import EmojiPicker, { Theme as EmojiTheme } from "emoji-picker-react";
 
 import styles from "./settings.module.scss";
 
@@ -19,7 +19,7 @@ import {
   // useUpdateStore,
   // useAccessStore,
 } from "../store";
-// import { Avatar } from "./home";
+import { Avatar } from "./home";
 
 import Locale, { changeLang, getLang } from "../locales";
 // import { getCurrentCommitId } from "../utils";
