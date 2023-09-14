@@ -10,7 +10,7 @@ const en: LocaleType = {
     ChatItemCount: (count: number) => `${count} messages`,
   },
   Chat: {
-    SubTitle: (count: number) => `${count} messages with Next Llama 2`,
+    SubTitle: (count: number) => `${count} messages`,
     Actions: {
       ChatList: "Go To Chat List",
       // CompressedHistory: "Compressed History Memory Prompt",
@@ -37,6 +37,7 @@ const en: LocaleType = {
   Home: {
     NewChat: "New Chat",
     DeleteChat: "Confirm to delete the selected conversation?",
+    Settings: "Settings",
   },
   Settings: {
     Title: "Settings",

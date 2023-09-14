@@ -55,20 +55,20 @@ const Emoji = dynamic(async () => (await import("emoji-picker-react")).Emoji, {
   loading: () => <LoadingIcon />,
 });
 
-// Avatar 组件
-export function Avatar(props: { role: Message["role"] }) {
-  const config = useChatStore((state) => state.config);
+// // Avatar 组件
+// export function Avatar(props: { role: Message["role"] }) {
+//   const config = useChatStore((state) => state.config);
 
-  if (props.role === "assistant") {
-    return <BotIcon className={styles["user-avtar"]} />;
-  }
+//   if (props.role === "assistant") {
+//     return <BotIcon className={styles["user-avtar"]} />;
+//   }
 
-  return (
-    <div className={styles["user-avtar"]}>
-      <Emoji unified={config.avatar} size={18} />
-    </div>
-  );
-}
+//   return (
+//     <div className={styles["user-avtar"]}>
+//       <Emoji unified={config.avatar} size={18} />
+//     </div>
+//   );
+// }
 
 // ChatItem 组件
 export function ChatItem(props: {
@@ -190,17 +190,17 @@ export function Chat(props: { showSideBar?: () => void }) {
       e.preventDefault();
     }
   };
-  const onRightClick = (e: any, message: Message) => {
-    // 自动填充用户输入
-    if (message.role === "user") {
-      setUserInput(message.content);
-    }
+  // const onRightClick = (e: any, message: Message) => {
+  //   // 自动填充用户输入
+  //   if (message.role === "user") {
+  //     setUserInput(message.content);
+  //   }
 
-    // 复制到剪贴板
-    if (selectOrCopy(e.currentTarget, message.content)) {
-      e.preventDefault();
-    }
-  };
+  //   // 复制到剪贴板
+  //   if (selectOrCopy(e.currentTarget, message.content)) {
+  //     e.preventDefault();
+  //   }
+  // };
 
   const onResend = (botIndex: number) => {
     // 查找最后一个用户输入消息并重新发送
@@ -247,21 +247,21 @@ export function Chat(props: { showSideBar?: () => void }) {
     );
 
   // 自动滚动
-  useLayoutEffect(() => {
-    setTimeout(() => {
-      const dom = latestMessageRef.current;
-      if (dom && !isIOS() && autoScroll) {
-        dom.scrollIntoView({
-          behavior: "smooth",
-          block: "end",
-        });
-      }
-    }, 500);
-  });
+  // useLayoutEffect(() => {
+  //   setTimeout(() => {
+  //     const dom = latestMessageRef.current;
+  //     if (dom && !isIOS() && autoScroll) {
+  //       dom.scrollIntoView({
+  //         behavior: "smooth",
+  //         block: "end",
+  //       });
+  //     }
+  //   }, 500);
+  // });
 
   return (
     <div className={styles.chat} key={session.id}>
-      <div className={styles["window-header"]}>
+      {/* <div className={styles["window-header"]}>
         <div
           className={styles["window-header-title"]}
           onClick={props?.showSideBar}
@@ -282,7 +282,8 @@ export function Chat(props: { showSideBar?: () => void }) {
               onClick={props?.showSideBar}
             />
           </div>
-          {/* <div className={styles["window-action-button"]}>
+          删除下面
+          <div className={styles["window-action-button"]}>
             <IconButton
               icon={<BrainIcon />}
               bordered
@@ -291,11 +292,11 @@ export function Chat(props: { showSideBar?: () => void }) {
                 showMemoryPrompt(session);
               }}
             />
-          </div> */}
+          </div>
 
-          {/* 现在不要，以后留着 */}
+          现在不要，以后留着
 
-          {/* <div className={styles["window-action-button"]}>
+          <div className={styles["window-action-button"]}>
             <IconButton
               icon={<ExportIcon />}
               bordered
@@ -304,9 +305,9 @@ export function Chat(props: { showSideBar?: () => void }) {
                 exportMessages(session.messages, session.topic);
               }}
             />
-          </div> */}
+          </div>
         </div>
-      </div>
+      </div> */}
 
       <div className={styles["chat-body"]}>
         {messages.map((message, i) => {
@@ -320,16 +321,16 @@ export function Chat(props: { showSideBar?: () => void }) {
               }
             >
               <div className={styles["chat-message-container"]}>
-                <div className={styles["chat-message-avatar"]}>
+                {/* <div className={styles["chat-message-avatar"]}>
                   <Avatar role={message.role} />
-                </div>
+                </div> */}
                 {/* {(message.preview || message.streaming) && (
                   <div className={styles["chat-message-status"]}>
                     {Locale.Chat.Typing}
                   </div>
                 )} */}
                 <div className={styles["chat-message-item"]}>
-                  {!isUser && (
+                  {/* {!isUser && (
                     <div className={styles["chat-message-top-actions"]}>
                       {message.streaming ? (
                         <div
@@ -354,26 +355,26 @@ export function Chat(props: { showSideBar?: () => void }) {
                         {Locale.Chat.Actions.Copy}
                       </div>
                     </div>
-                  )}
+                  )} */}
                   {(message.preview || message.content.length === 0) &&
                   !isUser ? (
                     <LoadingIcon />
                   ) : (
                     <div
                       className="markdown-body"
-                      onContextMenu={(e) => onRightClick(e, message)}
+                      // onContextMenu={(e) => onRightClick(e, message)}
                     >
                       <Markdown content={message.content} />
                     </div>
                   )}
                 </div>
-                {!isUser && !message.preview && (
+                {/* {!isUser && !message.preview && (
                   <div className={styles["chat-message-actions"]}>
                     <div className={styles["chat-message-action-date"]}>
                       {message.date.toLocaleString()}
                     </div>
                   </div>
-                )}
+                )} */}
               </div>
             </div>
           );
@@ -513,15 +514,22 @@ export function Home() {
       <div
         className={styles.sidebar + ` ${showSideBar && styles["sidebar-show"]}`}
       >
-        <div className={styles["sidebar-header"]}>
+        {/* <div className={styles["sidebar-header"]}>
           <div className={styles["sidebar-title"]}>Next Llama 2</div>
           <div className={styles["sidebar-sub-title"]}>
             CS51-1
           </div>
-          {/* <div className={styles["sidebar-logo"]}>
+          <div className={styles["sidebar-logo"]}>
             <ChatGptIcon />
-          </div> */}
-        </div>
+          </div>
+        </div> */}
+        <div className={styles["sidebar-header"]}>
+            <IconButton
+              icon={<AddIcon />}
+              text={Locale.Home.NewChat}
+              onClick={createNewSession}
+            />
+          </div>
 
         <div
           className={styles["sidebar-body"]}
@@ -548,6 +556,7 @@ export function Home() {
             <div className={styles["sidebar-action"]}>
               <IconButton
                 icon={<SettingsIcon />}
+                text={Locale.Home.Settings}
                 onClick={() => {
                   setOpenSettings(true);
                   setShowSideBar(false);
@@ -560,13 +569,13 @@ export function Home() {
               </a>
             </div> */}
           </div>
-          <div>
+          {/* <div>
             <IconButton
               icon={<AddIcon />}
               text={Locale.Home.NewChat}
               onClick={createNewSession}
             />
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -581,6 +590,7 @@ export function Home() {
         ) : (
           <Chat key="chat" showSideBar={() => setShowSideBar(true)} />
         )}
+        
       </div>
     </div>
   );

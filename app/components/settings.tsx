@@ -167,7 +167,7 @@ export function Settings(props: { closeSettings: () => void }) {
             )}
           </SettingItem> */}
 
-          <SettingItem title={Locale.Settings.SendKey}>
+          {/* <SettingItem title={Locale.Settings.SendKey}>
             <select
               value={config.submitKey}
               onChange={(e) => {
@@ -183,7 +183,7 @@ export function Settings(props: { closeSettings: () => void }) {
                 </option>
               ))}
             </select>
-          </SettingItem>
+          </SettingItem> */}
 
           <ListItem>
             <div className={styles["settings-title"]}>
@@ -224,7 +224,7 @@ export function Settings(props: { closeSettings: () => void }) {
             </div>
           </SettingItem>
 
-          <div className="no-mobile">
+          {/* <div className="no-mobile">
             <SettingItem title={Locale.Settings.TightBorder}>
               <input
                 type="checkbox"
@@ -236,7 +236,7 @@ export function Settings(props: { closeSettings: () => void }) {
                 }
               ></input>
             </SettingItem>
-          </div>
+          </div> */}
         </List>
         <List>
           {/* {enabledAccessControl ? (
@@ -257,9 +257,9 @@ export function Settings(props: { closeSettings: () => void }) {
             <></>
           )} */}
 
-          <SettingItem
+          {/* <SettingItem
             title={Locale.Settings.HistoryCount.Title}
-            subTitle={Locale.Settings.HistoryCount.SubTitle}
+            // subTitle={Locale.Settings.HistoryCount.SubTitle}
           >
             <input
               type="range"
@@ -267,7 +267,7 @@ export function Settings(props: { closeSettings: () => void }) {
               value={config.historyMessageCount}
               min="2"
               max="25"
-              step="2"
+              step="1"
               onChange={(e) =>
                 updateConfig(
                   (config) =>
@@ -275,9 +275,9 @@ export function Settings(props: { closeSettings: () => void }) {
                 )
               }
             ></input>
-          </SettingItem>
+          </SettingItem> */}
 
-          <SettingItem
+          {/* <SettingItem
             title={Locale.Settings.CompressThreshold.Title}
             subTitle={Locale.Settings.CompressThreshold.SubTitle}
           >
@@ -294,10 +294,29 @@ export function Settings(props: { closeSettings: () => void }) {
                 )
               }
             ></input>
-          </SettingItem>
+          </SettingItem> */}
         </List>
 
         <List>
+        <SettingItem
+            title={Locale.Settings.HistoryCount.Title}
+            // subTitle={Locale.Settings.HistoryCount.SubTitle}
+          >
+            <input
+              type="range"
+              title={config.historyMessageCount.toString()}
+              value={config.historyMessageCount}
+              min="2"
+              max="25"
+              step="1"
+              onChange={(e) =>
+                updateConfig(
+                  (config) =>
+                    (config.historyMessageCount = e.target.valueAsNumber)
+                )
+              }
+            ></input>
+          </SettingItem>
           {/* <SettingItem title={Locale.Settings.Model}>
             <select
               value={config.modelConfig.model}
@@ -322,7 +341,7 @@ export function Settings(props: { closeSettings: () => void }) {
               type="range"
               value={config.modelConfig.temperature.toFixed(1)}
               min="0"
-              max="1"
+              max="2"
               step="0.1"
               onChange={(e) => {
                 updateConfig(
@@ -333,14 +352,33 @@ export function Settings(props: { closeSettings: () => void }) {
               }}
             ></input>
           </SettingItem>
-          <SettingItem
+          {/* <SettingItem
             title={Locale.Settings.MaxTokens.Title}
             subTitle={Locale.Settings.MaxTokens.SubTitle}
           >
             <input
               type="number"
-              min={100}
+              min={20}
               max={4000}
+              value={config.modelConfig.max_tokens}
+              onChange={(e) =>
+                updateConfig(
+                  (config) =>
+                    (config.modelConfig.max_tokens =
+                      e.currentTarget.valueAsNumber)
+                )
+              }
+            ></input>
+          </SettingItem> */}
+          <SettingItem
+            title={Locale.Settings.MaxTokens.Title}
+            subTitle={Locale.Settings.MaxTokens.SubTitle}
+          >
+            <input
+              type="range"
+              min="20"
+              max="4000"
+              step="20"
               value={config.modelConfig.max_tokens}
               onChange={(e) =>
                 updateConfig(
@@ -360,7 +398,7 @@ export function Settings(props: { closeSettings: () => void }) {
               value={config.modelConfig.presence_penalty.toFixed(1)}
               min="-2"
               max="2"
-              step="0.5"
+              step="0.1"
               onChange={(e) => {
                 updateConfig(
                   (config) =>

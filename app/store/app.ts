@@ -51,7 +51,7 @@ export type ModelConfig = ChatConfig["modelConfig"];
 
 export const ALL_MODELS = [
   {
-    name: "LLaMa-2-7B-chat",
+    name: "LLaMa-2-13B-chat",
     available: true,
   },
 ];
@@ -72,13 +72,13 @@ export function filterConfig(config: ModelConfig): Partial<ModelConfig> {
       return isValidModel(x as string);
     },
     max_tokens(x) {
-      return isValidNumber(x as number, 100, 4000);
+      return isValidNumber(x as number, 20, 4000);
     },
     presence_penalty(x) {
       return isValidNumber(x as number, -2, 2);
     },
     temperature(x) {
-      return isValidNumber(x as number, 0, 1);
+      return isValidNumber(x as number, 0, 2);
     },
   };
 
@@ -93,7 +93,7 @@ export function filterConfig(config: ModelConfig): Partial<ModelConfig> {
 }
 
 const DEFAULT_CONFIG: ChatConfig = {
-  historyMessageCount: 4,
+  historyMessageCount: 10,
   compressMessageLengthThreshold: 1000,
   sendBotMessages: true as boolean,
   submitKey: SubmitKey.Enter as SubmitKey,
@@ -102,7 +102,7 @@ const DEFAULT_CONFIG: ChatConfig = {
   tightBorder: false,
 
   modelConfig: {
-    model: "LLaMa-2-7B-chat",
+    model: "LLaMa-2-13B-chat",
     temperature: 0.8,
     max_tokens: 2048,
     presence_penalty: 0,
