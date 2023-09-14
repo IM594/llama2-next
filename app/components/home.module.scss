@@ -90,7 +90,8 @@
 
 .sidebar-header {
   position: relative;
-  padding-top: 20px;
+  // padding-top: 20px;
+  padding-top: 10px;
   padding-bottom: 20px;
 }
 
@@ -153,7 +154,7 @@
 }
 
 .chat-item-title {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bolder;
   display: block;
   width: 200px;
@@ -171,7 +172,7 @@
 }
 
 .chat-item:hover > .chat-item-delete {
-  opacity: 0.5;
+  opacity: 0.2;
   right: 10px;
 }
 
@@ -276,9 +277,9 @@
 .chat-message-item {
   box-sizing: border-box;
   max-width: 100%;
-  margin-top: 10px;
+  margin-top: 20px;
   border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.03);
   padding: 10px;
   font-size: 14px;
   user-select: text;
@@ -315,7 +316,7 @@
 }
 
 .chat-message-user > .chat-message-container > .chat-message-item {
-  background-color: var(--second);
+  background-color: var(--third);
 }
 
 .chat-message-actions {
@@ -357,6 +358,7 @@
   padding: 10px 14px;
   resize: none;
   outline: none;
+  padding-right: 90px;
 }
 
 @media only screen and (max-width: 600px) {

@@ -85,12 +85,12 @@ export function Settings(props: { closeSettings: () => void }) {
           <div className={styles["window-header-main-title"]}>
             {Locale.Settings.Title}
           </div>
-          <div className={styles["window-header-sub-title"]}>
+          {/* <div className={styles["window-header-sub-title"]}>
             {Locale.Settings.SubTitle}
-          </div>
+          </div> */}
         </div>
         <div className={styles["window-actions"]}>
-          <div className={styles["window-action-button"]}>
+          {/* <div className={styles["window-action-button"]}>
             <IconButton
               icon={<ClearIcon />}
               onClick={clearAllData}
@@ -105,7 +105,7 @@ export function Settings(props: { closeSettings: () => void }) {
               bordered
               title={Locale.Settings.Actions.ResetAll}
             />
-          </div>
+          </div> */}
           <div className={styles["window-action-button"]}>
             <IconButton
               icon={<CloseIcon />}
@@ -238,7 +238,7 @@ export function Settings(props: { closeSettings: () => void }) {
             </SettingItem>
           </div> */}
         </List>
-        <List>
+        {/* <List> */}
           {/* {enabledAccessControl ? (
             <SettingItem
               title={Locale.Settings.AccessCode.Title}
@@ -295,7 +295,7 @@ export function Settings(props: { closeSettings: () => void }) {
               }
             ></input>
           </SettingItem> */}
-        </List>
+        {/* </List> */}
 
         <List>
         <SettingItem
@@ -409,6 +409,35 @@ export function Settings(props: { closeSettings: () => void }) {
             ></input>
           </SettingItem>
         </List>
+
+        <List>
+
+        <SettingItem
+            title={"Clear all chat history"}
+          >
+            <div className={styles["window-action-button"]}>
+            <IconButton
+              icon={<ClearIcon />}
+              onClick={clearAllData}
+              bordered
+              title={Locale.Settings.Actions.ClearAll}
+            />
+          </div>
+          </SettingItem>
+
+          <SettingItem
+            title={"Reset All Settings"}
+          >
+            <div className={styles["window-action-button"]}>
+            <IconButton
+              icon={<ResetIcon />}
+              onClick={resetConfig}
+              bordered
+              title={Locale.Settings.Actions.ResetAll}
+            />
+          </div>
+          </SettingItem>
+          </List>
       </div>
     </>
   );

@@ -389,7 +389,7 @@ export function Chat(props: { showSideBar?: () => void }) {
           <textarea
             className={styles["chat-input"]}
             placeholder={Locale.Chat.Input(submitKey)}
-            rows={3}
+            rows={1}
             onInput={(e) => setUserInput(e.currentTarget.value)}
             value={userInput}
             onKeyDown={(e) => onInputKeyDown(e as any)}
@@ -524,13 +524,15 @@ export function Home() {
           </div>
         </div> */}
         <div className={styles["sidebar-header"]}>
+        {/* <div className={styles["sidebar-title"]}> Next Llama 2</div>
+          <br /> */}
             <IconButton
               icon={<AddIcon />}
               text={Locale.Home.NewChat}
               onClick={createNewSession}
             />
           </div>
-
+<br />
         <div
           className={styles["sidebar-body"]}
           onClick={() => {
@@ -542,6 +544,7 @@ export function Home() {
         </div>
 
         <div className={styles["sidebar-tail"]}>
+          
           <div className={styles["sidebar-actions"]}>
             <div className={styles["sidebar-action"] + " " + styles.mobile}>
               <IconButton
