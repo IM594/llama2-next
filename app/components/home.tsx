@@ -140,12 +140,10 @@ function useSubmitHandler() {
       (config.submitKey === SubmitKey.AltEnter && e.altKey) ||
       (config.submitKey === SubmitKey.CtrlEnter && e.ctrlKey) ||
       (config.submitKey === SubmitKey.ShiftEnter && e.shiftKey) ||
-      (config.submitKey === SubmitKey.Enter
-         &&
+      (config.submitKey === SubmitKey.Enter &&
         !e.altKey &&
         !e.ctrlKey &&
-        !e.shiftKey
-        )
+        !e.shiftKey)
     );
   };
 
@@ -169,7 +167,7 @@ export function Chat(props: { showSideBar?: () => void }) {
 
   const onUserInput = useChatStore((state) => state.onUserInput);
 
- // 提交用户输入
+  // 提交用户输入
   const onUserSubmit = () => {
     if (userInput.length <= 0) return;
     setIsLoading(true);
@@ -399,7 +397,7 @@ export function Chat(props: { showSideBar?: () => void }) {
           />
           <IconButton
             icon={<SendWhiteIcon />}
-            text={Locale.Chat.Send}
+            // text={Locale.Chat.Send}
             className={styles["chat-input-send"] + " no-dark"}
             onClick={onUserSubmit}
           />
@@ -495,7 +493,7 @@ export function Home() {
   const loading = !useChatStore?.persist?.hasHydrated();
   const [showSideBar, setShowSideBar] = useState(true);
 
-    // 设置
+  // 设置
   const [openSettings, setOpenSettings] = useState(false);
   const config = useChatStore((state) => state.config);
 
@@ -524,28 +522,29 @@ export function Home() {
           </div>
         </div> */}
         <div className={styles["sidebar-header"]}>
-        {/* <div className={styles["sidebar-title"]}> Next Llama 2</div>
+          {/* <div className={styles["sidebar-title"]}> Next Llama 2</div>
           <br /> */}
-            <IconButton
-              icon={<AddIcon />}
-              text={Locale.Home.NewChat}
-              onClick={createNewSession}
-            />
-          </div>
-<br />
+          <IconButton
+            icon={<AddIcon />}
+            text={Locale.Home.NewChat}
+            onClick={createNewSession}
+          />
+        </div>
+        <br />
         <div
           className={styles["sidebar-body"]}
           onClick={() => {
             setOpenSettings(false);
-            setShowSideBar(false);//用来控制侧边栏的显示
+            setShowSideBar(false); //用来控制侧边栏的显示
           }}
         >
           <ChatList />
         </div>
 
-        <div className={styles["sidebar-tail"]}>
+        {/* <div className={styles["sidebar-tail"]}>
           
           <div className={styles["sidebar-actions"]}>
+            
             <div className={styles["sidebar-action"] + " " + styles.mobile}>
               <IconButton
                 icon={<CloseIcon />}
@@ -556,6 +555,7 @@ export function Home() {
                 }}
               />
             </div>
+            
             <div className={styles["sidebar-action"]}>
               <IconButton
                 icon={<SettingsIcon />}
@@ -566,19 +566,33 @@ export function Home() {
                 }}
               />
             </div>
-            {/* <div className={styles["sidebar-action"]}>
+            <div className={styles["sidebar-action"]}>
               <a href={REPO_URL} target="_blank">
                 <IconButton icon={<GithubIcon />} />
               </a>
-            </div> */}
+            </div>
           </div>
-          {/* <div>
+          <div>
             <IconButton
               icon={<AddIcon />}
               text={Locale.Home.NewChat}
               onClick={createNewSession}
             />
-          </div> */}
+          </div>
+        </div> */}
+        <br />
+        <br />
+        <div className={styles["width-100"]}>
+          <div className={styles["sidebar-action"]}>
+            <IconButton
+              icon={<SettingsIcon />}
+              text={Locale.Home.Settings}
+              onClick={() => {
+                setOpenSettings(true);
+                setShowSideBar(false);
+              }}
+            />
+          </div>
         </div>
       </div>
 
@@ -593,7 +607,6 @@ export function Home() {
         ) : (
           <Chat key="chat" showSideBar={() => setShowSideBar(true)} />
         )}
-        
       </div>
     </div>
   );

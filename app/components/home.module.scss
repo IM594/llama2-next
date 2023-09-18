@@ -3,13 +3,13 @@
 @mixin container {
   background-color: var(--white);
   border: var(--border-in-light);
-  border-radius: 20px;
+  border-radius: 15px;
   box-shadow: var(--shadow);
   color: var(--black);
   background-color: var(--white);
   min-width: 600px;
   min-height: 480px;
-  max-width: 900px;
+  max-width: 1000px;
 
   display: flex;
   overflow: hidden;
@@ -206,6 +206,10 @@
 
 .sidebar-action:not(:last-child) {
   margin-right: 15px;
+}
+
+.width-100 {
+  width: 100%;
 }
 
 .chat {

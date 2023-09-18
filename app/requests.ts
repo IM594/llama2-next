@@ -1,6 +1,7 @@
 import type { ChatRequest, ChatReponse } from "./api/chat/typing";
 import { filterConfig, Message, ModelConfig} from "./store";
 import Locale from "./locales";
+import { Console } from "console";
 
 const TIME_OUT_MS = 30000;
 
@@ -54,7 +55,7 @@ export async function requestChat(messages: Message[]) {
 }
 
 export async function requestChatStream(
-  messages: Message[],
+  messages: Message[],//messages 是一个数组，里面包含了用户输入的内容。Message[] 是一个类型，里面包含了 role，content，date 三个属性。这些属性来自 store.ts
   options?: {
     filterBot?: boolean;
     modelConfig?: ModelConfig;
@@ -79,6 +80,17 @@ export async function requestChatStream(
   const reqTimeoutId = setTimeout(() => controller.abort(), TIME_OUT_MS);
 
   try {
+
+    //console.log 输出 body 的内容
+    console.log("!!!!!request:", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",      },
+      body: JSON.stringify(req),
+      signal: controller.signal,
+    });
+    
+
     const res = await fetch("/api/chat-stream", {
       method: "POST",
       headers: {

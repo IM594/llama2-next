@@ -224,7 +224,7 @@ export function Settings(props: { closeSettings: () => void }) {
             </div>
           </SettingItem>
 
-          {/* <div className="no-mobile">
+          <div className="no-mobile">
             <SettingItem title={Locale.Settings.TightBorder}>
               <input
                 type="checkbox"
@@ -236,7 +236,7 @@ export function Settings(props: { closeSettings: () => void }) {
                 }
               ></input>
             </SettingItem>
-          </div> */}
+          </div>
         </List>
         {/* <List> */}
           {/* {enabledAccessControl ? (
