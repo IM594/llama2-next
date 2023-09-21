@@ -259,7 +259,7 @@ export function Chat(props: { showSideBar?: () => void }) {
 
   return (
     <div className={styles.chat} key={session.id}>
-      {/* <div className={styles["window-header"]}>
+       <div className={styles["window-header"]}>
         <div
           className={styles["window-header-title"]}
           onClick={props?.showSideBar}
@@ -280,19 +280,17 @@ export function Chat(props: { showSideBar?: () => void }) {
               onClick={props?.showSideBar}
             />
           </div>
-          删除下面
-          <div className={styles["window-action-button"]}>
-            <IconButton
-              icon={<BrainIcon />}
-              bordered
-              // title={Locale.Chat.Actions.CompressedHistory}
-              onClick={() => {
-                showMemoryPrompt(session);
-              }}
-            />
-          </div>
-
-          现在不要，以后留着
+          {/*删除下面*/}
+          {/*<div className={styles["window-action-button"]}>*/}
+          {/*  <IconButton*/}
+          {/*    icon={<BrainIcon />}*/}
+          {/*    bordered*/}
+          {/*    // title={Locale.Chat.Actions.CompressedHistory}*/}
+          {/*    onClick={() => {*/}
+          {/*      showMemoryPrompt(session);*/}
+          {/*    }}*/}
+          {/*  />*/}
+          {/*</div>*/}
 
           <div className={styles["window-action-button"]}>
             <IconButton
@@ -305,7 +303,7 @@ export function Chat(props: { showSideBar?: () => void }) {
             />
           </div>
         </div>
-      </div> */}
+      </div>
 
       <div className={styles["chat-body"]}>
         {messages.map((message, i) => {
