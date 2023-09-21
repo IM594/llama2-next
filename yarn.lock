@@ -2413,6 +2413,13 @@ fastq@^1.6.0:
   dependencies:
     reusify "^1.0.4"
 
+fault@^2.0.0:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/fault/-/fault-2.0.1.tgz#d47ca9f37ca26e4bd38374a7c500b5a384755b6c"
+  integrity sha512-WtySTkS4OKev5JtpHXnib4Gxiurzh5NCGvWrFaZ34m6JehfTUhKZvn9njTfw48t6JumVQOmrKqpmGcdwxnhqBQ==
+  dependencies:
+    format "^0.2.0"
+
 file-entry-cache@^6.0.1:
   version "6.0.1"
   resolved "https://registry.npmmirror.com/file-entry-cache/-/file-entry-cache-6.0.1.tgz#211b2dd9659cb0394b073e7323ac3c933d522027"
@@ -2468,6 +2475,11 @@ form-data@^4.0.0:
     asynckit "^0.4.0"
     combined-stream "^1.0.8"
     mime-types "^2.1.12"
+
+format@^0.2.0:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/format/-/format-0.2.2.tgz#d6170107e9efdc4ed30c9dc39016df942b5cb58b"
+  integrity sha512-wzsgA6WOq+09wrU1tsJ09udeR/YZRaeArL9e1wPbFg3GG2yDnC2ldKpxs4xunpFF9DgqCqOIra3bc1HWrJ37Ww==
 
 fs.realpath@^1.0.0:
   version "1.0.0"
@@ -2714,7 +2726,7 @@ hast-util-to-string@^2.0.0:
   dependencies:
     "@types/hast" "^2.0.0"
 
-hast-util-to-text@^3.1.0:
+hast-util-to-text@^3.0.0, hast-util-to-text@^3.1.0:
   version "3.1.2"
   resolved "https://registry.npmmirror.com/hast-util-to-text/-/hast-util-to-text-3.1.2.tgz#ecf30c47141f41e91a5d32d0b1e1859fd2ac04f2"
   integrity sha512-tcllLfp23dJJ+ju5wCCZHVpzsQQ43+moJbqVX3jNWPB7z/KFC4FyZD6R7y94cHL6MQ33YtMZL8Z0aIXXI4XFTw==
@@ -2739,6 +2751,11 @@ hastscript@^7.0.0:
     hast-util-parse-selector "^3.0.0"
     property-information "^6.0.0"
     space-separated-tokens "^2.0.0"
+
+highlight.js@~11.8.0:
+  version "11.8.0"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-11.8.0.tgz#966518ea83257bae2e7c9a48596231856555bb65"
+  integrity sha512-MedQhoqVdr0U6SSnWPzfiadUcDHfN/Wzq25AkXiQv9oiOO/sG0S7XkvpFIqWBl9Yq1UYyYOOVORs5UW2XlPyzg==
 
 ignore@^5.2.0:
   version "5.2.4"
@@ -3147,6 +3164,15 @@ loose-envify@^1.1.0, loose-envify@^1.4.0:
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
 
+lowlight@^2.0.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/lowlight/-/lowlight-2.9.0.tgz#70da647a4319c7bfd8e97721a679b13ef5621496"
+  integrity sha512-OpcaUTCLmHuVuBcyNckKfH5B0oA4JUavb/M/8n9iAvanJYNQkrVm4pvyX0SUaqkBG4dnWHKt7p50B3ngAG2Rfw==
+  dependencies:
+    "@types/hast" "^2.0.0"
+    fault "^2.0.0"
+    highlight.js "~11.8.0"
+
 lru-cache@^5.1.1:
   version "5.1.1"
   resolved "https://registry.npmmirror.com/lru-cache/-/lru-cache-5.1.1.tgz#1da27e6710271947695daf6848e847f01d84b920"
@@ -3269,6 +3295,14 @@ mdast-util-math@^2.0.0:
     "@types/mdast" "^3.0.0"
     longest-streak "^3.0.0"
     mdast-util-to-markdown "^1.3.0"
+
+mdast-util-newline-to-break@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/mdast-util-newline-to-break/-/mdast-util-newline-to-break-1.0.0.tgz#a42699874a9240dc89bfcf256d3ff3036856abba"
+  integrity sha512-491LcYv3gbGhhCrLoeALncQmega2xPh+m3gbsIhVsOX4sw85+ShLFPvPyibxc1Swx/6GtzxgVodq+cGa/47ULg==
+  dependencies:
+    "@types/mdast" "^3.0.0"
+    mdast-util-find-and-replace "^2.0.0"
 
 mdast-util-phrasing@^3.0.0:
   version "3.0.1"
@@ -3995,7 +4029,7 @@ readdirp@~3.6.0:
   dependencies:
     picomatch "^2.2.1"
 
-refractor@^4.7.0:
+refractor@^4.8.0:
   version "4.8.1"
   resolved "https://registry.yarnpkg.com/refractor/-/refractor-4.8.1.tgz#fbdd889333a3d86c9c864479622855c9b38e9d42"
   integrity sha512-/fk5sI0iTgFYlmVGYVew90AoYnNMP6pooClx/XKqyeeCQXrL0Kvgn8V0VEht5ccdljbzzF1i3Q213gcntkRExg==
@@ -4062,6 +4096,17 @@ regjsparser@^0.9.1:
   dependencies:
     jsesc "~0.5.0"
 
+rehype-highlight@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/rehype-highlight/-/rehype-highlight-6.0.0.tgz#8097219d8813b51f4c2b6d92db27dac6cbc9a641"
+  integrity sha512-q7UtlFicLhetp7K48ZgZiJgchYscMma7XjzX7t23bqEJF8m6/s+viXQEe4oHjrATTIZpX7RG8CKD7BlNZoh9gw==
+  dependencies:
+    "@types/hast" "^2.0.0"
+    hast-util-to-text "^3.0.0"
+    lowlight "^2.0.0"
+    unified "^10.0.0"
+    unist-util-visit "^4.0.0"
+
 rehype-katex@^6.0.2:
   version "6.0.2"
   resolved "https://registry.npmmirror.com/rehype-katex/-/rehype-katex-6.0.2.tgz#20197bbc10bdf79f6b999bffa6689d7f17226c35"
@@ -4076,7 +4121,7 @@ rehype-katex@^6.0.2:
     unist-util-remove-position "^4.0.0"
     unist-util-visit "^4.0.0"
 
-rehype-parse@^8.0.0, rehype-parse@^8.0.2:
+rehype-parse@^8.0.0:
   version "8.0.4"
   resolved "https://registry.npmmirror.com/rehype-parse/-/rehype-parse-8.0.4.tgz#3d17c9ff16ddfef6bbcc8e6a25a99467b482d688"
   integrity sha512-MJJKONunHjoTh4kc3dsM1v3C9kGrrxvA3U8PxZlP2SjH8RNUSrb+lF7Y0KVaUDnGH2QZ5vAn7ulkiajM9ifuqg==
@@ -4086,17 +4131,36 @@ rehype-parse@^8.0.0, rehype-parse@^8.0.2:
     parse5 "^6.0.0"
     unified "^10.0.0"
 
+rehype-parse@^8.0.2:
+  version "8.0.5"
+  resolved "https://registry.yarnpkg.com/rehype-parse/-/rehype-parse-8.0.5.tgz#ccffc21e08e288c7846614f8dc1dc23d603a4a80"
+  integrity sha512-Ds3RglaY/+clEX2U2mHflt7NlMA72KspZ0JLUJgBBLpRddBcEw3H8uYZQliQriku22NZpYMfjDdSgHcjxue24A==
+  dependencies:
+    "@types/hast" "^2.0.0"
+    hast-util-from-parse5 "^7.0.0"
+    parse5 "^6.0.0"
+    unified "^10.0.0"
+
 rehype-prism-plus@^1.5.1:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/rehype-prism-plus/-/rehype-prism-plus-1.5.1.tgz#b5f4eb3c789a13ffe874c81039665e144bcb1cae"
-  integrity sha512-mowYefSfrIkMMxkb0fwuEXlvc5nA9b1vQ6mzujM81Qx28RI0mo7jCHsBZ2tJ4eIJKXdFn+EdPkZZBGB10K02vg==
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/rehype-prism-plus/-/rehype-prism-plus-1.6.3.tgz#8bf23a4cfc3419349770bb9064a91bdab04fae86"
+  integrity sha512-F6tn376zimnvy+xW0bSnryul+rvVL7NhDIkavc9kAuzDx5zIZW04A6jdXPkcFBhojcqZB8b6pHt6CLqiUx+Tbw==
   dependencies:
     hast-util-to-string "^2.0.0"
     parse-numeric-range "^1.3.0"
-    refractor "^4.7.0"
+    refractor "^4.8.0"
     rehype-parse "^8.0.2"
     unist-util-filter "^4.0.0"
     unist-util-visit "^4.0.0"
+
+remark-breaks@^3.0.2:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/remark-breaks/-/remark-breaks-3.0.3.tgz#660e6c995e954e5abdd95bf77df6f1402cb911ef"
+  integrity sha512-C7VkvcUp1TPUc2eAYzsPdaUh8Xj4FSbQnYA5A9f80diApLZscTDeG7efiWP65W8hV2sEy3JuGVU0i6qr5D8Hug==
+  dependencies:
+    "@types/mdast" "^3.0.0"
+    mdast-util-newline-to-break "^1.0.0"
+    unified "^10.0.0"
 
 remark-gfm@^3.0.1:
   version "3.0.1"

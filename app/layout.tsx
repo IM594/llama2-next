@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-page-custom-font */
 import "./styles/globals.scss"; // 导入全局样式文件
 import "./styles/markdown.scss"; // 导入 Markdown 样式文件
-import "./styles/prism.scss"; // 导入 Prism 代码高亮样式文件
+// import "./styles/prism.scss"; // 导入 Prism 代码高亮样式文件
+import "./styles/highlight.scss";
 import process from "child_process";
 // import { ACCESS_CODES } from "./api/access";
 

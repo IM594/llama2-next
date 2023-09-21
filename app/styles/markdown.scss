@@ -359,7 +359,7 @@
   display: inline-block;
   padding: 3px 5px;
   font: 11px ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
-    Liberation Mono, monospace;
+  Liberation Mono, monospace;
   line-height: 10px;
   color: var(--color-fg-default);
   vertical-align: middle;
@@ -449,7 +449,7 @@
 .markdown-body code,
 .markdown-body samp {
   font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
-    Liberation Mono, monospace;
+  Liberation Mono, monospace;
   font-size: 12px;
 }
 
@@ -457,7 +457,7 @@
   margin-top: 0;
   margin-bottom: 0;
   font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
-    Liberation Mono, monospace;
+  Liberation Mono, monospace;
   font-size: 12px;
   word-wrap: normal;
 }
@@ -839,21 +839,20 @@
 
 .markdown-body .highlight pre,
 .markdown-body pre {
-  padding: 16px;
+  padding: 16px 16px 8px 16px;
   overflow: auto;
   font-size: 85%;
   line-height: 1.45;
-  background-color: var(--color-canvas-subtle);
   border-radius: 6px;
 }
 
 .markdown-body pre code,
 .markdown-body pre tt {
-  display: inline;
-  max-width: auto;
+  display: inline-block;
+  max-width: 100%;
   padding: 0;
   margin: 0;
-  overflow: visible;
+  overflow-x: scroll;
   line-height: inherit;
   word-wrap: normal;
   background-color: transparent;
@@ -1106,8 +1105,8 @@
 
 .markdown-body .contains-task-list:hover .task-list-item-convert-container,
 .markdown-body
-  .contains-task-list:focus-within
-  .task-list-item-convert-container {
+.contains-task-list:focus-within
+.task-list-item-convert-container {
   display: block;
   width: auto;
   height: 24px;
