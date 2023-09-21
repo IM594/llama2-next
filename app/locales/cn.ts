@@ -61,7 +61,7 @@ const cn = {
     // },
     SendKey: "发送键",
     Theme: "主题",
-    TightBorder: "紧凑边框",
+    TightBorder: "全屏",
     HistoryCount: {
       Title: "附带历史消息数",
       SubTitle: "每次请求携带的历史消息数",

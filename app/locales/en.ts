@@ -65,7 +65,7 @@ const en: LocaleType = {
     // },
     SendKey: "Send Key",
     Theme: "Theme",
-    TightBorder: "Tight Border",
+    TightBorder: "Fullscreen",
     HistoryCount: {
       Title: "Attached Messages Count",
       SubTitle: "Number of sent messages attached per request",
