@@ -5,7 +5,7 @@ import { type ChatCompletionResponseMessage } from "openai";
 import {
   ControllerPool,
   requestChatStream,
-  requestWithPrompt,
+  // requestWithPrompt,
 } from "../requests";
 import { trimTopic } from "../utils";
 
@@ -161,7 +161,7 @@ interface ChatStore {
   currentSession: () => ChatSession;
   onNewMessage: (message: Message) => void;
   onUserInput: (content: string) => Promise<void>;
-  summarizeSession: () => void;
+  // summarizeSession: () => void;
   updateStat: (message: Message) => void;
   updateCurrentSession: (updater: (session: ChatSession) => void) => void;
   updateMessage: (
@@ -178,7 +178,7 @@ interface ChatStore {
   clearAllData: () => void;
 }
 
-const LOCAL_KEY = "chat-next-web-store";
+const LOCAL_KEY = "cs51-1"; // 用来存储数据的键，用于持久化。一个用户就是一个键。
 
 export const useChatStore = create<ChatStore>()(
   persist(
@@ -260,7 +260,7 @@ export const useChatStore = create<ChatStore>()(
           session.lastUpdate = new Date().toLocaleString();
         });
         get().updateStat(message);
-        get().summarizeSession();
+        // get().summarizeSession();
       },
 
       async onUserInput(content) {
@@ -362,70 +362,70 @@ export const useChatStore = create<ChatStore>()(
         set(() => ({ sessions }));
       },
 
-      summarizeSession() {
-        const session = get().currentSession();
-
-        if (session.topic === DEFAULT_TOPIC && session.messages.length >= 3) {
-          // should summarize topic
-          requestWithPrompt(session.messages, Locale.Store.Prompt.Topic).then(
-            (res) => {
-              get().updateCurrentSession(
-                (session) => (session.topic = trimTopic(res))
-              );
-            }
-          );
-        }
-
-        const config = get().config;
-        let toBeSummarizedMsgs = session.messages.slice(
-          session.lastSummarizeIndex
-        );
-        const historyMsgLength = toBeSummarizedMsgs.reduce(
-          (pre, cur) => pre + cur.content.length,
-          0
-        );
-
-        if (historyMsgLength > 4000) {
-          toBeSummarizedMsgs = toBeSummarizedMsgs.slice(
-            -config.historyMessageCount
-          );
-        }
-
-        // add memory prompt
-        toBeSummarizedMsgs.unshift(get().getMemoryPrompt());
-
-        const lastSummarizeIndex = session.messages.length;
-
-        console.log(
-          "[Chat History] ",
-          toBeSummarizedMsgs,
-          historyMsgLength,
-          config.compressMessageLengthThreshold
-        );
-
-        if (historyMsgLength > config.compressMessageLengthThreshold) {
-          requestChatStream(
-            toBeSummarizedMsgs.concat({
-              role: "system",
-              content: Locale.Store.Prompt.Summarize,
-              date: "",
-            }),
-            {
-              filterBot: false,
-              onMessage(message, done) {
-                session.memoryPrompt = message;
-                if (done) {
-                  console.log("[Memory] ", session.memoryPrompt);
-                  session.lastSummarizeIndex = lastSummarizeIndex;
-                }
-              },
-              onError(error) {
-                console.error("[Summarize] ", error);
-              },
-            }
-          );
-        }
-      },
+      // summarizeSession() {
+      //   const session = get().currentSession();
+      //
+      //   if (session.topic === DEFAULT_TOPIC && session.messages.length >= 3) {
+      //     // should summarize topic
+      //     requestWithPrompt(session.messages, Locale.Store.Prompt.Topic).then(
+      //       (res) => {
+      //         get().updateCurrentSession(
+      //           (session) => (session.topic = trimTopic(res))
+      //         );
+      //       }
+      //     );
+      //   }
+      //
+      //   const config = get().config;
+      //   let toBeSummarizedMsgs = session.messages.slice(
+      //     session.lastSummarizeIndex
+      //   );
+      //   const historyMsgLength = toBeSummarizedMsgs.reduce(
+      //     (pre, cur) => pre + cur.content.length,
+      //     0
+      //   );
+      //
+      //   if (historyMsgLength > 4000) {
+      //     toBeSummarizedMsgs = toBeSummarizedMsgs.slice(
+      //       -config.historyMessageCount
+      //     );
+      //   }
+      //
+      //   // add memory prompt
+      //   toBeSummarizedMsgs.unshift(get().getMemoryPrompt());
+      //
+      //   const lastSummarizeIndex = session.messages.length;
+      //
+      //   console.log(
+      //     "[Chat History] ",
+      //     toBeSummarizedMsgs,
+      //     historyMsgLength,
+      //     config.compressMessageLengthThreshold
+      //   );
+      //
+      //   if (historyMsgLength > config.compressMessageLengthThreshold) {
+      //     requestChatStream(
+      //       toBeSummarizedMsgs.concat({
+      //         role: "system",
+      //         content: Locale.Store.Prompt.Summarize,
+      //         date: "",
+      //       }),
+      //       {
+      //         filterBot: false,
+      //         onMessage(message, done) {
+      //           session.memoryPrompt = message;
+      //           if (done) {
+      //             console.log("[Memory] ", session.memoryPrompt);
+      //             session.lastSummarizeIndex = lastSummarizeIndex;
+      //           }
+      //         },
+      //         onError(error) {
+      //           console.error("[Summarize] ", error);
+      //         },
+      //       }
+      //     );
+      //   }
+      // },
 
       updateStat(message) {
         get().updateCurrentSession((session) => {

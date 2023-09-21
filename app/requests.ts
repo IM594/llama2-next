@@ -1,4 +1,4 @@
-import type { ChatRequest, ChatReponse } from "./api/chat/typing";
+import type { ChatRequest, ChatReponse } from "./api/chat-stream/typing";
 import { filterConfig, Message, ModelConfig} from "./store";
 import Locale from "./locales";
 import { Console } from "console";
@@ -39,20 +39,20 @@ const makeRequestParam = (
 //   return headers;
 // }
 
-export async function requestChat(messages: Message[]) {
-  const req: ChatRequest = makeRequestParam(messages, { filterBot: true });
-
-  const res = await fetch("/api/chat", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      // ...getHeaders(),
-    },
-    body: JSON.stringify(req),
-  });
-
-  return (await res.json()) as ChatReponse;
-}
+// export async function requestChat(messages: Message[]) {
+//   const req: ChatRequest = makeRequestParam(messages, { filterBot: true });
+//
+//   const res = await fetch("/api/chat", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//       // ...getHeaders(),
+//     },
+//     body: JSON.stringify(req),
+//   });
+//
+//   return (await res.json()) as ChatReponse;
+// }
 
 export async function requestChatStream(
   messages: Message[],//messages 是一个数组，里面包含了用户输入的内容。Message[] 是一个类型，里面包含了 role，content，date 三个属性。这些属性来自 store.ts
@@ -146,23 +146,23 @@ export async function requestChatStream(
   }
 }
 
-export async function requestWithPrompt(messages: Message[], prompt: string) {
-  messages = messages.concat([
-    {
-      role: "user",
-      content: prompt,
-      date: new Date().toLocaleString(),
-    },
-  ]);
-
-  const res = await requestChat(messages);
-
-  // return res.choices.at(0)?.message?.content ?? "";//at(0) 返回第一个元素，但是会报错。
-  return Array.isArray(res.choices) && res.choices.length > 0
-  ? res.choices[0].message?.content || ""
-  : "New Conversation";//如果没获取到标题，则返回默认标题
-
-}
+// export async function requestWithPrompt(messages: Message[], prompt: string) {
+//   messages = messages.concat([
+//     {
+//       role: "user",
+//       content: prompt,
+//       date: new Date().toLocaleString(),
+//     },
+//   ]);
+//
+//   const res = await requestChat(messages);
+//
+//   // return res.choices.at(0)?.message?.content ?? "";//at(0) 返回第一个元素，但是会报错。
+//   return Array.isArray(res.choices) && res.choices.length > 0
+//   ? res.choices[0].message?.content || ""
+//   : "New Conversation";//如果没获取到标题，则返回默认标题
+//
+// }
 
 // To store message streaming controller
 export const ControllerPool = {
