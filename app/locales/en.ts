@@ -21,7 +21,7 @@ const en: LocaleType = {
     },
     // Typing: "Typing…",
     Input: (submitKey: string) =>
-      `Type something and press ${submitKey} to send`,
+      `Send a message`,
     Send: "Send",
   },
   Export: {

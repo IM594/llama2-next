@@ -8,7 +8,7 @@ async function createStream(payload: ReadableStream<Uint8Array>) {
   const encoder = new TextEncoder();
   const decoder = new TextDecoder();
 
-  // 发起带有有效负载的 POST 请求到 OpenAI 服务
+  // 发起带有有效负载的 POST 请求到 LLM 服务
   const res = await fetch("http://region-8.autodl.pro:47847/v1/chat/completions", {
     headers: {
       "Content-Type": "application/json",

@@ -38,7 +38,7 @@ export function Loading(props: { noLogo?: boolean }) {
   return (
     <div className={styles["loading-content"]}>
       {!props.noLogo && <BotIcon />}
-      <LoadingIcon />
+      {/* <LoadingIcon /> */}
     </div>
   );
 }
@@ -70,7 +70,7 @@ const Emoji = dynamic(async () => (await import("emoji-picker-react")).Emoji, {
 //   );
 // }
 
-// ChatItem 组件
+// ChatItem 组件，用于显示聊天列表
 export function ChatItem(props: {
   onClick?: () => void;
   onDelete?: () => void;
