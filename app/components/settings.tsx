@@ -335,7 +335,7 @@ export function Settings(props: { closeSettings: () => void }) {
           </SettingItem> */}
           <SettingItem
             title={Locale.Settings.Temperature.Title}
-            subTitle={Locale.Settings.Temperature.SubTitle}
+            // subTitle={Locale.Settings.Temperature.SubTitle}
           >
             <input
               type="range"
@@ -372,7 +372,7 @@ export function Settings(props: { closeSettings: () => void }) {
           </SettingItem> */}
           <SettingItem
             title={Locale.Settings.MaxTokens.Title}
-            subTitle={Locale.Settings.MaxTokens.SubTitle}
+            // subTitle={Locale.Settings.MaxTokens.SubTitle}
           >
             <input
               type="range"
@@ -391,7 +391,7 @@ export function Settings(props: { closeSettings: () => void }) {
           </SettingItem>
           <SettingItem
             title={Locale.Settings.PresencePenlty.Title}
-            subTitle={Locale.Settings.PresencePenlty.SubTitle}
+            // subTitle={Locale.Settings.PresencePenlty.SubTitle}
           >
             <input
               type="range"
@@ -413,11 +413,12 @@ export function Settings(props: { closeSettings: () => void }) {
         <List>
 
         <SettingItem
-            title={"Clear all chat history"}
+            title={"Clear All Data"}
           >
             <div className={styles["window-action-button"]}>
             <IconButton
               icon={<ClearIcon />}
+              // text={Locale.Settings.Actions.ClearAll}
               onClick={clearAllData}
               bordered
               title={Locale.Settings.Actions.ClearAll}
@@ -431,6 +432,7 @@ export function Settings(props: { closeSettings: () => void }) {
             <div className={styles["window-action-button"]}>
             <IconButton
               icon={<ResetIcon />}
+              // text={Locale.Settings.Actions.ResetAll}
               onClick={resetConfig}
               bordered
               title={Locale.Settings.Actions.ResetAll}

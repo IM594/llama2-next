@@ -108,7 +108,7 @@
 
 .sidebar-sub-title {
   font-size: 12px;
-  font-weight: 400px;
+  font-weight: 40px;
 }
 
 .sidebar-body {
@@ -246,7 +246,7 @@
   &:hover {
     .chat-message-top-actions {
       opacity: 1;
-      right: 10px;
+      left: 5px;
       pointer-events: all;
     }
   }
@@ -295,8 +295,8 @@
 .chat-message-top-actions {
   font-size: 12px;
   position: absolute;
-  right: 20px;
-  top: -26px;
+  left: 0px;
+  top: -25px;
   transition: all ease 0.3s;
   opacity: 0;
   pointer-events: none;

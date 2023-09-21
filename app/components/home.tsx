@@ -164,6 +164,7 @@ export function Chat(props: { showSideBar?: () => void }) {
   const [userInput, setUserInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { submitKey, shouldSubmit } = useSubmitHandler();
+  const [streaming, setStreaming] = useState(false);
 
   const onUserInput = useChatStore((state) => state.onUserInput);
 
@@ -326,19 +327,26 @@ export function Chat(props: { showSideBar?: () => void }) {
                   </div>
                 )} */}
                 <div className={styles["chat-message-item"]}>
-                  {/* {!isUser && (
+                 {!isUser && (
                     <div className={styles["chat-message-top-actions"]}>
                       {message.streaming ? (
                         <div
                           className={styles["chat-message-top-action"]}
-                          onClick={() => onUserStop(i)}
+                          onClick={() => {
+                            onUserStop(i);
+                            setStreaming(false); // 在这里更新 setStreaming
+                          }}
                         >
                           {Locale.Chat.Actions.Stop}
                         </div>
+
                       ) : (
                         <div
                           className={styles["chat-message-top-action"]}
-                          onClick={() => onResend(i)}
+                          onClick={() => {
+                            onResend(i);
+                            setStreaming(true); // 在这里更新 setStreaming
+                          }}
                         >
                           {Locale.Chat.Actions.Retry}
                         </div>
@@ -351,7 +359,7 @@ export function Chat(props: { showSideBar?: () => void }) {
                         {Locale.Chat.Actions.Copy}
                       </div>
                     </div>
-                  )} */}
+                  )}
                   {(message.preview || message.content.length === 0) &&
                   !isUser ? (
                     <LoadingIcon />
@@ -393,11 +401,57 @@ export function Chat(props: { showSideBar?: () => void }) {
             onBlur={() => setAutoScroll(false)}
             autoFocus
           />
+
+          {/*<div>*/}
+          {/*  /!*如果再streaming，则设置按钮为stop，否则就是正常的发送按钮*!/*/}
+          {/*  {streaming ? (*/}
+          {/*      <IconButton*/}
+          {/*          icon={<CloseIcon />}*/}
+          {/*          text="sadasdasd"*/}
+          {/*          className={styles["chat-input-send"] + " no-dark"}*/}
+          {/*          onClick={() => {*/}
+          {/*              if (streaming) {*/}
+          {/*                  //设置按钮颜色为灰色*/}
+          {/*                  return;*/}
+          {/*              }*/}
+          {/*              // 获得消息索引的最后一个*/}
+          {/*            let i = session.messages.length - 1;*/}
+          {/*            onUserStop(i);*/}
+          {/*          }}*/}
+          {/*      />*/}
+          {/*  ) : (*/}
+          {/*      <IconButton*/}
+          {/*          icon={<SendWhiteIcon />}*/}
+          {/*          // text={Locale.Chat.Send}*/}
+          {/*          className={styles["chat-input-send"] + " no-dark"}*/}
+          {/*          onClick={() => {*/}
+          {/*              if (streaming) {*/}
+          {/*                  //设置按钮颜色为灰色*/}
+          {/*                  return;*/}
+          {/*              }*/}
+          {/*              onUserSubmit();*/}
+
+          {/*          }}*/}
+          {/*      />*/}
+          {/*  )*/}
+          {/*  }*/}
+          {/*</div>*/}
+
           <IconButton
             icon={<SendWhiteIcon />}
             // text={Locale.Chat.Send}
             className={styles["chat-input-send"] + " no-dark"}
-            onClick={onUserSubmit}
+            onClick={() => {
+              if (streaming) {
+                console.log("streaming")
+                //设置按钮颜色为灰色
+                // let i = session.messages.length - 1;
+                // onUserStop(i);
+                // console.log("stop")
+                return;
+              }
+              onUserSubmit();
+            }}
           />
         </div>
       </div>
@@ -494,6 +548,7 @@ export function Home() {
   // 设置
   const [openSettings, setOpenSettings] = useState(false);
   const config = useChatStore((state) => state.config);
+
 
   useSwitchTheme();
 
