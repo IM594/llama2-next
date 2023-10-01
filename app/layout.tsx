@@ -5,6 +5,8 @@ import "./styles/markdown.scss"; // 导入 Markdown 样式文件
 import "./styles/highlight.scss";
 import process from "child_process";
 // import { ACCESS_CODES } from "./api/access";
+import { Analytics } from "@vercel/analytics/react";
+
 
 // 注意：下面这行代码尚未解开注释，如果需要启用，请取消注释。
 // const COMMIT_ID = process
@@ -59,6 +61,7 @@ export default function RootLayout({
         ></link> {/* 导入 Google 字体样式表 */}
       </head>
       <body>{children}</body> {/* 渲染子组件 */}
+      <Analytics />
     </html>
   );
 }
