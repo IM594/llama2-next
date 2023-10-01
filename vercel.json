@@ -1,6 +1,6 @@
 {
     "functions":{
-        "api/chat-stream/route.ts":{
+        "api/chat-stream":{
             "maxDuration": 60
         }
     }
