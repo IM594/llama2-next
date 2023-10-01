@@ -1,15 +1,17 @@
+/* 窗口标题栏样式：包含内边距、底部边框、弹性盒子布局 */
 .window-header {
   padding: 14px 20px;
   border-bottom: rgba(0, 0, 0, 0.1) 1px solid;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+/* 窗口标题样式：包含最大宽度 */
 .window-header-title {
   max-width: calc(100% - 100px);
 
+  /* 主标题样式 */
   .window-header-main-title {
     font-size: 20px;
     font-weight: bolder;
@@ -20,16 +22,19 @@
     max-width: 50vw;
   }
 
+  /* 子标题样式 */
   .window-header-sub-title {
     font-size: 14px;
     margin-top: 5px;
   }
 }
 
+/* 窗口操作按钮容器样式：内联弹性盒子布局 */
 .window-actions {
   display: inline-flex;
 }
 
+/* 窗口操作按钮样式：左边距设置为 10 像素 */
 .window-action-button {
   margin-left: 10px;
 }

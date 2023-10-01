@@ -72,5 +72,5 @@ export async function POST(req: NextRequest) {
 
 // 定义 Next.js 配置
 export const config = {
-  runtime: "edge",
+  // runtime: "edge",
 };
