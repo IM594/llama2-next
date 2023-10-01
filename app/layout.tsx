@@ -60,8 +60,8 @@ export default function RootLayout({
           rel="stylesheet"
         ></link> {/* 导入 Google 字体样式表 */}
       </head>
-      <body>{children}</body> {/* 渲染子组件 */}
-      <Analytics />
+      <body>{children} <Analytics /></body> {/* 渲染子组件 */}
+      
     </html>
   );
 }
