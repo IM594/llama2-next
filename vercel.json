@@ -1,4 +1,11 @@
 {
+    "routes": [
+        {
+          "src": "/api/chat",
+          "dest": "http://region-31.seetacloud.com:46766/v1/chat/completions"
+        }
+      ],
+
     "functions":{
         "app/api/chat-stream/*.ts":{
             "maxDuration": 60
