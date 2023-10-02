@@ -12,7 +12,8 @@ async function createStream(payload: ReadableStream<Uint8Array>) {
     console.log("Before sending request");
   
   // 发起带有有效负载的 POST 请求到 LLM 服务
-  const res = await fetch("http://region-8.autodl.pro:47847/v1/chat/completions", {
+  // const res = await fetch("http://region-8.autodl.pro:47847/v1/chat/completions", {
+    const res = await fetch("http://http://region-31.seetacloud.com:46766/v1/chat/completions", {
     headers: {
       "Content-Type": "application/json",
       Authorization: 'usyd-cs51-1',
@@ -72,5 +73,5 @@ export async function POST(req: NextRequest) {
 
 // 定义 Next.js 配置
 export const config = {
-  // runtime: "edge",
+  runtime: "edge",
 };
