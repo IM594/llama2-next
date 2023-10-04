@@ -12,8 +12,9 @@ async function createStream(payload: ReadableStream<Uint8Array>) {
     console.log("Before sending request");
   
   // 发起带有有效负载的 POST 请求到 LLM 服务
-  // const res = await fetch("http://region-8.autodl.pro:47847/v1/chat/completions", {
-    const res = await fetch("http://region-31.seetacloud.com:46766/v1/chat/completions", {
+  const res = await fetch("http://region-8.autodl.pro:47847/v1/chat/completions", { //芜湖区 / 003 机
+    // const res = await fetch("http://region-31.seetacloud.com:46766/v1/chat/completions", { //内蒙 A 区 / 385 机
+
     headers: {
       "Content-Type": "application/json",
       Authorization: 'usyd-cs51-1',
