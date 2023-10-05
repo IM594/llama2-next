@@ -36,10 +36,10 @@ import { ControllerPool } from "../requests";
 // Loading 组件
 export function Loading(props: { noLogo?: boolean }) {
   return (
-    <div className={styles["loading-content"]}>
-      {!props.noLogo && <BotIcon />}
-      {/* <LoadingIcon /> */}
-    </div>
+      <div className={styles["loading-content"]}>
+        {!props.noLogo && <BotIcon />}
+        {/* <LoadingIcon /> */}
+      </div>
   );
 }
 
@@ -80,51 +80,51 @@ export function ChatItem(props: {
   selected: boolean;
 }) {
   return (
-    <div
-      className={`${styles["chat-item"]} ${
-        props.selected && styles["chat-item-selected"]
-      }`}
-      onClick={props.onClick}
-    >
-      <div className={styles["chat-item-title"]}>{props.title}</div>
-      <div className={styles["chat-item-info"]}>
-        <div className={styles["chat-item-count"]}>
-          {Locale.ChatItem.ChatItemCount(props.count)}
+      <div
+          className={`${styles["chat-item"]} ${
+              props.selected && styles["chat-item-selected"]
+          }`}
+          onClick={props.onClick}
+      >
+        <div className={styles["chat-item-title"]}>{props.title}</div>
+        <div className={styles["chat-item-info"]}>
+          <div className={styles["chat-item-count"]}>
+            {Locale.ChatItem.ChatItemCount(props.count)}
+          </div>
+          <div className={styles["chat-item-date"]}>{props.time}</div>
         </div>
-        <div className={styles["chat-item-date"]}>{props.time}</div>
+        <div className={styles["chat-item-delete"]} onClick={props.onDelete}>
+          <DeleteIcon />
+        </div>
       </div>
-      <div className={styles["chat-item-delete"]} onClick={props.onDelete}>
-        <DeleteIcon />
-      </div>
-    </div>
   );
 }
 
 // ChatList 组件
 export function ChatList() {
   const [sessions, selectedIndex, selectSession, removeSession] = useChatStore(
-    (state) => [
-      state.sessions,
-      state.currentSessionIndex,
-      state.selectSession,
-      state.removeSession,
-    ]
+      (state) => [
+        state.sessions,
+        state.currentSessionIndex,
+        state.selectSession,
+        state.removeSession,
+      ]
   );
 
   return (
-    <div className={styles["chat-list"]}>
-      {sessions.map((item, i) => (
-        <ChatItem
-          title={item.topic}
-          time={item.lastUpdate}
-          count={item.messages.length}
-          key={i}
-          selected={i === selectedIndex}
-          onClick={() => selectSession(i)}
-          onDelete={() => removeSession(i)}
-        />
-      ))}
-    </div>
+      <div className={styles["chat-list"]}>
+        {sessions.map((item, i) => (
+            <ChatItem
+                title={item.topic}
+                time={item.lastUpdate}
+                count={item.messages.length}
+                key={i}
+                selected={i === selectedIndex}
+                onClick={() => selectSession(i)}
+                onDelete={() => removeSession(i)}
+            />
+        ))}
+      </div>
   );
 }
 
@@ -137,13 +137,13 @@ function useSubmitHandler() {
     if (e.key !== "Enter") return false;
 
     return (
-      (config.submitKey === SubmitKey.AltEnter && e.altKey) ||
-      (config.submitKey === SubmitKey.CtrlEnter && e.ctrlKey) ||
-      (config.submitKey === SubmitKey.ShiftEnter && e.shiftKey) ||
-      (config.submitKey === SubmitKey.Enter &&
-        !e.altKey &&
-        !e.ctrlKey &&
-        !e.shiftKey)
+        (config.submitKey === SubmitKey.AltEnter && e.altKey) ||
+        (config.submitKey === SubmitKey.CtrlEnter && e.ctrlKey) ||
+        (config.submitKey === SubmitKey.ShiftEnter && e.shiftKey) ||
+        (config.submitKey === SubmitKey.Enter &&
+            !e.altKey &&
+            !e.ctrlKey &&
+            !e.shiftKey)
     );
   };
 
@@ -206,11 +206,16 @@ export function Chat(props: { showSideBar?: () => void }) {
     for (let i = botIndex; i >= 0; i -= 1) {
       if (messages[i].role === "user") {
         setIsLoading(true);
-        onUserInput(messages[i].content).then(() => setIsLoading(false));
+
+        // Use optional chaining and nullish coalescing to handle undefined
+        const userInputContent = messages[i].content ?? "";
+
+        onUserInput(userInputContent).then(() => setIsLoading(false));
         return;
       }
     }
   };
+
 
   // 用于自动滚动
   const latestMessageRef = useRef<HTMLDivElement>(null);
@@ -220,30 +225,30 @@ export function Chat(props: { showSideBar?: () => void }) {
 
   // 预览消息
   const messages = (session.messages as RenderMessage[])
-    .concat(
-      isLoading
-        ? [
-            {
-              role: "assistant",
-              content: "……",
-              date: new Date().toLocaleString(),
-              preview: true,
-            },
-          ]
-        : []
-    )
-    .concat(
-      userInput.length > 0
-        ? [
-            // {
-            //   role: "user",
-            //   content: userInput,
-            //   date: new Date().toLocaleString(),
-            //   preview: true,
-            // },
-          ]
-        : []
-    );
+      .concat(
+          isLoading
+              ? [
+                {
+                  role: "assistant",
+                  content: "……",
+                  date: new Date().toLocaleString(),
+                  preview: true,
+                },
+              ]
+              : []
+      )
+      .concat(
+          userInput.length > 0
+              ? [
+                // {
+                //   role: "user",
+                //   content: userInput,
+                //   date: new Date().toLocaleString(),
+                //   preview: true,
+                // },
+              ]
+              : []
+      );
 
   // 自动滚动
   // useLayoutEffect(() => {
@@ -259,203 +264,206 @@ export function Chat(props: { showSideBar?: () => void }) {
   // });
 
   return (
-    <div className={styles.chat} key={session.id}>
-       <div className={styles["window-header"]}>
-        <div
-          className={styles["window-header-title"]}
-          onClick={props?.showSideBar}
-        >
-          <div className={styles["window-header-main-title"]}>
-            {session.topic}
-          </div>
-          <div className={styles["window-header-sub-title"]}>
-            {Locale.Chat.SubTitle(session.messages.length)}
-          </div>
-        </div>
-        <div className={styles["window-actions"]}>
-          <div className={styles["window-action-button"] + " " + styles.mobile}>
-            <IconButton
-              icon={<MenuIcon />}
-              bordered
-              title={Locale.Chat.Actions.ChatList}
+      <div className={styles.chat} key={session.id}>
+        <div className={styles["window-header"]}>
+          <div
+              className={styles["window-header-title"]}
               onClick={props?.showSideBar}
-            />
+          >
+            <div className={styles["window-header-main-title"]}>
+              {session.topic}
+            </div>
+            <div className={styles["window-header-sub-title"]}>
+              {Locale.Chat.SubTitle(session.messages.length)}
+            </div>
           </div>
-          {/*删除下面*/}
-          {/*<div className={styles["window-action-button"]}>*/}
-          {/*  <IconButton*/}
-          {/*    icon={<BrainIcon />}*/}
-          {/*    bordered*/}
-          {/*    // title={Locale.Chat.Actions.CompressedHistory}*/}
-          {/*    onClick={() => {*/}
-          {/*      showMemoryPrompt(session);*/}
-          {/*    }}*/}
-          {/*  />*/}
-          {/*</div>*/}
+          <div className={styles["window-actions"]}>
+            <div className={styles["window-action-button"] + " " + styles.mobile}>
+              <IconButton
+                  icon={<MenuIcon />}
+                  bordered
+                  title={Locale.Chat.Actions.ChatList}
+                  onClick={props?.showSideBar}
+              />
+            </div>
+            {/*删除下面*/}
+            {/*<div className={styles["window-action-button"]}>*/}
+            {/*  <IconButton*/}
+            {/*    icon={<BrainIcon />}*/}
+            {/*    bordered*/}
+            {/*    // title={Locale.Chat.Actions.CompressedHistory}*/}
+            {/*    onClick={() => {*/}
+            {/*      showMemoryPrompt(session);*/}
+            {/*    }}*/}
+            {/*  />*/}
+            {/*</div>*/}
 
-          <div className={styles["window-action-button"]}>
-            <IconButton
-              icon={<ExportIcon />}
-              bordered
-              title={Locale.Chat.Actions.Export}
-              onClick={() => {
-                exportMessages(session.messages, session.topic);
-              }}
-            />
+            <div className={styles["window-action-button"]}>
+              <IconButton
+                  icon={<ExportIcon />}
+                  bordered
+                  title={Locale.Chat.Actions.Export}
+                  onClick={() => {
+                    exportMessages(session.messages, session.topic);
+                  }}
+              />
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className={styles["chat-body"]}>
-        {messages.map((message, i) => {
-          const isUser = message.role === "user";
+        <div className={styles["chat-body"]}>
+          {messages.map((message, i) => {
+            const isUser = message.role === "user";
 
-          return (
-            <div
-              key={i}
-              className={
-                isUser ? styles["chat-message-user"] : styles["chat-message"]
-              }
-            >
-              <div className={styles["chat-message-container"]}>
-                {/* <div className={styles["chat-message-avatar"]}>
+            return (
+                <div
+                    key={i}
+                    className={
+                      isUser ? styles["chat-message-user"] : styles["chat-message"]
+                    }
+                >
+                  <div className={styles["chat-message-container"]}>
+                    {/* <div className={styles["chat-message-avatar"]}>
                   <Avatar role={message.role} />
                 </div> */}
-                {/* {(message.preview || message.streaming) && (
+                    {/* {(message.preview || message.streaming) && (
                   <div className={styles["chat-message-status"]}>
                     {Locale.Chat.Typing}
                   </div>
                 )} */}
-                <div className={styles["chat-message-item"]}>
-                 {!isUser && (
-                    <div className={styles["chat-message-top-actions"]}>
-                      {message.streaming ? (
-                        <div
-                          className={styles["chat-message-top-action"]}
-                          onClick={() => {
-                            onUserStop(i);
-                            setStreaming(false); // 在这里更新 setStreaming
-                          }}
-                        >
-                          {Locale.Chat.Actions.Stop}
-                        </div>
+                    <div className={styles["chat-message-item"]}>
+                      {!isUser && (
+                          <div className={styles["chat-message-top-actions"]}>
+                            {message.streaming ? (
+                                <div
+                                    className={styles["chat-message-top-action"]}
+                                    onClick={() => {
+                                      onUserStop(i);
+                                      setStreaming(false); // 在这里更新 setStreaming
+                                    }}
+                                >
+                                  {Locale.Chat.Actions.Stop}
+                                </div>
 
+                            ) : (
+                                <div
+                                    className={styles["chat-message-top-action"]}
+                                    onClick={() => {
+                                      onResend(i);
+                                      setStreaming(true); // 在这里更新 setStreaming
+                                    }}
+                                >
+                                  {Locale.Chat.Actions.Retry}
+                                </div>
+                            )}
+
+                            <div
+                                className={styles["chat-message-top-action"]}
+                                onClick={() => {
+                                  if (message.content !== undefined) {
+                                    copyToClipboard(message.content);
+                                  }
+                                }}
+                            >
+
+                              {Locale.Chat.Actions.Copy}
+                            </div>
+                          </div>
+                      )}
+                      {(message.preview || message.content?.length === 0) &&
+                      !isUser ? (
+                          <LoadingIcon />
                       ) : (
-                        <div
-                          className={styles["chat-message-top-action"]}
-                          onClick={() => {
-                            onResend(i);
-                            setStreaming(true); // 在这里更新 setStreaming
-                          }}
-                        >
-                          {Locale.Chat.Actions.Retry}
-                        </div>
+                          <div className="markdown-body">
+                            <Markdown content={message.content ?? ""} />
+                          </div>
                       )}
 
-                      <div
-                        className={styles["chat-message-top-action"]}
-                        onClick={() => copyToClipboard(message.content)}
-                      >
-                        {Locale.Chat.Actions.Copy}
-                      </div>
                     </div>
-                  )}
-                  {(message.preview || message.content.length === 0) &&
-                  !isUser ? (
-                    <LoadingIcon />
-                  ) : (
-                    <div
-                      className="markdown-body"
-                      // onContextMenu={(e) => onRightClick(e, message)}
-                    >
-                      <Markdown content={message.content} />
-                    </div>
-                  )}
-                </div>
-                {/* {!isUser && !message.preview && (
+                    {/* {!isUser && !message.preview && (
                   <div className={styles["chat-message-actions"]}>
                     <div className={styles["chat-message-action-date"]}>
                       {message.date.toLocaleString()}
                     </div>
                   </div>
                 )} */}
-              </div>
-            </div>
-          );
-        })}
-        <div ref={latestMessageRef} style={{ opacity: 0, height: "2em" }}>
-          -
+                  </div>
+                </div>
+            );
+          })}
+          <div ref={latestMessageRef} style={{ opacity: 0, height: "2em" }}>
+            -
+          </div>
         </div>
-      </div>
 
-      <div className={styles["chat-input-panel"]}>
-        <div className={styles["chat-input-panel-inner"]}>
+        <div className={styles["chat-input-panel"]}>
+          <div className={styles["chat-input-panel-inner"]}>
           <textarea
-            className={styles["chat-input"]}
-            placeholder={Locale.Chat.Input(submitKey)}
-            rows={1}
-            onInput={(e) => setUserInput(e.currentTarget.value)}
-            value={userInput}
-            onKeyDown={(e) => onInputKeyDown(e as any)}
-            onFocus={() => setAutoScroll(true)}
-            onBlur={() => setAutoScroll(false)}
-            autoFocus
+              className={styles["chat-input"]}
+              placeholder={Locale.Chat.Input(submitKey)}
+              rows={1}
+              onInput={(e) => setUserInput(e.currentTarget.value)}
+              value={userInput}
+              onKeyDown={(e) => onInputKeyDown(e as any)}
+              onFocus={() => setAutoScroll(true)}
+              onBlur={() => setAutoScroll(false)}
+              autoFocus
           />
 
-          {/*<div>*/}
-          {/*  /!*如果再streaming，则设置按钮为stop，否则就是正常的发送按钮*!/*/}
-          {/*  {streaming ? (*/}
-          {/*      <IconButton*/}
-          {/*          icon={<CloseIcon />}*/}
-          {/*          text="sadasdasd"*/}
-          {/*          className={styles["chat-input-send"] + " no-dark"}*/}
-          {/*          onClick={() => {*/}
-          {/*              if (streaming) {*/}
-          {/*                  //设置按钮颜色为灰色*/}
-          {/*                  return;*/}
-          {/*              }*/}
-          {/*              // 获得消息索引的最后一个*/}
-          {/*            let i = session.messages.length - 1;*/}
-          {/*            onUserStop(i);*/}
-          {/*          }}*/}
-          {/*      />*/}
-          {/*  ) : (*/}
-          {/*      <IconButton*/}
-          {/*          icon={<SendWhiteIcon />}*/}
-          {/*          // text={Locale.Chat.Send}*/}
-          {/*          className={styles["chat-input-send"] + " no-dark"}*/}
-          {/*          onClick={() => {*/}
-          {/*              if (streaming) {*/}
-          {/*                  //设置按钮颜色为灰色*/}
-          {/*                  return;*/}
-          {/*              }*/}
-          {/*              onUserSubmit();*/}
+            {/*<div>*/}
+            {/*  /!*如果再streaming，则设置按钮为stop，否则就是正常的发送按钮*!/*/}
+            {/*  {streaming ? (*/}
+            {/*      <IconButton*/}
+            {/*          icon={<CloseIcon />}*/}
+            {/*          text="sadasdasd"*/}
+            {/*          className={styles["chat-input-send"] + " no-dark"}*/}
+            {/*          onClick={() => {*/}
+            {/*              if (streaming) {*/}
+            {/*                  //设置按钮颜色为灰色*/}
+            {/*                  return;*/}
+            {/*              }*/}
+            {/*              // 获得消息索引的最后一个*/}
+            {/*            let i = session.messages.length - 1;*/}
+            {/*            onUserStop(i);*/}
+            {/*          }}*/}
+            {/*      />*/}
+            {/*  ) : (*/}
+            {/*      <IconButton*/}
+            {/*          icon={<SendWhiteIcon />}*/}
+            {/*          // text={Locale.Chat.Send}*/}
+            {/*          className={styles["chat-input-send"] + " no-dark"}*/}
+            {/*          onClick={() => {*/}
+            {/*              if (streaming) {*/}
+            {/*                  //设置按钮颜色为灰色*/}
+            {/*                  return;*/}
+            {/*              }*/}
+            {/*              onUserSubmit();*/}
 
-          {/*          }}*/}
-          {/*      />*/}
-          {/*  )*/}
-          {/*  }*/}
-          {/*</div>*/}
+            {/*          }}*/}
+            {/*      />*/}
+            {/*  )*/}
+            {/*  }*/}
+            {/*</div>*/}
 
-          <IconButton
-            icon={<SendWhiteIcon />}
-            // text={Locale.Chat.Send}
-            className={styles["chat-input-send"] + " no-dark"}
-            onClick={() => {
-              if (streaming) {
-                console.log("streaming")
-                //设置按钮颜色为灰色
-                // let i = session.messages.length - 1;
-                // onUserStop(i);
-                // console.log("stop")
-                return;
-              }
-              onUserSubmit();
-            }}
-          />
+            <IconButton
+                icon={<SendWhiteIcon />}
+                // text={Locale.Chat.Send}
+                className={styles["chat-input-send"] + " no-dark"}
+                onClick={() => {
+                  if (streaming) {
+                    console.log("streaming")
+                    //设置按钮颜色为灰色
+                    // let i = session.messages.length - 1;
+                    // onUserStop(i);
+                    // console.log("stop")
+                    return;
+                  }
+                  onUserSubmit();
+                }}
+            />
+          </div>
         </div>
       </div>
-    </div>
   );
 }
 
@@ -477,35 +485,38 @@ function useSwitchTheme() {
 // 导出消息
 function exportMessages(messages: Message[], topic: string) {
   const mdText =
-    `# ${topic}\n\n` +
-    messages
-      .map((m) => {
-        return m.role === "user" ? `## ${m.content}` : m.content.trim();
-      })
-      .join("\n\n");
+      `# ${topic}\n\n` +
+      messages
+          .map((m) => {
+            // Use nullish coalescing to handle undefined
+            const content = m.content ?? "";
+            return m.role === "user" ? `## ${content}` : content.trim();
+          })
+          .join("\n\n");
+
   const filename = `${topic}.md`;
 
   showModal({
     title: Locale.Export.Title,
     children: (
-      <div className="markdown-body">
-        <pre className={styles["export-content"]}>{mdText}</pre>
-      </div>
+        <div className="markdown-body">
+          <pre className={styles["export-content"]}>{mdText}</pre>
+        </div>
     ),
     actions: [
       <IconButton
-        key="copy"
-        icon={<CopyIcon />}
-        bordered
-        text={Locale.Export.Copy}
-        onClick={() => copyToClipboard(mdText)}
+          key="copy"
+          icon={<CopyIcon />}
+          bordered
+          text={Locale.Export.Copy}
+          onClick={() => copyToClipboard(mdText)}
       />,
       <IconButton
-        key="download"
-        icon={<DownloadIcon />}
-        bordered
-        text={Locale.Export.Download}
-        onClick={() => downloadAs(mdText, filename)}
+          key="download"
+          icon={<DownloadIcon />}
+          bordered
+          text={Locale.Export.Download}
+          onClick={() => downloadAs(mdText, filename)}
       />,
     ],
   });
@@ -536,11 +547,11 @@ function exportMessages(messages: Message[], topic: string) {
 // Home 组件
 export function Home() {
   const [createNewSession, currentIndex, removeSession] = useChatStore(
-    (state) => [
-      state.newSession,
-      state.currentSessionIndex,
-      state.removeSession,
-    ]
+      (state) => [
+        state.newSession,
+        state.currentSessionIndex,
+        state.removeSession,
+      ]
   );
   const loading = !useChatStore?.persist?.hasHydrated();
   const [showSideBar, setShowSideBar] = useState(true);
@@ -557,15 +568,15 @@ export function Home() {
   }
 
   return (
-    <div
-      className={`${
-        config.tightBorder ? styles["tight-container"] : styles.container
-      }`}
-    >
       <div
-        className={styles.sidebar + ` ${showSideBar && styles["sidebar-show"]}`}
+          className={`${
+              config.tightBorder ? styles["tight-container"] : styles.container
+          }`}
       >
-        {/* <div className={styles["sidebar-header"]}>
+        <div
+            className={styles.sidebar + ` ${showSideBar && styles["sidebar-show"]}`}
+        >
+          {/* <div className={styles["sidebar-header"]}>
           <div className={styles["sidebar-title"]}>Next Llama 2</div>
           <div className={styles["sidebar-sub-title"]}>
             CS51-1
@@ -574,27 +585,27 @@ export function Home() {
             <ChatGptIcon />
           </div>
         </div> */}
-        <div className={styles["sidebar-header"]}>
-          {/* <div className={styles["sidebar-title"]}> Next Llama 2</div>
+          <div className={styles["sidebar-header"]}>
+            {/* <div className={styles["sidebar-title"]}> Next Llama 2</div>
           <br /> */}
-          <IconButton
-            icon={<AddIcon />}
-            text={Locale.Home.NewChat}
-            onClick={createNewSession}
-          />
-        </div>
-        <br />
-        <div
-          className={styles["sidebar-body"]}
-          onClick={() => {
-            setOpenSettings(false);
-            setShowSideBar(false); //用来控制侧边栏的显示
-          }}
-        >
-          <ChatList />
-        </div>
+            <IconButton
+                icon={<AddIcon />}
+                text={Locale.Home.NewChat}
+                onClick={createNewSession}
+            />
+          </div>
+          <br />
+          <div
+              className={styles["sidebar-body"]}
+              onClick={() => {
+                setOpenSettings(false);
+                setShowSideBar(false); //用来控制侧边栏的显示
+              }}
+          >
+            <ChatList />
+          </div>
 
-        {/* <div className={styles["sidebar-tail"]}>
+          {/* <div className={styles["sidebar-tail"]}>
           
           <div className={styles["sidebar-actions"]}>
             
@@ -633,34 +644,34 @@ export function Home() {
             />
           </div>
         </div> */}
-        <br />
-        <br />
-        <div className={styles["width-100"]}>
-          <div className={styles["sidebar-action"]}>
-            <IconButton
-              icon={<SettingsIcon />}
-              text={Locale.Home.Settings}
-              onClick={() => {
-                setOpenSettings(true);
-                setShowSideBar(false);
-              }}
-            />
+          <br />
+          <br />
+          <div className={styles["width-100"]}>
+            <div className={styles["sidebar-action"]}>
+              <IconButton
+                  icon={<SettingsIcon />}
+                  text={Locale.Home.Settings}
+                  onClick={() => {
+                    setOpenSettings(true);
+                    setShowSideBar(false);
+                  }}
+              />
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className={styles["window-content"]}>
-        {openSettings ? (
-          <Settings
-            closeSettings={() => {
-              setOpenSettings(false);
-              setShowSideBar(true);
-            }}
-          />
-        ) : (
-          <Chat key="chat" showSideBar={() => setShowSideBar(true)} />
-        )}
+        <div className={styles["window-content"]}>
+          {openSettings ? (
+              <Settings
+                  closeSettings={() => {
+                    setOpenSettings(false);
+                    setShowSideBar(true);
+                  }}
+              />
+          ) : (
+              <Chat key="chat" showSideBar={() => setShowSideBar(true)} />
+          )}
+        </div>
       </div>
-    </div>
   );
 }
