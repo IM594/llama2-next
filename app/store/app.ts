@@ -429,7 +429,8 @@ export const useChatStore = create<ChatStore>()(
 
       updateStat(message) {
         get().updateCurrentSession((session) => {
-          session.stat.charCount += message.content.length;
+          const contentLength = (message.content ?? "").length;
+          session.stat.charCount += contentLength;
           // TODO: should update chat count and word count
         });
       },
