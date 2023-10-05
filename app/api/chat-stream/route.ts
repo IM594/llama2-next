@@ -34,6 +34,7 @@ async function createStream(payload: ReadableStream<Uint8Array>) {
           // 如果数据为 "[DONE]"，则关闭流
           if (data === "[DONE]") {
             controller.close();
+            console.log("Stream closed")
             return;
           }
           try {
@@ -41,10 +42,12 @@ async function createStream(payload: ReadableStream<Uint8Array>) {
             const json = JSON.parse(data);
             const text = json.choices[0].delta.content;
             const queue = encoder.encode(text);
+            console.log("Stream data: ", text)
             controller.enqueue(queue);
           } catch (e) {
             // 如果解析或处理出错，报错并关闭流
             controller.error(e);
+            console.log("Stream error: ", e)
           }
         }
       }
@@ -54,6 +57,7 @@ async function createStream(payload: ReadableStream<Uint8Array>) {
       for await (const chunk of res.body as any) {
         // 解码并处理每个数据块
         parser.feed(decoder.decode(chunk));
+        console.log("Stream chunk decoded: ", decoder.decode(chunk));
       }
     },
   });
@@ -64,6 +68,7 @@ async function createStream(payload: ReadableStream<Uint8Array>) {
 export async function POST(req: NextRequest) {
   try {
     const stream = await createStream(req.body!);
+    console.log("Stream created")
     return new NextResponse(stream, { headers: { 'Content-Type': 'text/html; charset=utf-8' } }); // 修改这里，使用NextResponse代替Response.添加响应头
 
   } catch (error) {
