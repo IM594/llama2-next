@@ -79,5 +79,5 @@ export async function POST(req: NextRequest) {
 
 export const config = {
   //在解决bug前可以先去除edge属性
-  runtime: "edge",
+  // runtime: "edge",
 };
