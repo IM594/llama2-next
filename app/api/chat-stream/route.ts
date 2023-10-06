@@ -12,8 +12,8 @@ async function createStream(payload: ReadableStream<Uint8Array>) {
 
   // 发起带有有效负载的 POST 请求到 LLM 服务
   // const res = await fetch("http://region-8.autodl.pro:47847/v1/chat/completions", { //芜湖区 / 003 机
-    // const res = await fetch("http://region-31.seetacloud.com:46766/v1/chat/completions", { //内蒙 A 区 / 385 机
-    const res = await fetch("http://region-31.seetacloud.com:39349/v1/chat/completions", { //内蒙A区 / 367机 A40显卡
+    const res = await fetch("http://region-31.seetacloud.com:46766/v1/chat/completions", { //内蒙 A 区 / 385 机
+    // const res = await fetch("http://region-31.seetacloud.com:39349/v1/chat/completions", { //内蒙A区 / 367机 A40显卡
 
     headers: {
       "Content-Type": "application/json",
@@ -78,5 +78,6 @@ export async function POST(req: NextRequest) {
 }
 
 export const config = {
-  // runtime: "edge", //在解决bug前先去除edge属性
+  //在解决bug前可以先去除edge属性
+  runtime: "edge",
 };
