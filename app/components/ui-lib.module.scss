@@ -1,4 +1,5 @@
-/* 卡片样式：带有白色背景、10 像素圆角边框、阴影效果和 10 像素内边距 */
+@import "../styles/animation.scss";
+
 .card {
   background-color: var(--white);
   border-radius: 10px;
@@ -6,12 +7,11 @@
   padding: 10px;
 }
 
-/* 弹出框样式 */
 .popover {
   position: relative;
+  z-index: 2;
 }
 
-/* 弹出框内容样式：相对定位、带有滑入动画效果、位于右上角下方 10 像素 */
 .popover-content {
   position: absolute;
   animation: slide-in 0.3s ease;
@@ -19,7 +19,6 @@
   top: calc(100% + 10px);
 }
 
-/* 弹出框遮罩样式：固定定位，覆盖整个视口 */
 .popover-mask {
   position: fixed;
   top: 0;
@@ -28,19 +27,6 @@
   height: 100vh;
 }
 
-/* 定义名为 slide-in 的滑入动画 */
-@keyframes slide-in {
-  from {
-    transform: translateY(10px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-/* 列表项样式：以弹入效果显示，包含弹性盒子属性 */
 .list-item {
   display: flex;
   justify-content: space-between;
@@ -49,9 +35,27 @@
   border-bottom: var(--border-in-light);
   padding: 10px 20px;
   animation: slide-in ease 0.6s;
+
+  .list-header {
+    display: flex;
+    align-items: center;
+
+    .list-icon {
+      margin-right: 10px;
+    }
+
+    .list-item-title {
+      font-size: 14px;
+      font-weight: bolder;
+    }
+
+    .list-item-sub-title {
+      font-size: 12px;
+      font-weight: normal;
+    }
+  }
 }
 
-/* 列表样式：带有边框、圆角和阴影效果 */
 .list {
   border: var(--border-in-light);
   border-radius: 10px;
@@ -60,22 +64,19 @@
   animation: slide-in ease 0.3s;
 }
 
-/* 最后一个列表项无下边框 */
 .list .list-item:last-child {
   border: 0;
 }
 
-/* 模态框容器样式：带有阴影、白色背景、圆角和宽度定义 */
 .modal-container {
   box-shadow: var(--card-shadow);
   background-color: var(--white);
   border-radius: 12px;
-  width: 50vw;
+  width: 60vw;
   animation: slide-in ease 0.3s;
-  /* 自定义变量定义 */
+
   --modal-padding: 20px;
 
-  /* 模态框头部样式：包含标题和关闭按钮 */
   .modal-header {
     padding: var(--modal-padding);
     display: flex;
@@ -83,35 +84,33 @@
     justify-content: space-between;
     border-bottom: var(--border-in-light);
 
-    /* 模态框标题样式：加粗字体和字号 */
     .modal-title {
       font-weight: bolder;
       font-size: 16px;
     }
 
-    /* 模态框关闭按钮样式 */
     .modal-close-btn {
       cursor: pointer;
+
       &:hover {
         filter: brightness(1.2);
       }
     }
   }
 
-  /* 模态框内容样式：最大高度、内边距和滚动 */
   .modal-content {
     max-height: 40vh;
     padding: var(--modal-padding);
     overflow: auto;
   }
 
-  /* 模态框底部样式：内边距和右对齐 */
   .modal-footer {
     padding: var(--modal-padding);
     display: flex;
     justify-content: flex-end;
+    border-top: var(--border-in-light);
+    box-shadow: var(--shadow);
 
-    /* 模态框操作按钮样式 */
     .modal-actions {
       display: flex;
       align-items: center;
@@ -125,7 +124,6 @@
   }
 }
 
-/* 显示状态样式：透明度和位置变化，位于视口底部 */
 .show {
   opacity: 1;
   transition: all ease 0.3s;
@@ -137,36 +135,63 @@
   z-index: 99999;
 }
 
-/* 隐藏状态样式：透明度和位置变化 */
 .hide {
   opacity: 0;
   transition: all ease 0.3s;
   transform: translateY(20px);
 }
 
-/* 提示框容器样式：固定定位，位于视口底部 */
 .toast-container {
   position: fixed;
-  bottom: 0;
+  bottom: 5vh;
   left: 0;
   width: 100vw;
   display: flex;
   justify-content: center;
+  pointer-events: none;
 
-  /* 提示框内容样式：字体大小、背景、阴影、边框和颜色 */
   .toast-content {
+    max-width: 80vw;
+    word-break: break-all;
     font-size: 14px;
     background-color: var(--white);
     box-shadow: var(--card-shadow);
     border: var(--border-in-light);
     color: var(--black);
-    padding: 10px 30px;
+    padding: 10px 20px;
     border-radius: 50px;
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    pointer-events: all;
+
+    .toast-action {
+      padding-left: 20px;
+      color: var(--primary);
+      opacity: 0.8;
+      border: 0;
+      background: none;
+      cursor: pointer;
+      font-family: inherit;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
   }
 }
 
-/* 响应式布局：在窄屏幕上微调模态框容器宽度和内容最大高度 */
+.input {
+  border: var(--border-in-light);
+  border-radius: 10px;
+  padding: 10px;
+  font-family: inherit;
+  background-color: var(--white);
+  color: var(--black);
+  resize: none;
+  min-width: 50px;
+}
+
 @media only screen and (max-width: 600px) {
   .modal-container {
     width: 90vw;

@@ -1,99 +1,57 @@
-//设置默认语言为英文
-import CN from './cn'
-import EN from './en'
+import CN from "./cn";
+import EN from "./en";
 
-export type { LocaleType } from './cn'
+export type { LocaleType } from "./cn";
 
-type Lang = 'en' | 'cn'
+export const AllLangs = ["en", "cn"] as const;
+export type Lang = (typeof AllLangs)[number];
 
-const LANG_KEY = 'lang'
+const LANG_KEY = "lang";
+const DEFAULT_LANG = "en";
 
 function getItem(key: string) {
-    try {
-        return localStorage.getItem(key)
-    } catch {
-        return null
-    }
+  try {
+    return localStorage.getItem(key);
+  } catch {
+    return null;
+  }
 }
 
 function setItem(key: string, value: string) {
-    try {
-        localStorage.setItem(key, value)
-    } catch { }
+  try {
+    localStorage.setItem(key, value);
+  } catch {}
+}
+
+function getLanguage() {
+  // 直接设置默认语言为英语
+  return DEFAULT_LANG;
 }
 
 export function getLang(): Lang {
-    const savedLang = getItem(LANG_KEY)
+  const savedLang = getItem(LANG_KEY);
 
-    if (['en', 'cn'].includes(savedLang ?? '')) {
-        return savedLang as Lang
+  if (AllLangs.includes((savedLang ?? "") as Lang)) {
+    return savedLang as Lang;
+  }
+
+  const lang = getLanguage();
+
+  for (const option of AllLangs) {
+    if (lang.includes(option)) {
+      return option;
     }
+  }
 
-    return 'en'; // 将默认语言设置为英文
+  return DEFAULT_LANG;
 }
 
 export function changeLang(lang: Lang) {
-    setItem(LANG_KEY, lang)
-    location.reload()
+  setItem(LANG_KEY, lang);
+  location.reload();
 }
 
-export default { en: EN, cn: CN }[getLang()]
-
-
-
-
-// import CN from './cn'
-// import EN from './en'
-
-// export type { LocaleType } from './cn'
-
-// type Lang = 'en' | 'cn'
-
-// const LANG_KEY = 'lang'
-
-// function getItem(key: string) {
-//     try {
-//         return localStorage.getItem(key)
-//     } catch {
-//         return null
-//     }
-// }
-
-// function setItem(key: string, value: string) {
-//     try {
-//         localStorage.setItem(key, value)
-//     } catch { }
-// }
-
-// function getLanguage() {
-//     try {
-//         return navigator.language.toLowerCase()
-//     } catch {
-//         return 'en'
-//     }
-// }
-
-// export function getLang(): Lang {
-//     const savedLang = getItem(LANG_KEY)
-
-//     if (['en', 'cn'].includes(savedLang ?? '')) {
-//         return savedLang as Lang
-//     }
-
-//     const lang = getLanguage()
-
-//     if (lang.includes('zh') || lang.includes('cn')) {
-//         return 'en'
-//     } else {
-//         return 'cn'
-//     }
-// }
-
-// export function changeLang(lang: Lang) {
-//     setItem(LANG_KEY, lang)
-//     location.reload()
-// }
-
-// export default { en: EN, cn: CN }[getLang()]
-
-
+export default {
+  en: EN,
+  cn: CN,
+}[getLang()] as typeof CN;

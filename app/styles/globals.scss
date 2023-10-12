@@ -1,4 +1,9 @@
+@import "./animation.scss";
+@import "./window.scss";
+
 @mixin light {
+  --theme: light;
+
   /* color */
   --white: white;
   --black: rgb(48, 48, 48);
@@ -6,21 +11,24 @@
   // --primary: rgb(29, 147, 171);
   --primary: rgba(61, 80, 128, 0.915);
   // --second: rgb(231, 248, 255);
-    --second: rgba(241, 245, 248);
-    --third: rgba(213, 231, 250, 0.649);
+  --second: rgba(241, 245, 248);
+  --third: rgba(213, 231, 250, 0.649);
   // --hover-color: #f3f3f3;
   --hover-color: #f7f5f5ce;
   --bar-color: rgba(0, 0, 0, 0.1);
+  --theme-color: var(--gray);
 
   /* shadow */
-  --shadow: 50px 50px 50px 50px rgba(125, 125, 125, 0.01);
-  --card-shadow: 0px 3px 4px 0px rgb(0, 0, 0, 0.05);
+  --shadow: 50px 50px 100px 10px rgb(0, 0, 0, 0.1);
+  --card-shadow: 0px 2px 4px 0px rgb(0, 0, 0, 0.05);
 
   /* stroke */
   --border-in-light: 1px solid rgb(222, 222, 222);
 }
 
 @mixin dark {
+  --theme: dark;
+
   /* color */
   --white: rgb(30, 30, 30);
   --black: rgb(187, 187, 187);
@@ -34,6 +42,12 @@
   --bar-color: rgba(255, 255, 255, 0.1);
 
   --border-in-light: 1px solid rgba(255, 255, 255, 0.192);
+
+  --theme-color: var(--gray);
+
+  div:not(.no-dark) > svg {
+    filter: invert(0.5);
+  }
 }
 
 .light {
@@ -52,10 +66,11 @@
   @include light;
 
   --window-width: 90vw;
-  --window-height: 90vh;
+  --window-height: 100vh;
   --sidebar-width: 300px;
   --window-content-width: calc(100% - var(--sidebar-width));
   --message-max-width: 80%;
+  --full-height: 100vh;//从100%改成100vh
 }
 
 @media only screen and (max-width: 600px) {
@@ -77,20 +92,27 @@
     @include dark;
   }
 }
+html {
+  height: var(--full-height);
+}
 
 body {
   background-color: var(--gray);
   color: var(--black);
   margin: 0;
   padding: 0;
-  height: 100vh;
+  height: var(--full-height);
   width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
   user-select: none;
-  font-family: "Noto Sans SC", "SF Pro SC", "SF Pro Text", "SF Pro Icons",
-    "PingFang SC", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  touch-action: pan-x pan-y;
+  font-family:  -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  @media only screen and (max-width: 600px) {
+    background-color: var(--second);
+  }
 }
 
 ::-webkit-scrollbar {
@@ -112,12 +134,22 @@ body {
 
 select {
   border: var(--border-in-light);
-  padding: 8px 10px;
+  padding: 10px;
   border-radius: 10px;
   appearance: none;
   cursor: pointer;
   background-color: var(--white);
   color: var(--black);
+  text-align: center;
+}
+
+label {
+  cursor: pointer;
+}
+
+input {
+  text-align: center;
+  font-family: inherit;
 }
 
 input[type="checkbox"] {
@@ -145,19 +177,11 @@ input[type="checkbox"]:checked::after {
 
 input[type="range"] {
   appearance: none;
-  border: var(--border-in-light);
-  border-radius: 10px;
-  padding: 5px 15px 5px 10px;
   background-color: var(--white);
   color: var(--black);
-
-  &::before {
-    content: attr(value);
-    font-size: 12px;
-  }
 }
 
-input[type="range"]::-webkit-slider-thumb {
+@mixin thumb() {
   appearance: none;
   height: 8px;
   width: 20px;
@@ -166,24 +190,51 @@ input[type="range"]::-webkit-slider-thumb {
   cursor: pointer;
   transition: all ease 0.3s;
   margin-left: 5px;
+  border: none;
 }
 
-input[type="range"]::-webkit-slider-thumb:hover {
+input[type="range"]::-webkit-slider-thumb {
+  @include thumb();
+}
+
+input[type="range"]::-moz-range-thumb {
+  @include thumb();
+}
+
+input[type="range"]::-ms-thumb {
+  @include thumb();
+}
+
+@mixin thumbHover() {
   transform: scaleY(1.2);
   width: 24px;
 }
 
+input[type="range"]::-webkit-slider-thumb:hover {
+  @include thumbHover();
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+  @include thumbHover();
+}
+
+input[type="range"]::-ms-thumb:hover {
+  @include thumbHover();
+}
+
 input[type="number"],
-input[type="text"] {
+input[type="text"],
+input[type="password"] {
   appearance: none;
   border-radius: 10px;
   border: var(--border-in-light);
-  height: 32px;
+  min-height: 36px;
   box-sizing: border-box;
   background: var(--white);
   color: var(--black);
   padding: 0 10px;
   max-width: 50%;
+  font-family: inherit;
 }
 
 div.math {
@@ -195,7 +246,7 @@ div.math {
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;
+  height: var(--full-height);
   width: 100vw;
   background-color: rgba($color: #000000, $alpha: 0.5);
   display: flex;
@@ -211,4 +262,94 @@ div.math {
   &:hover {
     text-decoration: underline;
   }
+}
+
+pre {
+  position: relative;
+
+  &:hover .copy-code-button {
+    pointer-events: all;
+    transform: translateX(0px);
+    opacity: 0.5;
+  }
+
+  .copy-code-button {
+    position: absolute;
+    right: 10px;
+    top: 1em;
+    cursor: pointer;
+    padding: 0px 5px;
+    background-color: var(--black);
+    color: var(--white);
+    border: var(--border-in-light);
+    border-radius: 10px;
+    transform: translateX(10px);
+    pointer-events: none;
+    opacity: 0;
+    transition: all ease 0.3s;
+
+    &:after {
+      content: "copy";
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.clickable {
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(0.9);
+  }
+}
+
+.error {
+  width: 80%;
+  border-radius: 20px;
+  border: var(--border-in-light);
+  box-shadow: var(--card-shadow);
+  padding: 20px;
+  overflow: auto;
+  background-color: var(--white);
+  color: var(--black);
+
+  pre {
+    overflow: auto;
+  }
+}
+
+.password-input-container {
+  max-width: 50%;
+  display: flex;
+  justify-content: flex-end;
+
+  .password-eye {
+    margin-right: 4px;
+  }
+
+  .password-input {
+    min-width: 80%;
+  }
+}
+
+.user-avatar {
+  height: 30px;
+  min-height: 30px;
+  width: 30px;
+  min-width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--border-in-light);
+  box-shadow: var(--card-shadow);
+  border-radius: 10px;
+}
+
+.one-line {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

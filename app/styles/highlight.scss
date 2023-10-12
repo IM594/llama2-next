@@ -8,14 +8,20 @@
     font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
   }
 
-  pre code.hljs {
+  pre code {
     display: block;
     overflow-x: auto;
-    padding: 1.5em;
+    padding: 1em;
   }
 
-  code.hljs {
+  code {
     padding: 3px 5px;
+  }
+
+  .hljs,
+  pre {
+    background: #1a1b26;
+    color: #cbd2ea;
   }
 
   /*!
@@ -28,7 +34,7 @@
 */
   .hljs-comment,
   .hljs-meta {
-    color: #7f7f7f;
+    color: #565f89;
   }
 
   .hljs-deletion,
@@ -97,11 +103,6 @@
 
   .hljs-punctuation {
     color: #c0caf5;
-  }
-
-  .hljs {
-    background: #1b1b1b;
-    color: #dde1ee;
   }
 
   .hljs-emphasis {

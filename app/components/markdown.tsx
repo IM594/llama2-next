@@ -8,67 +8,116 @@ import RehypeHighlight from "rehype-highlight";
 import { useRef, useState, RefObject, useEffect } from "react";
 import { copyToClipboard } from "../utils";
 
-export function PreCode(props: { children: any }) {
-    const ref = useRef<HTMLPreElement>(null);
+import LoadingIcon from "../icons/three-dots.svg";
+import React from "react";
 
-    return (
-        <pre ref={ref}>
+export function PreCode(props: { children: any }) {
+  const ref = useRef<HTMLPreElement>(null);
+
+  return (
+    <pre ref={ref}>
       <span
-          className="copy-code-button"
-          onClick={() => {
-              if (ref.current) {
-                  const code = ref.current.innerText;
-                  copyToClipboard(code);
-              }
-          }}
+        className="copy-code-button"
+        onClick={() => {
+          if (ref.current) {
+            const code = ref.current.innerText;
+            copyToClipboard(code);
+          }
+        }}
       ></span>
-            {props.children}
+      {props.children}
     </pre>
-    );
+  );
 }
 
-const useLazyLoad = (ref: RefObject<Element>): boolean => {
-    const [isIntersecting, setIntersecting] = useState<boolean>(false);
+function _MarkDownContent(props: { content: string }) {
+  return (
+    <ReactMarkdown
+      remarkPlugins={[RemarkMath, RemarkGfm, RemarkBreaks]}
+      rehypePlugins={[
+        RehypeKatex,
+        [
+          RehypeHighlight,
+          {
+            detect: false,
+            ignoreMissing: true,
+          },
+        ],
+      ]}
+      components={{
+        pre: PreCode,
+        a: (aProps) => {
+          const href = aProps.href || "";
+          const isInternal = /^\/#/i.test(href);
+          const target = isInternal ? "_self" : aProps.target ?? "_blank";
+          return <a {...aProps} target={target} />;
+        },
+      }}
+    >
+      {props.content}
+    </ReactMarkdown>
+  );
+}
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(([entry]) => {
-            if (entry.isIntersecting) {
-                setIntersecting(true);
-                observer.disconnect();
-            }
-        });
+export const MarkdownContent = React.memo(_MarkDownContent);
 
-        if (ref.current) {
-            observer.observe(ref.current);
-        }
+export function Markdown(
+  props: {
+    content: string;
+    loading?: boolean;
+    fontSize?: number;
+    parentRef: RefObject<HTMLDivElement>;
+    defaultShow?: boolean;
+  } & React.DOMAttributes<HTMLDivElement>,
+) {
+  const mdRef = useRef<HTMLDivElement>(null);
+  const renderedHeight = useRef(0);
+  const inView = useRef(!!props.defaultShow);
 
-        return () => {
-            observer.disconnect();
-        };
-    }, [ref]);
+  const parent = props.parentRef.current;
+  const md = mdRef.current;
 
-    return isIntersecting;
-};
+  const checkInView = () => {
+    if (parent && md) {
+      const parentBounds = parent.getBoundingClientRect();
+      const twoScreenHeight = Math.max(500, parentBounds.height * 2);
+      const mdBounds = md.getBoundingClientRect();
+      const isInRange = (x: number) =>
+        x <= parentBounds.bottom + twoScreenHeight &&
+        x >= parentBounds.top - twoScreenHeight;
+      inView.current = isInRange(mdBounds.top) || isInRange(mdBounds.bottom);
+    }
 
-export function Markdown(props: { content: string }) {
-    return (
-        <ReactMarkdown
-            remarkPlugins={[RemarkMath, RemarkGfm, RemarkBreaks]}
-            rehypePlugins={[
-                RehypeKatex,
-                [
-                    RehypeHighlight,
-                    {
-                        detect: true,
-                        ignoreMissing: true,
-                    },
-                ],
-            ]}
-            components={{
-                pre: PreCode,
-            }}
-        >
-            {props.content}
-        </ReactMarkdown>
-    );
+    if (inView.current && md) {
+      renderedHeight.current = Math.max(
+        renderedHeight.current,
+        md.getBoundingClientRect().height,
+      );
+    }
+  };
+
+  checkInView();
+
+  return (
+    <div
+      className="markdown-body"
+      style={{
+        fontSize: `${props.fontSize ?? 14}px`,
+        height:
+          !inView.current && renderedHeight.current > 0
+            ? renderedHeight.current
+            : "auto",
+      }}
+      ref={mdRef}
+      onContextMenu={props.onContextMenu}
+      onDoubleClickCapture={props.onDoubleClickCapture}
+    >
+      {inView.current &&
+        (props.loading ? (
+          <LoadingIcon />
+        ) : (
+          <MarkdownContent content={props.content} />
+        ))}
+    </div>
+  );
 }

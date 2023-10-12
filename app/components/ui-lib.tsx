@@ -1,13 +1,16 @@
 import styles from "./ui-lib.module.scss";
 import LoadingIcon from "../icons/three-dots.svg";
 import CloseIcon from "../icons/close.svg";
-import { createRoot } from "react-dom/client";
-import React, { ReactNode } from "react";
+import EyeIcon from "../icons/eye.svg";
+import EyeOffIcon from "../icons/eye-off.svg";
 
-// Popover 组件用于显示一个弹出窗口，包含触发器和内容。
+import { createRoot } from "react-dom/client";
+import React, { HTMLProps, useEffect, useState } from "react";
+import { IconButton } from "./button";
+
 export function Popover(props: {
-  children: ReactNode;
-  content: ReactNode;
+  children: JSX.Element;
+  content: JSX.Element;
   open?: boolean;
   onClose?: () => void;
 }) {
@@ -24,30 +27,47 @@ export function Popover(props: {
   );
 }
 
-// Card 组件用于渲染一个卡片容器，可以包含子元素。
-export function Card(props: { children: ReactNode[]; className?: string }) {
+export function Card(props: { children: JSX.Element[]; className?: string }) {
   return (
-    <div className={styles.card + " " + props.className}>
+    <div className={styles.card + " " + props.className}>{props.children}</div>
+  );
+}
+
+export function ListItem(props: {
+  title: string;
+  subTitle?: string;
+  children?: JSX.Element | JSX.Element[];
+  icon?: JSX.Element;
+  className?: string;
+}) {
+  return (
+    <div className={styles["list-item"] + ` ${props.className}`}>
+      <div className={styles["list-header"]}>
+        {props.icon && <div className={styles["list-icon"]}>{props.icon}</div>}
+        <div className={styles["list-item-title"]}>
+          <div>{props.title}</div>
+          {props.subTitle && (
+            <div className={styles["list-item-sub-title"]}>
+              {props.subTitle}
+            </div>
+          )}
+        </div>
+      </div>
       {props.children}
     </div>
   );
 }
 
-// ListItem 组件用于渲染一个列表项容器，可以包含最多两个子元素。
-export function ListItem(props: { children: ReactNode[] }) {
-  if (React.Children.count(props.children) > 2) {
-    throw new Error("Only Support Two Children");
-  }
-
-  return <div className={styles["list-item"]}>{props.children}</div>;
-}
-
-// List 组件用于渲染一个列表容器，可以包含多个子元素。
-export function List(props: { children: ReactNode[] }) {
+export function List(props: {
+  children:
+    | Array<JSX.Element | null | undefined>
+    | JSX.Element
+    | null
+    | undefined;
+}) {
   return <div className={styles.list}>{props.children}</div>;
 }
 
-// Loading 组件用于显示加载中的状态，通常在数据加载时使用。
 export function Loading() {
   return (
     <div
@@ -64,16 +84,28 @@ export function Loading() {
   );
 }
 
-// ModalProps 接口定义了 Modal 组件的属性。
 interface ModalProps {
   title: string;
-  children?: ReactNode;
-  actions?: ReactNode[];
+  children?: JSX.Element | JSX.Element[];
+  actions?: JSX.Element[];
   onClose?: () => void;
 }
-
-// Modal 组件用于显示一个模态框弹窗，包含标题、内容和操作按钮。
 export function Modal(props: ModalProps) {
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        props.onClose?.();
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className={styles["modal-container"]}>
       <div className={styles["modal-header"]}>
@@ -99,7 +131,6 @@ export function Modal(props: ModalProps) {
   );
 }
 
-// showModal 函数用于在页面上显示一个模态框弹窗。
 export function showModal(props: ModalProps) {
   const div = document.createElement("div");
   div.className = "modal-mask";
@@ -121,22 +152,41 @@ export function showModal(props: ModalProps) {
   root.render(<Modal {...props} onClose={closeModal}></Modal>);
 }
 
-// ToastProps 接口定义了 Toast 组件的属性。
-export interface ToastProps {
+export type ToastProps = {
   content: string;
-}
+  action?: {
+    text: string;
+    onClick: () => void;
+  };
+  onClose?: () => void;
+};
 
-// Toast 组件用于显示一个简短的提示消息。
 export function Toast(props: ToastProps) {
   return (
     <div className={styles["toast-container"]}>
-      <div className={styles["toast-content"]}>{props.content}</div>
+      <div className={styles["toast-content"]}>
+        <span>{props.content}</span>
+        {props.action && (
+          <button
+            onClick={() => {
+              props.action?.onClick?.();
+              props.onClose?.();
+            }}
+            className={styles["toast-action"]}
+          >
+            {props.action.text}
+          </button>
+        )}
+      </div>
     </div>
   );
 }
 
-// showToast 函数用于在页面上显示一个提示消息。
-export function showToast(content: string, delay = 3000) {
+export function showToast(
+  content: string,
+  action?: ToastProps["action"],
+  delay = 3000,
+) {
   const div = document.createElement("div");
   div.className = styles.show;
   document.body.appendChild(div);
@@ -155,5 +205,42 @@ export function showToast(content: string, delay = 3000) {
     close();
   }, delay);
 
-  root.render(<Toast content={content} />);
+  root.render(<Toast content={content} action={action} onClose={close} />);
+}
+
+export type InputProps = React.HTMLProps<HTMLTextAreaElement> & {
+  autoHeight?: boolean;
+  rows?: number;
+};
+
+export function Input(props: InputProps) {
+  return (
+    <textarea
+      {...props}
+      className={`${styles["input"]} ${props.className}`}
+    ></textarea>
+  );
+}
+
+export function PasswordInput(props: HTMLProps<HTMLInputElement>) {
+  const [visible, setVisible] = useState(false);
+
+  function changeVisibility() {
+    setVisible(!visible);
+  }
+
+  return (
+    <div className={"password-input-container"}>
+      <IconButton
+        icon={visible ? <EyeIcon /> : <EyeOffIcon />}
+        onClick={changeVisibility}
+        className={"password-eye"}
+      />
+      <input
+        {...props}
+        type={visible ? "text" : "password"}
+        className={"password-input"}
+      />
+    </div>
+  );
 }
