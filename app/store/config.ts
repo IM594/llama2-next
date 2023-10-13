@@ -11,9 +11,9 @@ export enum SubmitKey {
 }
 
 export enum Theme {
-  Auto = "Auto",
-  Dark = "Dark",
-  Light = "Light",
+  Auto = "auto",
+  Dark = "dark",
+  Light = "light",
 }
 
 export const DEFAULT_CONFIG = {
