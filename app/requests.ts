@@ -226,10 +226,12 @@ export async function requestChatStream(
       }
 
       finish();
-    } else if (res.status === 401) {
-      console.error("Unauthorized");
-      options?.onError(new Error("Unauthorized"), res.status);
-    } else {
+    }
+    // else if (res.status === 401) {
+    //   console.error("Unauthorized");
+    //   options?.onError(new Error("Unauthorized"), res.status);
+    // }
+    else {
       console.error("Stream Error", res.body);
       options?.onError(new Error("Stream Error"), res.status);
     }

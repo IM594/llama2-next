@@ -289,9 +289,10 @@ export const useChatStore = create<ChatStore>()(
           },
           onError(error, statusCode) {
             const isAborted = error.message.includes("aborted");
-            if (statusCode === 401) {
-              botMessage.content = Locale.Error.Unauthorized;
-            } else if (!isAborted) {
+            // if (statusCode === 401) {
+            //   botMessage.content = Locale.Error.Unauthorized;
+            // } else
+              if (!isAborted) {
               botMessage.content += "\n\n" + Locale.Store.Error;
             }
             botMessage.streaming = false;

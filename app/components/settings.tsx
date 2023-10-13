@@ -385,22 +385,22 @@ export function Settings() {
           {/*  </select>*/}
           {/*</ListItem>*/}
 
-          <ListItem title={Locale.Settings.Theme}>
-            <select
-              value={config.theme}
-              onChange={(e) => {
-                updateConfig(
-                  (config) => (config.theme = e.target.value as any as Theme),
-                );
-              }}
-            >
-              {Object.values(Theme).map((v) => (
-                <option value={v} key={v}>
-                  {v}
-                </option>
-              ))}
-            </select>
-          </ListItem>
+          {/*<ListItem title={Locale.Settings.Theme}>*/}
+          {/*  <select*/}
+          {/*    value={config.theme}*/}
+          {/*    onChange={(e) => {*/}
+          {/*      updateConfig(*/}
+          {/*        (config) => (config.theme = e.target.value as any as Theme),*/}
+          {/*      );*/}
+          {/*    }}*/}
+          {/*  >*/}
+          {/*    {Object.values(Theme).map((v) => (*/}
+          {/*      <option value={v} key={v}>*/}
+          {/*        {v}*/}
+          {/*      </option>*/}
+          {/*    ))}*/}
+          {/*  </select>*/}
+          {/*</ListItem>*/}
 
           <ListItem title={Locale.Settings.Lang.Name}>
             <select
