@@ -398,6 +398,7 @@ export const useChatStore = create<ChatStore>()(
       summarizeSession() {
         const session = get().currentSession();
 
+        // 自动生成主题
         // should summarize topic after chating more than 50 words
         const SUMMARIZE_MIN_LEN = 50;
         if (
