@@ -1,9 +1,9 @@
 import { NextRequest } from "next/server";
 
-// const BASE_URL = "http://region-31.seetacloud.com:39349/v1/chat/completions"; // 直接写死请求地址.内蒙A区 / 367机
+const BASE_URL = "http://region-31.seetacloud.com:39349/v1/chat/completions"; // 直接写死请求地址.内蒙A区 / 367机
 // http://region-31.seetacloud.com:46766/
 
-const BASE_URL = "http://region-31.seetacloud.com:46766/v1/chat/completions"; // 直接写死请求地址.内蒙A区 / 385机
+// const BASE_URL = "http://region-31.seetacloud.com:46766/v1/chat/completions"; // 直接写死请求地址.内蒙A区 / 385机
 
 export async function requestOpenai(req: NextRequest) {
   console.log("[Base Url]", BASE_URL);
