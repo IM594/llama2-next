@@ -303,6 +303,13 @@
       .sidebar-action {
         margin-right: 0;
         margin-top: 15px;
+        .sidebar-bar-button {
+          flex-grow: 1;
+
+          &:not(:last-child) {
+            margin-right: 10px;
+          }
+        }
       }
     }
   }
@@ -416,6 +423,9 @@
   flex-direction: row-reverse;
 
   .chat-message-top-action {
+    border-radius: 10px; /* 调整圆角半径，根据需要 */
+    padding: 2px 0px; /* 添加内边距，根据需要 */
+    border-color: var(--primary); /* 添加边框颜色，根据需要 */
     opacity: 0.5;
     color: var(--black);
     white-space: nowrap;
@@ -547,6 +557,16 @@
   bottom: 32px;
 }
 
+.chat-input-send-disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background-color: var(--primary);
+  color: white;
+  position: absolute;
+  right: 30px;
+  bottom: 32px;
+}
+
 @media only screen and (max-width: 600px) {
   .chat-input {
     font-size: 16px;
@@ -555,6 +575,14 @@
   .chat-input-send {
     bottom: 30px;
   }
+
+  .chat-input-send-disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    bottom: 30px;
+
+  }
+
 }
 
 .export-content {
@@ -573,4 +601,8 @@
 
 .width-100 {
     width: 100%;
+}
+
+.width-50 {
+  width: 50%;
 }

@@ -111,48 +111,70 @@ export function SideBar(props: { className?: string }) {
         shouldNarrow && styles["narrow-sidebar"]
       }`}
     >
-      <div className={styles["sidebar-header"]}>
-        {/*<div className={styles["sidebar-title"]}>ChatGPT Next</div>*/}
-        {/*<div className={styles["sidebar-sub-title"]}>*/}
-        {/*    Build your own AI assistant.*/}
-        {/*</div>*/}
-        {/*<div className={styles["sidebar-logo"] + " no-dark"}>*/}
-        {/*    <ChatGptIcon/>*/}
-        {/*</div>*/}
-        <div>
-          <IconButton
-            className={styles["width-100"]}
+      {/*<div className={styles["sidebar-header"]}>*/}
+      {/*  /!*<div className={styles["sidebar-title"]}>ChatGPT Next</div>*!/*/}
+      {/*  /!*<div className={styles["sidebar-sub-title"]}>*!/*/}
+      {/*  /!*    Build your own AI assistant.*!/*/}
+      {/*  /!*</div>*!/*/}
+      {/*  /!*<div className={styles["sidebar-logo"] + " no-dark"}>*!/*/}
+      {/*  /!*    <ChatGptIcon/>*!/*/}
+      {/*  /!*</div>*!/*/}
+      {/*  <div>*/}
+      {/*    <IconButton*/}
+      {/*      className={styles["width-50"]}*/}
+      {/*      icon={<AddIcon />}*/}
+      {/*      text={shouldNarrow ? undefined : Locale.Home.NewChat}*/}
+      {/*      onClick={() => {*/}
+      {/*        if (config.dontShowMaskSplashScreen) {*/}
+      {/*          chatStore.newSession();*/}
+      {/*          navigate(Path.Chat);*/}
+      {/*        } else {*/}
+      {/*          navigate(Path.NewChat);*/}
+      {/*        }*/}
+      {/*      }}*/}
+      {/*      shadow*/}
+      {/*    />*/}
+
+      {/*    <IconButton*/}
+      {/*        className={styles["width-50"]}*/}
+      {/*        icon={<AddIcon />}*/}
+      {/*        text={shouldNarrow ? undefined : Locale.Home.NewChat}*/}
+      {/*        onClick={() => {*/}
+      {/*          chatStore.newSession();*/}
+      {/*          navigate(Path.Chat);}}*/}
+      {/*        shadow*/}
+      {/*    />*/}
+      {/*  </div>*/}
+
+      {/*</div>*/}
+
+      <div className={styles["sidebar-header-bar"]}>
+
+        <IconButton
             icon={<AddIcon />}
+            className={styles["sidebar-bar-button"]}
             text={shouldNarrow ? undefined : Locale.Home.NewChat}
+            onClick={() => {
+              chatStore.newSession();
+              navigate(Path.Chat);}}
+
+            shadow
+        />
+
+        <IconButton
+            icon={<MaskIcon />}
+            className={styles["sidebar-bar-button"]}
+            text={shouldNarrow ? undefined : Locale.Home.MaskChat}
             onClick={() => {
               if (config.dontShowMaskSplashScreen) {
                 chatStore.newSession();
                 navigate(Path.Chat);
               } else {
-                navigate(Path.NewChat);
+                navigate(Path.MaskChat);
               }
             }}
             shadow
-          />
-        </div>
-      </div>
-
-      <div className={styles["sidebar-header-bar"]}>
-        {/*<IconButton*/}
-        {/*    icon={<MaskIcon/>}*/}
-        {/*    text={shouldNarrow ? undefined : Locale.Mask.Name}*/}
-        {/*    className={styles["sidebar-bar-button"]}*/}
-        {/*    onClick={() => navigate(Path.NewChat, {state: {fromHome: true}})}*/}
-        {/*    shadow*/}
-        {/*/>*/}
-
-        {/*<IconButton*/}
-        {/*    icon={<PluginIcon/>}*/}
-        {/*    text={shouldNarrow ? undefined : Locale.Plugin.Name}*/}
-        {/*    className={styles["sidebar-bar-button"]}*/}
-        {/*    onClick={() => showToast(Locale.WIP)}*/}
-        {/*    shadow*/}
-        {/*/>*/}
+        />
       </div>
 
       <div
@@ -169,9 +191,11 @@ export function SideBar(props: { className?: string }) {
       <div className={styles["sidebar-tail"]}>
         <div className={styles["sidebar-actions"]}>
           <div className={styles["sidebar-action"]}>
-            <Link to={Path.Settings}>
-              <IconButton icon={<SettingsIcon />} shadow />
-            </Link>
+              <IconButton icon={<SettingsIcon />}
+                          shadow
+                          text={"Settings"}
+                          onClick={() => {  navigate(Path.Settings);}}
+              />
           </div>
 
           <div className={styles["sidebar-action"] + " " + styles.mobile}>
@@ -193,11 +217,18 @@ export function SideBar(props: { className?: string }) {
         </div>
         <div className={styles["sidebar-actions"]} onClick={nextTheme}>
           {theme === Theme.Auto ? (
-            <IconButton icon={<AutoIcon />} shadow />
+            <IconButton icon={<AutoIcon />} shadow
+                        text={"Themes"}
+
+            />
           ) : theme === Theme.Light ? (
-            <IconButton icon={<LightIcon />} shadow />
+            <IconButton icon={<LightIcon />} shadow
+                        text={"Themes"}
+            />
           ) : theme === Theme.Dark ? (
-            <IconButton icon={<DarkIcon />} shadow />
+            <IconButton icon={<DarkIcon />} shadow
+                        text={"Themes"}
+            />
           ) : null}
         </div>
         {/*<div>*/}

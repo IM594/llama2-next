@@ -49,7 +49,8 @@ const en: LocaleType = {
   //     "Resetting will clear the current conversation history and historical memory. Are you sure you want to reset?",
   // },
   Home: {
-    NewChat: "New Conversation",
+    NewChat: "New Chat",
+    MaskChat: "Mask Chat",
     DeleteChat: "Confirm to delete the selected conversation?",
     // DeleteToast: "Chat Deleted",
     // Revert: "Revert",
@@ -219,8 +220,8 @@ const en: LocaleType = {
   NewChat: {
     Return: "Return",
     Skip: "Skip",
-    Title: "Pick a Mask & Chat with it",
-    // SubTitle: "Chat with a Mask",
+    Title: "New Chat",
+    SubTitle: "Pick a Mask & Chat with it",
     // More: "Find More",
     NotShow: "Don't Show this Page Again",
     ConfirmNoShow: "Confirm to disable？You can enable it in settings later.",

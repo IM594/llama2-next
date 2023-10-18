@@ -4,6 +4,7 @@ export enum Path {
   Chat = "/chat", // 聊天页面路径
   Settings = "/settings", // 设置页面路径
   NewChat = "/new-chat", // 新聊天页面路径
+  MaskChat = "/mask-chat", // 面具聊天页面路径
   // Masks = "/masks", // 面具页面路径
 }
 

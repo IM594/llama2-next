@@ -52,6 +52,7 @@ const cn = {
   // },
   Home: {
     NewChat: "新的聊天",
+    MaskChat: "面具聊天",
     DeleteChat: "确认删除选中的对话吗？",
     // DeleteToast: "已删除会话",
     // Revert: "撤销",
@@ -216,8 +217,8 @@ const cn = {
     Skip: "直接新建对话",
     NotShow: "不再展示此页面",
     ConfirmNoShow: "确认禁用？禁用后可以随时在设置中重新启用。",
-    Title: "请挑选一个面具，然后开始对话",
-    // SubTitle: "现在开始，与面具背后的灵魂思维碰撞",
+    Title: "开始对话",
+    SubTitle: "请挑选一个面具，然后开始对话",
     // More: "查看全部",
   },
 

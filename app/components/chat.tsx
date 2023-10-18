@@ -340,19 +340,19 @@ export function ChatActions(props: {
   }
 
   // stop all responses
-  // const couldStop = ControllerPool.hasPending();
-  // const stopAll = () => ControllerPool.stopAll();
+  const couldStop = ControllerPool.hasPending();
+  const stopAll = () => ControllerPool.stopAll();
 
   return (
     <div className={chatStyle["chat-input-actions"]}>
-      {/*{couldStop && (*/}
-      {/*  <div*/}
-      {/*    className={`${chatStyle["chat-input-action"]} clickable`}*/}
-      {/*    onClick={stopAll}*/}
-      {/*  >*/}
-      {/*    <StopIcon />*/}
-      {/*  </div>*/}
-      {/*)}*/}
+      {couldStop && (
+        <div
+          className={`${chatStyle["chat-input-action"]} clickable`}
+          onClick={stopAll}
+        >
+          <StopIcon />
+        </div>
+      )}
 
       {/*{props.hitBottom && (*/}
       {/*  <div*/}
@@ -825,13 +825,11 @@ export function Chat() {
           />
 
           {couldStop ? (
-            <IconButton
-              icon={<StopIcon />}
-              // text={Locale.Chat.Send}
-              className={styles["chat-input-send"]}
-              type="primary"
-              onClick={stopAll}
-            />
+              <IconButton
+                  icon={<SendWhiteIcon />}
+                  className={styles["chat-input-send-disabled"]}
+                  type="primary"
+              />
           ) : (
             <IconButton
               icon={<SendWhiteIcon />}
@@ -840,6 +838,7 @@ export function Chat() {
               type="primary"
               onClick={onUserSubmit}
             />
+
           )}
         </div>
       </div>
