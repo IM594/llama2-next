@@ -4,7 +4,7 @@ import Locale from "./locales";
 
 // 去除主题末尾的标点符号
 export function trimTopic(topic: string) {
-  return topic.replace(/[，。！？”“"、,.!?]*$/, "");
+  return topic.replace(/[，。！？”“"、,.!?#]*$/, "");
 }
 
 // 复制文本到剪贴板

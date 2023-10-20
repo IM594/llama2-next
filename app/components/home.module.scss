@@ -176,7 +176,7 @@
   font-size: 14px;
   font-weight: bolder;
   display: block;
-  width: 200px;
+  //width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -439,6 +439,19 @@
       margin-right: 10px;
     }
   }
+
+  .chat-message-action-date {
+    border-radius: 10px; /* 调整圆角半径，根据需要 */
+    padding: 2px 0px; /* 添加内边距，根据需要 */
+    border-color: var(--primary); /* 添加边框颜色，根据需要 */
+    opacity: 0.5;
+    color: var(--black);
+    white-space: nowrap;
+
+    &:not(:first-child) {
+      margin-right: 10px;
+    }
+  }
 }
 
 .chat-message-user > .chat-message-container > .chat-message-item {
@@ -447,7 +460,7 @@
 
 .chat-message-actions {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   width: 100%;
   padding-top: 5px;
   box-sizing: border-box;
@@ -456,6 +469,7 @@
 
 .chat-message-action-date {
   color: #aaa;
+  padding: 3px;
 }
 
 .chat-input-panel {

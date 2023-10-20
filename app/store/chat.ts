@@ -50,6 +50,7 @@ export interface ChatSession {
   messages: Message[];
   stat: ChatStat;
   lastUpdate: number;
+  createTime: number;
   lastSummarizeIndex: number;
 
   mask: Mask;
@@ -79,6 +80,7 @@ function createEmptySession(): ChatSession {
       charCount: 0,
     },
     lastUpdate: Date.now(),
+    createTime:Date.now(),
     lastSummarizeIndex: 0,
     mask: createEmptyMask(),
   };
@@ -166,9 +168,12 @@ export const useChatStore = create<ChatStore>()(
         set(() => ({ globalId: get().globalId + 1 }));
         session.id = get().globalId;
 
+        // 设置创建时间
+        session.createTime = Date.now();
+
         if (mask) {
           session.mask = { ...mask };
-          session.topic = mask.name;
+          session.topic = "Mask | "+ mask.name;
         }
 
         set((state) => ({
@@ -236,6 +241,7 @@ export const useChatStore = create<ChatStore>()(
       onNewMessage(message) {
         get().updateCurrentSession((session) => {
           session.lastUpdate = Date.now();
+          console.log("date", session.lastUpdate);
         });
         get().updateStat(message);
         get().summarizeSession();
@@ -399,8 +405,8 @@ export const useChatStore = create<ChatStore>()(
         const session = get().currentSession();
 
         // 自动生成主题
-        // should summarize topic after chating more than 50 words
-        const SUMMARIZE_MIN_LEN = 50;
+        // should summarize topic after chating more than 200 words
+        const SUMMARIZE_MIN_LEN = 200;
         if (
           session.topic === DEFAULT_TOPIC &&
           countMessages(session.messages) >= SUMMARIZE_MIN_LEN

@@ -341,7 +341,7 @@ export function ChatActions(props: {
 
   // stop all responses
   const couldStop = ControllerPool.hasPending();
-  const stopAll = () => ControllerPool.stopAll();
+  const stopAll = () => {ControllerPool.stopAll()}
 
   return (
     <div className={chatStyle["chat-input-actions"]}>
@@ -422,6 +422,10 @@ export function Chat() {
   const { submitKey, shouldSubmit } = useSubmitHandler();
   const { scrollRef, setAutoScroll, scrollToBottom } = useScrollToBottom();
   const [hitBottom, setHitBottom] = useState(true);
+  // 是否刚点击过发送键
+  //   const [justClickSend, setJustClickSend] = useState(false);
+  const [sendButtonDisabled, setSendButtonDisabled] = useState(false);
+
   const isMobileScreen = useMobileScreen();
   const navigate = useNavigate();
 
@@ -488,14 +492,25 @@ export function Chat() {
 
   // submit user input
   const onUserSubmit = () => {
-    if (userInput.length <= 0) return;
+    if (userInput.length <= 0 || couldStop || sendButtonDisabled) {
+      return; // 不允许提交
+    }
+
+    // 在提交之前禁用发送按钮
+    setSendButtonDisabled(true); // 禁用发送按钮
+
     setIsLoading(true);
-    chatStore.onUserInput(userInput).then(() => setIsLoading(false));
+    chatStore.onUserInput(userInput).then(() => {
+      setIsLoading(false);
+    });
+
     setBeforeInput(userInput);
     setUserInput("");
     // setPromptHints([]);
     if (!isMobileScreen) inputRef.current?.focus();
     setAutoScroll(true);
+
+
   };
 
   // stop response
@@ -629,6 +644,84 @@ export function Chat() {
   const couldStop = ControllerPool.hasPending();
   const stopAll = () => ControllerPool.stopAll();
 
+  useEffect(() => {
+    // 监听 couldStop 状态的变化
+    if (!couldStop) {
+      // 当 couldStop 变为 false 时重新启用发送按钮
+      setSendButtonDisabled(false);
+    }
+  }, [couldStop]);
+
+  function formatLastUpdate(lastUpdate: string | number | Date) {
+    const lastUpdateDate = new Date(lastUpdate);
+    const currentDate = new Date();
+
+    const options: Intl.DateTimeFormatOptions = {
+      hour: '2-digit',
+      minute: '2-digit',
+      // timeZoneName: 'short'
+    };
+
+    const timeFormat = lastUpdateDate.toLocaleTimeString('en-US', options);
+
+    if (
+        lastUpdateDate.getDate() === currentDate.getDate() &&
+        lastUpdateDate.getMonth() === currentDate.getMonth() &&
+        lastUpdateDate.getFullYear() === currentDate.getFullYear()
+    ) {
+      return `Today ${timeFormat}`;
+    } else {
+      currentDate.setDate(currentDate.getDate() - 1); // Go back 1 day
+      if (
+          lastUpdateDate.getDate() === currentDate.getDate() &&
+          lastUpdateDate.getMonth() === currentDate.getMonth() &&
+          lastUpdateDate.getFullYear() === currentDate.getFullYear()
+      ) {
+        return `Yesterday ${timeFormat}`;
+      } else {
+        return `${lastUpdateDate.toLocaleDateString('en-US', { timeZone: 'Australia/Sydney' })} ${timeFormat}`;
+      }
+    }
+  }
+
+
+  function formatTime(id: number | undefined) {
+    if (id !== undefined) {
+      const time = new Date(id);
+      const currentDate = new Date();
+
+      const options: Intl.DateTimeFormatOptions = {
+        hour: '2-digit',
+        minute: '2-digit',
+        // timeZoneName: 'short'
+      };
+
+      const timeFormat = time.toLocaleTimeString('en-US', options);
+
+      if (
+          time.getDate() === currentDate.getDate() &&
+          time.getMonth() === currentDate.getMonth() &&
+          time.getFullYear() === currentDate.getFullYear()
+      ) {
+        return `Today ${timeFormat}`;
+      } else {
+        currentDate.setDate(currentDate.getDate() - 1); // Go back 1 day
+        if (
+            time.getDate() === currentDate.getDate() &&
+            time.getMonth() === currentDate.getMonth() &&
+            time.getFullYear() === currentDate.getFullYear()
+        ) {
+          return `Yesterday ${timeFormat}`;
+        } else {
+          return `${time.toLocaleDateString('en-US', { timeZone: 'Australia/Sydney' })} ${timeFormat}`;
+        }
+      }
+    } else {
+      return 'Invalid date';
+    }
+  }
+
+
   return (
     <div className={styles.chat} key={session.id}>
       <div className="window-header">
@@ -639,8 +732,13 @@ export function Chat() {
           >
             {!session.topic ? DEFAULT_TOPIC : session.topic}
           </div>
-          <div className="window-header-sub-title">
-            {Locale.Chat.SubTitle(session.messages.length)}
+          {/*<div className="window-header-sub-title">*/}
+          {/*  Total : {Locale.Chat.SubTitle(session.messages.length)}*/}
+          {/*</div>*/}
+          <div className="window-header-lastupdatedate">
+            {/*Last Update: {new Date(session.lastUpdate).toLocaleString("en-US", {timeZone: "Australia/Sydney"})}*/}
+            Last Message: {formatLastUpdate(session.lastUpdate)}
+
           </div>
         </div>
         <div className="window-actions">
@@ -714,6 +812,9 @@ export function Chat() {
             !(message.preview || message.content.length === 0);
           const showTyping = message.preview || message.streaming;
 
+          console.log("message.date", message.date);
+
+
           return (
             <div
               key={i}
@@ -766,6 +867,13 @@ export function Chat() {
                         onClick={() => copyToClipboard(message.content)}
                       >
                         {Locale.Chat.Actions.Copy}
+                      </div>
+
+                      <div
+                          className={styles["chat-message-action-date"]}
+                      >
+                        {/*{message.date.toLocaleString()}*/}
+                        {formatTime(message.id)}
                       </div>
                     </div>
                   )}
@@ -823,20 +931,23 @@ export function Chat() {
             rows={inputRows}
             autoFocus={autoFocus}
           />
-
+          {/*couldStop说明现在的状态是正在运行中，所以不能发送*/}
           {couldStop ? (
               <IconButton
                   icon={<SendWhiteIcon />}
                   className={styles["chat-input-send-disabled"]}
                   type="primary"
+                  disabled={true}
               />
-          ) : (
+
+            ) : (
             <IconButton
               icon={<SendWhiteIcon />}
               // text={Locale.Chat.Send}
               className={styles["chat-input-send"]}
               type="primary"
               onClick={onUserSubmit}
+              disabled={sendButtonDisabled} // 设置按钮是否禁用
             />
 
           )}

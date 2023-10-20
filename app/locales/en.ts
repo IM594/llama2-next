@@ -11,7 +11,7 @@ const en: LocaleType = {
     ChatItemCount: (count: number) => `${count} messages`,
   },
   Chat: {
-    SubTitle: (count: number) => `${count} messages`,
+    SubTitle: (count: number) => `${count} Messages`,
     Actions: {
       ChatList: "Go To Conversation List",
       // CompressedHistory: "Compressed History Memory Prompt",
@@ -50,7 +50,7 @@ const en: LocaleType = {
   // },
   Home: {
     NewChat: "New Chat",
-    MaskChat: "Mask Chat",
+    MaskChat: "Chat Mask",
     DeleteChat: "Confirm to delete the selected conversation?",
     // DeleteToast: "Chat Deleted",
     // Revert: "Revert",
