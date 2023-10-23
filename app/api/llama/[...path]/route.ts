@@ -76,7 +76,8 @@ async function handle(
       const mayBeErrorBody = await api.json();
       if (mayBeErrorBody.error) {
         console.error("[Llama 2 Response] ", mayBeErrorBody);
-        return formatResponse(mayBeErrorBody);
+        // return formatResponse(mayBeErrorBody);
+        return formatResponse("Something went wrong... Please check if the backend is turned on.")
       } else {
         const res = new Response(JSON.stringify(mayBeErrorBody));
         res.headers.set("Content-Type", "application/json");
@@ -92,7 +93,8 @@ async function handle(
     }
   } catch (e) {
     console.error("[Llama 2] ", e);
-    return formatResponse(e);
+    // return formatResponse(e);
+    return formatResponse("Something went wrong... Please check if the backend is turned on.")
   }
 }
 
