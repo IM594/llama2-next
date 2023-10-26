@@ -354,44 +354,6 @@ export function ChatActions(props: {
         </div>
       )}
 
-      {/*{props.hitBottom && (*/}
-      {/*  <div*/}
-      {/*    className={`${chatStyle["chat-input-action"]} clickable`}*/}
-      {/*    onClick={props.showPromptModal}*/}
-      {/*  >*/}
-      {/*    <BrainIcon />*/}
-      {/*  </div>*/}
-      {/*)}*/}
-
-      {/*<div*/}
-      {/*  className={`${chatStyle["chat-input-action"]} clickable`}*/}
-      {/*  onClick={nextTheme}*/}
-      {/*>*/}
-      {/*  {theme === Theme.Auto ? (*/}
-      {/*    <AutoIcon />*/}
-      {/*  ) : theme === Theme.Light ? (*/}
-      {/*    <LightIcon />*/}
-      {/*  ) : theme === Theme.Dark ? (*/}
-      {/*    <DarkIcon />*/}
-      {/*  ) : null}*/}
-      {/*</div>*/}
-
-      {/*<div*/}
-      {/*  className={`${chatStyle["chat-input-action"]} clickable`}*/}
-      {/*  onClick={props.showPromptHints}*/}
-      {/*>*/}
-      {/*  <PromptIcon />*/}
-      {/*</div>*/}
-
-      {/*<div*/}
-      {/*  className={`${chatStyle["chat-input-action"]} clickable`}*/}
-      {/*  onClick={() => {*/}
-      {/*    navigate(Path.Masks);*/}
-      {/*  }}*/}
-      {/*>*/}
-      {/*  <MaskIcon />*/}
-      {/*</div>*/}
-
       {!props.hitBottom && (
         <div
           className={`${chatStyle["chat-input-action"]} clickable`}
@@ -422,8 +384,6 @@ export function Chat() {
   const { submitKey, shouldSubmit } = useSubmitHandler();
   const { scrollRef, setAutoScroll, scrollToBottom } = useScrollToBottom();
   const [hitBottom, setHitBottom] = useState(true);
-  // 是否刚点击过发送键
-  //   const [justClickSend, setJustClickSend] = useState(false);
   const [sendButtonDisabled, setSendButtonDisabled] = useState(false);
 
   const isMobileScreen = useMobileScreen();
@@ -433,23 +393,6 @@ export function Chat() {
     const isTouchBottom = e.scrollTop + e.clientHeight >= e.scrollHeight - 100;
     setHitBottom(isTouchBottom);
   };
-
-  // prompt hints
-  // const promptStore = usePromptStore();
-  // const [promptHints, setPromptHints] = useState<Prompt[]>([]);
-  // const onSearch = useDebouncedCallback(
-  //   (text: string) => {
-  //     setPromptHints(promptStore.search(text));
-  //   },
-  //   100,
-  //   { leading: true, trailing: true },
-  // );
-
-  // const onPromptSelect = (prompt: Prompt) => {
-  //   setPromptHints([]);
-  //   inputRef.current?.focus();
-  //   setTimeout(() => setUserInput(prompt.content), 60);
-  // };
 
   // auto grow input
   const [inputRows, setInputRows] = useState(2);
@@ -477,17 +420,6 @@ export function Chat() {
   const onInput = (text: string) => {
     setUserInput(text);
     const n = text.trim().length;
-
-    // clear search results
-    // if (n === 0) {
-    //   setPromptHints([]);
-    // } else if (!config.disablePromptHint && n < SEARCH_TEXT_LIMIT) {
-    //   // check if need to trigger auto completion
-    //   if (text.startsWith("/")) {
-    //     let searchText = text.slice(1);
-    //     onSearch(searchText);
-    //   }
-    // }
   };
 
   // submit user input

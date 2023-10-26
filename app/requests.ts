@@ -147,7 +147,7 @@ export async function requestChat(
 //   };
 // }
 
-// 请求 ChatGPT 模型的流式输出
+// 请求 LLaMA 模型的流式输出
 export async function requestChatStream(
   messages: Message[],
   options?: {

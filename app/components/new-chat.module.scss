@@ -44,6 +44,7 @@
   .title {
     font-size: 32px;
     font-weight: bolder;
+    margin-top: 5%;
     margin-bottom: 1vh;
     animation: slide-in ease 0.35s;
   }
@@ -75,27 +76,27 @@
     animation: slide-in ease 0.5s;
 
     .mask-row {
-      margin-bottom: 10px;
+      margin-bottom: 20px;
       display: flex;
       justify-content: center;
 
-      @for $i from 1 to 10 {
-        &:nth-child(#{$i * 2}) {
-          margin-left: 50px;
-        }
-      }
+      //@for $i from 1 to 10 {
+      //  &:nth-child(#{$i * 2}) {
+      //    margin-left: 1150px;
+      //  }
+      //}
 
       .mask {
         display: flex;
         align-items: center;
-        padding: 15px 21px;
+        padding: 20px 25px;
         border: var(--border-in-light);
         box-shadow: var(--card-shadow);
         background-color: var(--white);
-        border-radius: 14px;
-        margin-right: 16px;
+        border-radius: 18px;
+        margin-right: 20px;
         margin-bottom: 10px;
-        max-width: 10em;
+        max-width: 12em;
         transform: scale(1);
         cursor: pointer;
         transition: all ease 0.3s;
