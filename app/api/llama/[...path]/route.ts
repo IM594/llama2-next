@@ -66,13 +66,13 @@ async function handle(
 
     let requestFunction;
     switch (params.path[3]) {
-        case "BaseGPT (LLaMA-2-13B)":
+        case "BaseGPT-LLaMA-2-13B":
             requestFunction = requestLlama2Base;
             break;
-        case "HealthcareGPT (LLaMA-2-13B)":
+        case "HealthcareGPT-LLaMA-2-13B":
             requestFunction = requestLlama2Medical;
             break;
-        case "FinanceGPT (LLaMA-2-13B)":
+        case "FinanceGPT-LLaMA-2-13B":
             requestFunction = requestLlama2Finance;
             break;
         default:

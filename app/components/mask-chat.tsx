@@ -64,8 +64,8 @@ function useMaskGroup(masks: Mask[]) {
         const rect = appBody.getBoundingClientRect();
         const maxWidth = rect.width;
         const maxHeight = rect.height * 0.5;
-        const maskItemWidth = 370;
-        const maskItemHeight = 300;
+        const maskItemWidth = 200;
+        const maskItemHeight = 160;
 
         const randomMask = () => masks[Math.floor(Math.random() * masks.length)];
         let maskIndex = 0;
