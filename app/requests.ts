@@ -68,7 +68,8 @@ const makeRequestParam = (
 // }
 
 // 创建用于发起 OpenAI 客户端请求的函数
-export function requestOpenaiClient(path: string) {
+export function requestLlama2Client(path: string) {
+  console.log("使用了requestLlama2Client")
   const llamaUrl = useAccessStore.getState().llamaUrl;
   return (body: any, method = "POST") =>
     fetch(llamaUrl + path, {
@@ -78,16 +79,21 @@ export function requestOpenaiClient(path: string) {
     });
 }
 
-// 请求 ChatGPT 模型
+// 请求 LLaMa 模型，用于生成标题等
 export async function requestChat(
   messages: Message[],
   options?: {
     model?: ModelType;
   },
 ) {
+
+  console.log("使用了requestChat")
   const req: ChatRequest = makeRequestParam(messages);
 
-  const res = await requestOpenaiClient("v1/chat/completions")(req);
+  const res = await requestLlama2Client("v1/chat/completions")(req);
+
+  console.log("!!!![Request body] ", req);
+  console.log("!!!![Request URL] ", res.url);
 
   try {
     return (await res.json()) as ChatResponse;
@@ -96,58 +102,7 @@ export async function requestChat(
   }
 }
 
-// 请求用法统计信息
-// export async function requestUsage() {
-//   const formatDate = (d: Date) =>
-//       `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, "0")}-${d
-//           .getDate()
-//           .toString()
-//           .padStart(2, "0")}`;
-//   const ONE_DAY = 1 * 24 * 60 * 60 * 1000;
-//   const now = new Date();
-//   const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-//   const startDate = formatDate(startOfMonth);
-//   const endDate = formatDate(new Date(Date.now() + ONE_DAY));
-//
-//   const [used, subs] = await Promise.all([
-//     requestOpenaiClient(
-//         `dashboard/billing/usage?start_date=${startDate}&end_date=${endDate}`,
-//     )(null, "GET"),
-//     requestOpenaiClient("dashboard/billing/subscription")(null, "GET"),
-//   ]);
-//
-//   const response = (await used.json()) as {
-//     total_usage?: number;
-//     error?: {
-//       type: string;
-//       message: string;
-//     };
-//   };
-//
-//   const total = (await subs.json()) as {
-//     hard_limit_usd?: number;
-//   };
-//
-//   if (response.error && response.error.type) {
-//     showToast(response.error.message);
-//     return;
-//   }
-//
-//   if (response.total_usage) {
-//     response.total_usage = Math.round(response.total_usage) / 100;
-//   }
-//
-//   if (total.hard_limit_usd) {
-//     total.hard_limit_usd = Math.round(total.hard_limit_usd * 100) / 100;
-//   }
-//
-//   return {
-//     used: response.total_usage,
-//     subscription: total.hard_limit_usd,
-//   };
-// }
-
-// 请求 LLaMA 模型的流式输出
+// 请求 LLaMA 模型的流式输出，用于对话
 export async function requestChatStream(
   messages: Message[],
   options?: {
@@ -158,6 +113,7 @@ export async function requestChatStream(
     onController?: (controller: AbortController) => void;
   },
 ) {
+  console.log("使用了requestChatStream");
   const req = makeRequestParam(messages, {
     stream: true,
     // overrideModel: options?.overrideModel,
@@ -171,16 +127,21 @@ export async function requestChatStream(
   try {
     const llamaUrl = useAccessStore.getState().llamaUrl;
 
-    console.log("!!!!!request:", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(req),
-      signal: controller.signal,
-    });
+    const currentModel = useChatStore.getState().currentSession().mask.modelConfig.model;
+    // 打印当前Mask的model
 
-    const res = await fetch(llamaUrl + "v1/chat/completions", {
+    // console.log("!!!!!request:", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(req),
+    //   signal: controller.signal,
+    // });
+
+    console.log("request: "+ JSON.stringify(req));
+
+    const res = await fetch(llamaUrl + "v1/chat/completions/" + currentModel, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -249,6 +210,7 @@ export async function requestWithPrompt(
     model?: ModelType;
   },
 ) {
+  console.log("使用了requestWithPrompt")
   messages = messages.concat([
     {
       role: "user",

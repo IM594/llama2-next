@@ -29,7 +29,7 @@ export const DEFAULT_CONFIG = {
   dontShowMaskSplashScreen: false, // dont show splash screen when create chat
 
   modelConfig: {
-    model: "LLaMa-2-13B-chat" as ModelType,
+    model: "LLaMa-2-13B-chat-Base" as ModelType,
     temperature: 1,
     max_tokens: 2000,
     presence_penalty: 0,
@@ -52,7 +52,15 @@ export type ModelConfig = ChatConfig["modelConfig"];
 
 export const ALL_MODELS = [
   {
-    name: "LLaMa-2-13B-chat",
+    name: "LLaMa-2-13B-chat-Base",
+    available: true,
+  },
+  {
+    name: "LLaMa-2-13B-chat-Medical",
+    available: true,
+  },
+  {
+    name: "LLaMa-2-13B-chat-Finance",
     available: true,
   },
 ] as const;

@@ -122,8 +122,7 @@ export function NewChat() {
 
 
             <div className={styles["title"]}>{Locale.NewChat.Title}</div>
-            <div className={styles["sub-title"]}>{Locale.NewChat.SubTitle}</div>
-
+            <div className={styles["sub-title"]}>{Locale.NewChat.SubTitle}</div>·
             <br/><br/>
             {!showMore && (
                 <IconButton
@@ -132,12 +131,9 @@ export function NewChat() {
                     text={showMore ? undefined : "Show More"}
                     onClick={toggleShowMore}
                     shadow
-
                 />
             )}
             <br/><br/>
-
-
             <div className={styles["masks"]}>
                 {groups.slice(0, showMore ? groups.length : numMasksToShow).map((masks, i) => (
                     <div key={i} className={styles["mask-row"]}>

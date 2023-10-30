@@ -412,7 +412,8 @@ export const useChatStore = create<ChatStore>()(
           countMessages(session.messages) >= SUMMARIZE_MIN_LEN
         ) {
           requestWithPrompt(session.messages, Locale.Store.Prompt.Topic, {
-            model: "LLaMa-2-13B-chat",
+            // 使用当前 Model
+            model: session.mask.modelConfig.model,
           }).then((res) => {
             get().updateCurrentSession(
               (session) =>

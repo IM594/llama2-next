@@ -744,7 +744,7 @@ export function Chat() {
             !(message.preview || message.content.length === 0);
           const showTyping = message.preview || message.streaming;
 
-          console.log("message.date", message.date);
+          // console.log("message.date", message.date);
 
 
           return (
@@ -871,7 +871,6 @@ export function Chat() {
                   type="primary"
                   disabled={true}
               />
-
             ) : (
             <IconButton
               icon={<SendWhiteIcon />}

@@ -149,7 +149,7 @@ const en: LocaleType = {
     //   SubTitle: "Access control enabled",
     //   Placeholder: "Need Access Code",
     // },
-    // Model: "Model",
+    Model: "Model",
     Temperature: {
       Title: "Temperature",
       // SubTitle: "A larger value makes the more random output",
