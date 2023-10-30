@@ -30,10 +30,10 @@ const cn = {
       return "输入消息";
     },
     Send: "发送",
-    // Config: {
-    //   Reset: "重置默认",
-    //   SaveAs: "另存为面具",
-    // },
+    Config: {
+      Reset: "重置默认",
+      SaveAs: "另存为面具",
+    },
   },
   Export: {
     Title: "导出聊天记录",
@@ -42,14 +42,14 @@ const cn = {
     MessageFromYou: "你",
     MessageFromChatGPT: "Next-Llama-2",
   },
-  // Memory: {
-  //   Title: "历史摘要",
-  //   EmptyContent: "对话内容过短，无需总结",
-  //   Send: "自动压缩聊天记录并作为上下文发送",
-  //   Copy: "复制摘要",
-  //   Reset: "重置对话",
-  //   ResetConfirm: "重置后将清空当前对话记录以及历史摘要，确认重置？",
-  // },
+  Memory: {
+    Title: "历史摘要",
+    EmptyContent: "对话内容过短，无需总结",
+    Send: "自动压缩聊天记录并作为上下文发送",
+    Copy: "复制摘要",
+    Reset: "重置对话",
+    ResetConfirm: "重置后将清空当前对话记录以及历史摘要，确认重置？",
+  },
   Home: {
     NewChat: "新的聊天",
     MaskChat: "面具聊天",
@@ -155,10 +155,16 @@ const cn = {
       Title: "最大 Token 数",
       // SubTitle: "单次交互所用的最大 Token 数",
     },
-    PresencePenlty: {
+    PresencePenalty: {
       Title: "话题新鲜度",
       // SubTitle: "值越大，越有可能扩展到新话题",
     },
+    TopP: {
+        Title: "TopP",
+    },
+    FrequencyPenalty: {
+        Title: "FrequencyPenalty",
+    }
   },
   Store: {
     DefaultTopic: "新的对话",
@@ -177,11 +183,11 @@ const cn = {
   //   Success: "已写入剪切板",
   //   Failed: "复制失败，请赋予剪切板权限",
   // },
-  // Context: {
-  //   Toast: (x: any) => `已设置 ${x} 条前置上下文`,
-  //   Edit: "当前对话设置",
-  //   Add: "新增预设对话",
-  // },
+  Context: {
+    Toast: (x: any) => `已设置 ${x} 条前置上下文`,
+    Edit: "当前聊天设置",
+    Add: "新增预设对话",
+  },
   // Plugin: {
   //   Name: "插件",
   // },

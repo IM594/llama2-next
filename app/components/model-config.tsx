@@ -70,7 +70,7 @@ export function ModelConfigList(props: {
                 ></InputRange>
             </ListItem>
             <ListItem
-                title={Locale.Settings.PresencePenlty.Title}
+                title={Locale.Settings.PresencePenalty.Title}
                 // subTitle={Locale.Settings.PresencePenlty.SubTitle}
             >
                 <InputRange

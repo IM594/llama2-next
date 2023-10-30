@@ -90,7 +90,9 @@ export async function requestChat(
   console.log("使用了requestChat")
   const req: ChatRequest = makeRequestParam(messages);
 
-  const res = await requestLlama2Client("v1/chat/completions")(req);
+  const currentModel = useChatStore.getState().currentSession().mask.modelConfig.model;
+
+  const res = await requestLlama2Client("v1/chat/completions/"+currentModel)(req);
 
   console.log("!!!![Request body] ", req);
   console.log("!!!![Request URL] ", res.url);

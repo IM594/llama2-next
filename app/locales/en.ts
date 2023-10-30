@@ -27,10 +27,10 @@ const en: LocaleType = {
       return `Send a message`
     },
     Send: "Send",
-    // Config: {
-    //   Reset: "Reset to Default",
-    //   SaveAs: "Save as Mask",
-    // },
+    Config: {
+      Reset: "Reset to Default",
+      SaveAs: "Save as Mask",
+    },
   },
   Export: {
     Title: "All Messages",
@@ -39,15 +39,15 @@ const en: LocaleType = {
     MessageFromYou: "You",
     MessageFromChatGPT: "Next-Llama-2",
   },
-  // Memory: {
-  //   Title: "Memory Prompt",
-  //   EmptyContent: "Nothing yet.",
-  //   Send: "Send Memory",
-  //   Copy: "Copy Memory",
-  //   Reset: "Reset Session",
-  //   ResetConfirm:
-  //     "Resetting will clear the current conversation history and historical memory. Are you sure you want to reset?",
-  // },
+  Memory: {
+    Title: "Memory Prompt",
+    EmptyContent: "Nothing yet.",
+    Send: "Send Memory",
+    Copy: "Copy Memory",
+    Reset: "Reset Session",
+    ResetConfirm:
+      "Resetting will clear the current conversation history and historical memory. Are you sure you want to reset?",
+  },
   Home: {
     NewChat: "New Chat",
     MaskChat: "Chat Mask",
@@ -158,11 +158,17 @@ const en: LocaleType = {
       Title: "Max Tokens",
       // SubTitle: "Maximum length of input tokens and generated tokens",
     },
-    PresencePenlty: {
+    PresencePenalty: {
       Title: "Presence Penalty",
       // SubTitle:
       //   "A larger value increases the likelihood to talk about new topics",
     },
+    TopP: {
+        Title: "Top P",
+    },
+    FrequencyPenalty: {
+        Title: "Frequency Penalty",
+    }
   },
   Store: {
     DefaultTopic: "New Conversation",
@@ -173,7 +179,7 @@ const en: LocaleType = {
         "This is a summary of the chat history between the AI and the user as a recap: " +
         content,
       Topic:
-        "Please generate a four to five word title summarizing the conversation without any lead-in, punctuation, quotation marks, periods, symbols, or additional text. Remove enclosing quotation marks.",
+        "Generate a 4 to 5 word title to summarize the conversation without any lead-in, punctuation, quotation marks, periods, symbols, or additional text. Remove enclosing quotation marks.",
       Summarize:
         "Summarize our discussion briefly in 200 words or less to use as a prompt for future context.",
     },
@@ -182,11 +188,11 @@ const en: LocaleType = {
   //   Success: "Copied to clipboard",
   //   Failed: "Copy failed, please grant permission to access clipboard",
   // },
-  // Context: {
-  //   Toast: (x: any) => `With ${x} contextual prompts`,
-  //   Edit: "Contextual and Memory Prompts",
-  //   Add: "Add a Prompt",
-  // },
+  Context: {
+    Toast: (x: any) => `With ${x} contextual prompts`,
+    Edit: "Current Chat Settings",
+    Add: "Add a Prompt",
+  },
   // Plugin: {
   //   Name: "Plugin",
   // },
