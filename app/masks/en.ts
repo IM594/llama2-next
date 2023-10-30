@@ -29,7 +29,7 @@ export const EN_MASKS: BuiltinMask[] = [
 //             },
 //         ],
 //         modelConfig: {
-//             model: "LLaMA-2-13B-BaseGPT",
+//             model: "BaseGPT (LLaMA-2-13B)",
 //             temperature: 1,
 //             max_tokens: 2000,
 //             presence_penalty: 0,
@@ -50,7 +50,7 @@ export const EN_MASKS: BuiltinMask[] = [
 //             },
 //         ],
 //         modelConfig: {
-//             model: "LLaMA-2-13B-BaseGPT",
+//             model: "BaseGPT (LLaMA-2-13B)",
 //             temperature: 1,
 //             max_tokens: 2000,
 //             presence_penalty: 0,
@@ -73,7 +73,7 @@ export const EN_MASKS: BuiltinMask[] = [
 //             },
 //         ],
 //         modelConfig: {
-//             model: "LLaMA-2-13B-BaseGPT",
+//             model: "BaseGPT (LLaMA-2-13B)",
 //             temperature: 1,
 //             max_tokens: 2000,
 //             presence_penalty: 0,
@@ -96,7 +96,7 @@ export const EN_MASKS: BuiltinMask[] = [
 //             },
 //         ],
 //         modelConfig: {
-//             model: "LLaMA-2-13B-BaseGPT",
+//             model: "BaseGPT (LLaMA-2-13B)",
 //             temperature: 1,
 //             max_tokens: 2000,
 //             presence_penalty: 0,
@@ -119,7 +119,7 @@ export const EN_MASKS: BuiltinMask[] = [
 //             },
 //         ],
 //         modelConfig: {
-//             model: "LLaMA-2-13B-BaseGPT",
+//             model: "BaseGPT (LLaMA-2-13B)",
 //             temperature: 1,
 //             max_tokens: 2000,
 //             presence_penalty: 0,
@@ -142,7 +142,7 @@ export const EN_MASKS: BuiltinMask[] = [
 //             },
 //         ],
 //         modelConfig: {
-//             model: "LLaMA-2-13B-BaseGPT",
+//             model: "BaseGPT (LLaMA-2-13B)",
 //             temperature: 1,
 //             max_tokens: 2000,
 //             presence_penalty: 0,
@@ -165,7 +165,7 @@ export const EN_MASKS: BuiltinMask[] = [
 //             },
 //         ],
 //         modelConfig: {
-//             model: "LLaMA-2-13B-BaseGPT",
+//             model: "BaseGPT (LLaMA-2-13B)",
 //             temperature: 1,
 //             max_tokens: 2000,
 //             presence_penalty: 0,
@@ -188,7 +188,7 @@ export const EN_MASKS: BuiltinMask[] = [
 //             },
 //         ],
 //         modelConfig: {
-//             model: "LLaMA-2-13B-BaseGPT",
+//             model: "BaseGPT (LLaMA-2-13B)",
 //             temperature: 1,
 //             max_tokens: 2000,
 //             presence_penalty: 0,
@@ -211,7 +211,7 @@ export const EN_MASKS: BuiltinMask[] = [
         ],
         modelConfig: {
             // 没什么用 最后还是会用设置里的 Model，因为app/store/mask.ts设置了用全局的。
-            model: "LLaMA-2-13B-BaseGPT",
+            model: "BaseGPT (LLaMA-2-13B)",
             temperature: 1,
             max_tokens: 2000,
             presence_penalty: 0,
@@ -233,7 +233,7 @@ export const EN_MASKS: BuiltinMask[] = [
             },
         ],
         modelConfig: {
-            model: "LLaMA-2-13B-BaseGPT",
+            model: "BaseGPT (LLaMA-2-13B)",
             temperature: 1,
             max_tokens: 2000,
             presence_penalty: 0,
@@ -256,7 +256,7 @@ export const EN_MASKS: BuiltinMask[] = [
             },
         ],
         modelConfig: {
-            model: "LLaMA-2-13B-BaseGPT",
+            model: "BaseGPT (LLaMA-2-13B)",
             temperature: 1,
             max_tokens: 2000,
             presence_penalty: 0,
