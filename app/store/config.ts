@@ -60,7 +60,7 @@ export const ALL_MODELS = [
     available: true,
   },
   {
-    name: "LLaMA-2-13B-HealthCareGPT",
+    name: "LLaMA-2-13B-HealthcareGPT",
     available: true,
   },
 ] as const;

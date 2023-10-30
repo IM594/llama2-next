@@ -69,7 +69,7 @@ async function handle(
         case "LLaMA-2-13B-BaseGPT":
             requestFunction = requestLlama2Base;
             break;
-        case "LLaMA-2-13B-HealthCare":
+        case "LLaMA-2-13B-Healthcare":
             requestFunction = requestLlama2Medical;
             break;
         case "LLaMA-2-13B-Finance":
