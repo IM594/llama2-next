@@ -417,17 +417,17 @@ export function Settings() {
             </select>
           </ListItem>
 
-          <ListItem className="no-mobile" title={Locale.Settings.TightBorder}>
-            <input
-              type="checkbox"
-              checked={config.tightBorder}
-              onChange={(e) =>
-                updateConfig(
-                  (config) => (config.tightBorder = e.currentTarget.checked),
-                )
-              }
-            ></input>
-          </ListItem>
+          {/*<ListItem className="no-mobile" title={Locale.Settings.TightBorder}>*/}
+          {/*  <input*/}
+          {/*    type="checkbox"*/}
+          {/*    checked={config.tightBorder}*/}
+          {/*    onChange={(e) =>*/}
+          {/*      updateConfig(*/}
+          {/*        (config) => (config.tightBorder = e.currentTarget.checked),*/}
+          {/*      )*/}
+          {/*    }*/}
+          {/*  ></input>*/}
+          {/*</ListItem>*/}
 
           {/*<ListItem*/}
           {/*  title={Locale.Settings.FontSize.Title}*/}

@@ -18,6 +18,8 @@
   --bar-color: rgba(0, 0, 0, 0.1);
   --theme-color: var(--gray);
 
+  --date-color: #00000080;
+
   /* shadow */
   --shadow: 50px 50px 100px 10px rgb(0, 0, 0, 0.1);
   --card-shadow: 0px 2px 4px 0px rgb(0, 0, 0, 0.05);
@@ -44,6 +46,8 @@
   --border-in-light: 1px solid rgba(255, 255, 255, 0.192);
 
   --theme-color: var(--gray);
+
+  --date-color: rgba(253, 253, 253, 0.5);
 
   div:not(.no-dark) > svg {
     filter: invert(0.5);
