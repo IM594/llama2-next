@@ -119,7 +119,7 @@ async function handle(
     } catch (e) {
         console.error("[Llama 2] ", e);
         // return formatResponse(e);
-        return formatResponse("Something went wrong... Please check if the backend is turned on.");
+        return formatResponse("Something went wrong... Please check if the backend "+requestFunction+" is turned on.");
         // 返回params的第三个参数
         // return formatResponse("" + requestFunction);
 

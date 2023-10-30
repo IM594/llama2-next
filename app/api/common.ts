@@ -4,7 +4,7 @@ import { NextRequest } from "next/server";
 // 创建多个请求地址，分别对应不同的机器: BASE_URL, MEDICAL_URL, FINANCE_URL
 const BASE_URL = "http://region-31.seetacloud.com:46766/v1/chat/completions"; // 内蒙A区 / 385机 3090
 const MEDICAL_URL = "http://region-31.seetacloud.com:46411/v1/chat/completions"; // 内蒙A区 / 384机 3090
-const FINANCE_URL = "http://http://region-31.seetacloud.com:30342/v1/chat/completions"; // 内蒙A区 / 386机 3090
+const FINANCE_URL = "http://region-31.seetacloud.com:30342/v1/chat/completions"; // 内蒙A区 / 386机 3090
 
 //暴露BASE_URL
 export { BASE_URL, MEDICAL_URL, FINANCE_URL };
