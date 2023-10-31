@@ -51,7 +51,9 @@
 
     .list-item-sub-title {
       font-size: 12px;
-      font-weight: normal;
+      font-weight: lighter;
+      color: var(--subtitle-color);
+      margin-top: 5px;
     }
   }
 }

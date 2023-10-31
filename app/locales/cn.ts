@@ -120,11 +120,11 @@ const cn = {
     // },
     HistoryCount: {
       Title: "附带历史消息数",
-      // SubTitle: "每次请求携带的历史消息数",
+      SubTitle: "每次请求携带的历史消息数",
     },
     CompressThreshold: {
       Title: "历史消息长度压缩值",
-      // SubTitle: "当未压缩的历史消息超过该值时，将进行压缩",
+      SubTitle: "当未压缩的历史消息超过该值时，将进行压缩",
     },
     // Token: {
     //   Title: "API Key",
@@ -149,15 +149,15 @@ const cn = {
     Model: "模型",
     Temperature: {
       Title: "随机性",
-      // SubTitle: "值越大，回复越随机",
+      SubTitle: "值越大，回复越随机",
     },
     MaxTokens: {
       Title: "最大 Token 数",
-      // SubTitle: "单次交互所用的最大 Token 数",
+      SubTitle: "单次交互所用的最大 Token 数",
     },
     PresencePenalty: {
       Title: "话题新鲜度",
-      // SubTitle: "值越大，越有可能扩展到新话题",
+      SubTitle: "值越大，越有可能扩展到新话题",
     },
     TopP: {
         Title: "TopP",

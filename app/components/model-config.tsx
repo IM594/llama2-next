@@ -33,7 +33,7 @@ export function ModelConfigList(props: {
             </ListItem>
             <ListItem
                 title={Locale.Settings.Temperature.Title}
-                // subTitle={Locale.Settings.Temperature.SubTitle}
+                subTitle={Locale.Settings.Temperature.SubTitle}
             >
                 <InputRange
                     value={props.modelConfig.temperature?.toFixed(1)}
@@ -52,7 +52,7 @@ export function ModelConfigList(props: {
             </ListItem>
             <ListItem
                 title={Locale.Settings.MaxTokens.Title}
-                // subTitle={Locale.Settings.MaxTokens.SubTitle}
+                subTitle={Locale.Settings.MaxTokens.SubTitle}
             >
                 <InputRange
                     min="100"
@@ -71,7 +71,7 @@ export function ModelConfigList(props: {
             </ListItem>
             <ListItem
                 title={Locale.Settings.PresencePenalty.Title}
-                // subTitle={Locale.Settings.PresencePenlty.SubTitle}
+                subTitle={Locale.Settings.PresencePenalty.SubTitle}
             >
                 <InputRange
                     value={props.modelConfig.presence_penalty?.toFixed(1)}
@@ -92,7 +92,7 @@ export function ModelConfigList(props: {
 
             <ListItem
                 title={Locale.Settings.HistoryCount.Title}
-                // subTitle={Locale.Settings.HistoryCount.SubTitle}
+                subTitle={Locale.Settings.HistoryCount.SubTitle}
             >
                 <InputRange
                     title={props.modelConfig.historyMessageCount.toString()}
@@ -110,6 +110,7 @@ export function ModelConfigList(props: {
 
             <ListItem
                 title={Locale.Settings.CompressThreshold.Title}
+                subTitle={Locale.Settings.CompressThreshold.SubTitle}
             >
                 <InputRange
                     min="500"

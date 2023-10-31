@@ -2,7 +2,7 @@ import {useEffect, useRef, useState} from "react";
 import {Path, SlotID} from "../constant";
 import styles from "./new-chat.module.scss";
 
-import EyeIcon from "../icons/eye.svg";
+import MoreIcon from "../icons/more.svg";
 
 import {useLocation, useNavigate} from "react-router-dom";
 import {Mask, useMaskStore} from "../store/mask";
@@ -126,7 +126,7 @@ export function NewChat() {
             <br/><br/>
             {!showMore && (
                 <IconButton
-                    icon={<EyeIcon/>}
+                    icon={<MoreIcon/>}
                     className={styles["sidebar-bar-button"]}
                     text={showMore ? undefined : "Show More"}
                     onClick={toggleShowMore}

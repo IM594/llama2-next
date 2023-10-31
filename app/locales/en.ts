@@ -123,12 +123,12 @@ const en: LocaleType = {
     // },
     HistoryCount: {
       Title: "Attached Messages Count",
-      // SubTitle: "Number of sent messages attached per request",
+      SubTitle: "Number of sent messages attached per request",
     },
     CompressThreshold: {
       Title: "History Compression Threshold",
-      // SubTitle:
-      //   "Will compress if uncompressed messages length exceeds the value",
+      SubTitle:
+        "Will compress if uncompressed messages length exceeds the value",
     },
     // Token: {
     //   Title: "API Key",
@@ -152,16 +152,16 @@ const en: LocaleType = {
     Model: "Model",
     Temperature: {
       Title: "Temperature",
-      // SubTitle: "A larger value makes the more random output",
+      SubTitle: "A larger value makes the more random output",
     },
     MaxTokens: {
       Title: "Max Tokens",
-      // SubTitle: "Maximum length of input tokens and generated tokens",
+      SubTitle: "Maximum length of input tokens and generated tokens",
     },
     PresencePenalty: {
       Title: "Presence Penalty",
-      // SubTitle:
-      //   "A larger value increases the likelihood to talk about new topics",
+      SubTitle:
+        "A larger value increases the likelihood to talk about new topics",
     },
     TopP: {
         Title: "Top P",

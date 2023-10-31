@@ -1,12 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Path, SlotID } from "../constant";
 import { IconButton } from "./button";
-// import { EmojiAvatar } from "./emoji";
 import styles from "./new-chat.module.scss";
 
 import LeftIcon from "../icons/left.svg";
-import LightningIcon from "../icons/lightning.svg";
-import EyeIcon from "../icons/eye.svg";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import { Mask, useMaskStore } from "../store/mask";
@@ -149,13 +146,13 @@ export function NewChat() {
       {/*<div className={styles["sub-title"]}>{Locale.NewChat.SubTitle}</div>*/}
 
       <div className={styles["actions"]}>
-        <IconButton
-          text={Locale.NewChat.Skip}
-          onClick={() => startChat()}
-          icon={<LightningIcon />}
-          type="primary"
-          shadow
-        />
+        {/*<IconButton*/}
+        {/*  text={Locale.NewChat.Skip}*/}
+        {/*  onClick={() => startChat()}*/}
+        {/*  icon={<LightningIcon />}*/}
+        {/*  type="primary"*/}
+        {/*  shadow*/}
+        {/*/>*/}
 
         {/*<IconButton*/}
         {/*  className={styles["more"]}*/}

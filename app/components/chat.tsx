@@ -1,8 +1,7 @@
 import {useDebouncedCallback} from "use-debounce";
 import {useState, useRef, useEffect, useLayoutEffect} from "react";
 
-import SendWhiteIcon from "../icons/send-white.svg";
-import BrainIcon from "../icons/brain.svg";
+import SendIcon from "../icons/send.svg";
 import EditIcon from "../icons/edit.svg";
 import RenameIcon from "../icons/rename.svg";
 import ExportIcon from "../icons/share.svg";
@@ -10,7 +9,6 @@ import ReturnIcon from "../icons/return.svg";
 import CopyIcon from "../icons/copy.svg";
 import DownloadIcon from "../icons/download.svg";
 import LoadingIcon from "../icons/three-dots.svg";
-// import PromptIcon from "../icons/prompt.svg";
 // import MaskIcon from "../icons/mask.svg";
 import MaxIcon from "../icons/max.svg";
 import MinIcon from "../icons/min.svg";
@@ -1046,14 +1044,14 @@ export function Chat() {
                     {/*couldStop说明现在的状态是正在运行中，所以不能发送*/}
                     {couldStop ? (
                         <IconButton
-                            icon={<SendWhiteIcon/>}
+                            icon={<SendIcon/>}
                             className={styles["chat-input-send-disabled"]}
                             type="primary"
                             disabled={true}
                         />
                     ) : (
                         <IconButton
-                            icon={<SendWhiteIcon/>}
+                            icon={<SendIcon/>}
                             // text={Locale.Chat.Send}
                             className={styles["chat-input-send"]}
                             type="primary"

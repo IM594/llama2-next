@@ -7,7 +7,7 @@
   /* color */
   --white: white;
   --black: rgb(48, 48, 48);
-  --gray: rgb(250, 250, 250);
+  --gray: rgba(239, 239, 239, 0.86);
   // --primary: rgb(29, 147, 171);
   --primary: rgba(61, 80, 128, 0.915);
   // --second: rgb(231, 248, 255);
@@ -19,6 +19,8 @@
   --theme-color: var(--gray);
 
   --date-color: #00000080;
+
+  --subtitle-color: rgba(0, 0, 0, 0.87);
 
   /* shadow */
   --shadow: 50px 50px 100px 10px rgb(0, 0, 0, 0.1);
@@ -34,7 +36,7 @@
   /* color */
   --white: rgb(30, 30, 30);
   --black: rgb(187, 187, 187);
-  --gray: rgb(21, 21, 21);
+  --gray: rgba(24, 24, 24, 0.88);
   // --primary: rgb(29, 147, 171);
   --primary: rgba(61, 80, 128, 0.915);
   --second: rgb(25, 33, 39);
@@ -48,6 +50,8 @@
   --theme-color: var(--gray);
 
   --date-color: rgba(253, 253, 253, 0.5);
+
+  --subtitle-color: rgba(253, 253, 253, 0.89);
 
   div:not(.no-dark) > svg {
     filter: invert(0.5);
