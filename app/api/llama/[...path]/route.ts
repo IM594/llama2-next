@@ -1,7 +1,6 @@
 import {createParser} from "eventsource-parser";
 import {NextRequest, NextResponse} from "next/server";
-import {BASE_URL, requestLlama2Base, requestLlama2Medical, requestLlama2Finance} from "../../common";
-import {useChatStore} from "@/app/store";
+import {requestLlama2Base, requestLlama2Medical, requestLlama2Finance} from "../../common";
 
 async function createStream(res: Response) {
     const encoder = new TextEncoder();
@@ -51,18 +50,6 @@ async function handle(
     currentModel: string // 传递 currentModel 作为参数
 ) {
     console.log("[Llama 2 Route] params ", params);
-
-
-    const authResult = true;
-    // if (authResult.error) {
-    //   return NextResponse.json(authResult, {
-    //     status: 401,
-    //   });
-    // }
-
-
-    // 根据config的model值，请求不同的方法函数
-    // const currentModel = useChatStore.getState().currentSession().mask.modelConfig.model;
 
     let requestFunction;
     switch (params.path[3]) {
@@ -118,10 +105,7 @@ async function handle(
         }
     } catch (e) {
         console.error("[Llama 2] ", e);
-        // return formatResponse(e);
-        return formatResponse("Something went wrong... Please check if the backend "+requestFunction+" is turned on.");
-        // 返回params的第三个参数
-        // return formatResponse("" + requestFunction);
+        return formatResponse("Please check if the backend " + requestFunction + " is turned on.");
 
     }
 }

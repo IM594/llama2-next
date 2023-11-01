@@ -52,8 +52,8 @@ const en: LocaleType = {
     NewChat: "New Chat",
     MaskChat: "Chat Mask",
     DeleteChat: "Confirm to delete the selected conversation?",
-    // DeleteToast: "Chat Deleted",
-    // Revert: "Revert",
+    DeleteToast: "Chat Deleted",
+    Revert: "Revert",
   },
   Settings: {
     Title: "Settings",

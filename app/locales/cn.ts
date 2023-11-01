@@ -1,11 +1,6 @@
 // import { SubmitKey } from "../store/config";
 
 const cn = {
-  // WIP: "该功能仍在开发中……",
-  // Error: {
-  //   Unauthorized:
-  //     "现在是未授权状态，请点击左下角[设置](/#/settings)按钮输入访问密码。",
-  // },
   ChatItem: {
     ChatItemCount: (count: number) => `${count} 条对话`,
   },
@@ -23,10 +18,6 @@ const cn = {
     Rename: "重命名",
     // Typing: "正在输入…",
     Input: (submitKey: string) => {
-      // var inputHints = `${submitKey} 发送`;
-      // if (submitKey === String(SubmitKey.Enter)) {
-      //   inputHints += "，Shift + Enter 换行";
-      // }
       return "输入消息";
     },
     Send: "发送",
@@ -54,8 +45,8 @@ const cn = {
     NewChat: "新的聊天",
     MaskChat: "面具聊天",
     DeleteChat: "确认删除选中的对话吗？",
-    // DeleteToast: "已删除会话",
-    // Revert: "撤销",
+    DeleteToast: "已删除会话",
+    Revert: "撤销",
   },
   Settings: {
     Title: "设置",
@@ -75,20 +66,7 @@ const cn = {
         en: "English",
       },
     },
-    // Avatar: "头像",
-    // FontSize: {
-    //   Title: "字体大小",
-    //   SubTitle: "聊天内容的字体大小",
-    // },
 
-    // Update: {
-    //   // Version: (x: string) => `当前版本：${x}`,
-    //   IsLatest: "已是最新版本",
-    //   CheckUpdate: "检查更新",
-    //   IsChecking: "正在检查更新...",
-    //   FoundUpdate: (x: string) => `发现新版本：${x}`,
-    //   GoToUpdate: "前往更新",
-    // },
     // SendKey: "发送键",
     Theme: "主题",
     TightBorder: "全屏显示",
@@ -100,24 +78,6 @@ const cn = {
       Title: "展示面具页",
       // SubTitle: "新建聊天时，展示面具启动页",
     },
-    // Prompt: {
-    //   Disable: {
-    //     Title: "禁用提示词自动补全",
-    //     SubTitle: "在输入框开头输入 / 即可触发自动补全",
-    //   },
-    //   List: "自定义提示词列表",
-    //   ListCount: (builtin: number, custom: number) =>
-    //     `内置 ${builtin} 条，用户定义 ${custom} 条`,
-    //   Edit: "编辑",
-    //   Modal: {
-    //     Title: "提示词列表",
-    //     Add: "新建",
-    //     Search: "搜索提示词",
-    //   },
-    //   EditModal: {
-    //     Title: "编辑提示词",
-    //   },
-    // },
     HistoryCount: {
       Title: "附带历史消息数",
       SubTitle: "使用多少个之前的消息作为上下文。它们会占用一些令牌",

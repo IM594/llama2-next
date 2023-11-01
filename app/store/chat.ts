@@ -212,16 +212,16 @@ export const useChatStore = create<ChatStore>()(
           sessions,
         }));
 
-        // showToast(
-        //   Locale.Home.DeleteToast,
-        //   {
-        //     text: Locale.Home.Revert,
-        //     onClick() {
-        //       set(() => restoreState);
-        //     },
-        //   },
-        //   5000,
-        // );
+        showToast(
+          Locale.Home.DeleteToast,
+          {
+            text: Locale.Home.Revert,
+            onClick() {
+              set(() => restoreState);
+            },
+          },
+          5000,
+        );
       },
 
       currentSession() {

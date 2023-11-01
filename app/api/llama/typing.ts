@@ -1,6 +1,6 @@
 import type {
-  CreateChatCompletionRequest,
-  CreateChatCompletionResponse,
+    CreateChatCompletionRequest,
+    CreateChatCompletionResponse,
 } from "openai";
 
 export type ChatRequest = CreateChatCompletionRequest;
