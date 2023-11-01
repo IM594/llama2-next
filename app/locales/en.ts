@@ -123,45 +123,26 @@ const en: LocaleType = {
     // },
     HistoryCount: {
       Title: "Attached Messages Count",
-      SubTitle: "Number of sent messages attached per request",
+      SubTitle: "How many previous messages to use for context. They will take up some tokens",
     },
     CompressThreshold: {
       Title: "History Compression Threshold",
       SubTitle:
-        "Will compress if uncompressed messages length exceeds the value",
+        "Will shorten the previous messages if they exceed the value you set",
     },
-    // Token: {
-    //   Title: "API Key",
-    //   SubTitle: "Use your key to ignore access code limit",
-    //   Placeholder: "OpenAI API Key",
-    // },
-    // Usage: {
-    //   Title: "Account Balance",
-    //   SubTitle(used: any, total: any) {
-    //     return `Used this month $${used}, subscription $${total}`;
-    //   },
-    //   IsChecking: "Checking...",
-    //   Check: "Check",
-    //   NoAccess: "Enter API Key to check balance",
-    // },
-    // AccessCode: {
-    //   Title: "Access Code",
-    //   SubTitle: "Access control enabled",
-    //   Placeholder: "Need Access Code",
-    // },
     Model: "Model",
     Temperature: {
       Title: "Temperature",
-      SubTitle: "A larger value makes the more random output",
+      SubTitle: "Controls the randomness of the output, higher means more uncertain",
     },
     MaxTokens: {
       Title: "Max Tokens",
-      SubTitle: "Maximum length of input tokens and generated tokens",
+      SubTitle: "Limits the maximum length of the input and output, larger means longer",
     },
     PresencePenalty: {
       Title: "Presence Penalty",
       SubTitle:
-        "A larger value increases the likelihood to talk about new topics",
+        "Punishes repeated words in the output, higher means less repetition",
     },
     TopP: {
         Title: "Top P",

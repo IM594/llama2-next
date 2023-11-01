@@ -120,44 +120,24 @@ const cn = {
     // },
     HistoryCount: {
       Title: "附带历史消息数",
-      SubTitle: "每次请求携带的历史消息数",
+      SubTitle: "使用多少个之前的消息作为上下文。它们会占用一些令牌",
     },
     CompressThreshold: {
-      Title: "历史消息长度压缩值",
-      SubTitle: "当未压缩的历史消息超过该值时，将进行压缩",
+      Title: "历史消息压缩阈值",
+      SubTitle: "如果之前的消息超过您设置的值，将自动压缩它们",
     },
-    // Token: {
-    //   Title: "API Key",
-    //   SubTitle: "使用自己的 Key 可绕过密码访问限制",
-    //   Placeholder: "OpenAI API Key",
-    // },
-
-    // Usage: {
-    //   Title: "余额查询",
-    //   SubTitle(used: any, total: any) {
-    //     return `本月已使用 $${used}，订阅总额 $${total}`;
-    //   },
-    //   IsChecking: "正在检查…",
-    //   Check: "重新检查",
-    //   NoAccess: "输入 API Key 或访问密码查看余额",
-    // },
-    // AccessCode: {
-    //   Title: "访问密码",
-    //   SubTitle: "已开启加密访问",
-    //   Placeholder: "请输入访问密码",
-    // },
     Model: "模型",
     Temperature: {
       Title: "随机性",
-      SubTitle: "值越大，回复越随机",
+      SubTitle: "控制输出的随机性，越高越不确定",
     },
     MaxTokens: {
-      Title: "最大 Token 数",
-      SubTitle: "单次交互所用的最大 Token 数",
+      Title: "最大令牌数",
+      SubTitle: "限制输入和输出的最大长度，越大越长",
     },
     PresencePenalty: {
-      Title: "话题新鲜度",
-      SubTitle: "值越大，越有可能扩展到新话题",
+      Title: "存在惩罚",
+      SubTitle: "惩罚输出中重复的词语，越高越少重复",
     },
     TopP: {
         Title: "TopP",
