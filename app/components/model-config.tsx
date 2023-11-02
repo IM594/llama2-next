@@ -1,5 +1,3 @@
-// 用于设置的Model部分
-import styles from "./settings.module.scss";
 import {ALL_MODELS, ModalConfigValidator, ModelConfig} from "../store";
 
 import Locale from "../locales";
@@ -13,23 +11,23 @@ export function ModelConfigList(props: {
     return (
         <>
             <ListItem title={Locale.Settings.Model}>
-              <select
-                value={props.modelConfig.model}
-                onChange={(e) => {
-                  props.updateConfig(
-                    (config) =>
-                      (config.model = ModalConfigValidator.model(
-                        e.currentTarget.value,
-                      )),
-                  );
-                }}
-              >
-                {ALL_MODELS.map((v) => (
-                  <option value={v.name} key={v.name} disabled={!v.available}>
-                    {v.name}
-                  </option>
-                ))}
-              </select>
+                <select
+                    value={props.modelConfig.model}
+                    onChange={(e) => {
+                        props.updateConfig(
+                            (config) =>
+                                (config.model = ModalConfigValidator.model(
+                                    e.currentTarget.value,
+                                )),
+                        );
+                    }}
+                >
+                    {ALL_MODELS.map((v) => (
+                        <option value={v.name} key={v.name} disabled={!v.available}>
+                            {v.name}
+                        </option>
+                    ))}
+                </select>
             </ListItem>
             <ListItem
                 title={Locale.Settings.Temperature.Title}
@@ -126,17 +124,6 @@ export function ModelConfigList(props: {
                     }
                 ></InputRange>
             </ListItem>
-            {/*<ListItem title={Locale.Memory.Title} subTitle={Locale.Memory.Send}>*/}
-            {/*  <input*/}
-            {/*    type="checkbox"*/}
-            {/*    checked={props.modelConfig.sendMemory}*/}
-            {/*    onChange={(e) =>*/}
-            {/*      props.updateConfig(*/}
-            {/*        (config) => (config.sendMemory = e.currentTarget.checked),*/}
-            {/*      )*/}
-            {/*    }*/}
-            {/*  ></input>*/}
-            {/*</ListItem>*/}
         </>
     );
 }

@@ -373,6 +373,7 @@ export function Chat() {
             return; // 不允许提交
         }
 
+
         // 在提交之前禁用发送按钮
         setSendButtonDisabled(true); // 禁用发送按钮
 
@@ -647,7 +648,7 @@ export function Chat() {
                                 <div className={styles["chat-message-item"]}>
                                     {showActions && (
                                         <div className={styles["chat-message-top-actions"]}>
-                                            {message.streaming ? (
+                                            {sendButtonDisabled ? (
                                                 <div
                                                     className={styles["chat-message-top-action"]}
                                                     onClick={() => onUserStop(message.id ?? i)}
@@ -720,23 +721,30 @@ export function Chat() {
               autoFocus={autoFocus}
           />
                     {/*couldStop说明现在的状态是正在运行中，所以不能发送*/}
-                    {couldStop ? (
-                        <IconButton
-                            icon={<SendIcon/>}
-                            className={styles["chat-input-send-disabled"]}
-                            type="primary"
-                            disabled={true}
-                        />
-                    ) : (
-                        <IconButton
-                            icon={<SendIcon/>}
-                            className={styles["chat-input-send"]}
-                            type="primary"
-                            onClick={onUserSubmit}
-                            disabled={sendButtonDisabled} // 设置按钮是否禁用
-                        />
+                    {/*{couldStop ? (*/}
+                    {/*    <IconButton*/}
+                    {/*        icon={<SendIcon/>}*/}
+                    {/*        className={styles["chat-input-send-disabled"]}*/}
+                    {/*        type="primary"*/}
+                    {/*        disabled={true}*/}
+                    {/*    />*/}
+                    {/*) : (*/}
+                    {/*    <IconButton*/}
+                    {/*        icon={<SendIcon/>}*/}
+                    {/*        className={styles["chat-input-send"]}*/}
+                    {/*        type="primary"*/}
+                    {/*        onClick={onUserSubmit}*/}
+                    {/*        disabled={sendButtonDisabled} // 设置按钮是否禁用*/}
+                    {/*    />*/}
 
-                    )}
+                    {/*)}*/}
+                    <IconButton
+                        icon={<SendIcon/>}
+                        className={styles["chat-input-send"]}
+                        type="primary"
+                        onClick={onUserSubmit}
+                        disabled={sendButtonDisabled} // 设置按钮是否禁用
+                    />
                 </div>
             </div>
         </div>

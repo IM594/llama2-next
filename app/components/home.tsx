@@ -1,145 +1,129 @@
 "use client";
-
-// import {MaskPage} from "@/app/components/mask";
-
 require("../polyfill");
 
-import { useState, useEffect } from "react";
-
+import {useState, useEffect} from "react";
 import styles from "./home.module.scss";
-
-import BotIcon from "../icons/bot.svg";
-import LoadingIcon from "../icons/three-dots.svg";
-
-import { getCSSVar, useMobileScreen } from "../utils";
-
+import LlamaIcon from "../icons/llama.svg";
+import {getCSSVar, useMobileScreen} from "../utils";
 import dynamic from "next/dynamic";
-import { Path, SlotID } from "../constant";
-// import { ErrorBoundary } from "./error";
-
+import {Path, SlotID} from "../constant";
 import {
-  HashRouter as Router,
-  Routes,
-  Route,
-  useLocation,
+    HashRouter as Router,
+    Routes,
+    Route,
+    useLocation,
 } from "react-router-dom";
-import { SideBar } from "./sidebar";
-import { useAppConfig } from "../store/config";
+import {SideBar} from "./sidebar";
+import {useAppConfig} from "@/app/store";
 
 export function Loading(props: { noLogo?: boolean }) {
-  return (
-    <div className={styles["loading-content"] + " no-dark"}>
-      {!props.noLogo && <BotIcon />}
-      {/*<LoadingIcon />*/}
-    </div>
-  );
+    return (
+        <div className={styles["loading-content"] + " no-dark"}>
+            {!props.noLogo && <LlamaIcon/>}
+        </div>
+    );
 }
 
 const Settings = dynamic(async () => (await import("./settings")).Settings, {
-  loading: () => <Loading noLogo />,
+    loading: () => <Loading noLogo/>,
 });
 
 const Chat = dynamic(async () => (await import("./chat")).Chat, {
-  loading: () => <Loading noLogo />,
+    loading: () => <Loading noLogo/>,
 });
 
 const NewChat = dynamic(async () => (await import("./new-chat")).NewChat, {
-  loading: () => <Loading noLogo />,
+    loading: () => <Loading noLogo/>,
 });
 const MaskChat = dynamic(async () => (await import("./mask-chat")).NewChat, {
-  loading: () => <Loading noLogo />,
+    loading: () => <Loading noLogo/>,
 });
 
-// const MaskPage = dynamic(async () => (await import("./mask")).MaskPage, {
-//   loading: () => <Loading noLogo />,
-// });
-
 export function useSwitchTheme() {
-  const config = useAppConfig();
+    const config = useAppConfig();
 
-  useEffect(() => {
-    document.body.classList.remove("light");
-    document.body.classList.remove("dark");
+    useEffect(() => {
+        document.body.classList.remove("light");
+        document.body.classList.remove("dark");
 
-    if (config.theme === "dark") {
-      document.body.classList.add("dark");
-    } else if (config.theme === "light") {
-      document.body.classList.add("light");
-    }
+        if (config.theme === "dark") {
+            document.body.classList.add("dark");
+        } else if (config.theme === "light") {
+            document.body.classList.add("light");
+        }
 
-    const metaDescriptionDark = document.querySelector(
-      'meta[name="theme-color"][media]',
-    );
-    const metaDescriptionLight = document.querySelector(
-      'meta[name="theme-color"]:not([media])',
-    );
+        const metaDescriptionDark = document.querySelector(
+            'meta[name="theme-color"][media]',
+        );
+        const metaDescriptionLight = document.querySelector(
+            'meta[name="theme-color"]:not([media])',
+        );
 
-    if (config.theme === "auto") {
-      metaDescriptionDark?.setAttribute("content", "#151515");
-      metaDescriptionLight?.setAttribute("content", "#fafafa");
-    } else {
-      const themeColor = getCSSVar("--themeColor");
-      metaDescriptionDark?.setAttribute("content", themeColor);
-      metaDescriptionLight?.setAttribute("content", themeColor);
-    }
-  }, [config.theme]);
+        if (config.theme === "auto") {
+            metaDescriptionDark?.setAttribute("content", "#151515");
+            metaDescriptionLight?.setAttribute("content", "#fafafa");
+        } else {
+            const themeColor = getCSSVar("--themeColor");
+            metaDescriptionDark?.setAttribute("content", themeColor);
+            metaDescriptionLight?.setAttribute("content", themeColor);
+        }
+    }, [config.theme]);
 }
 
 const useHasHydrated = () => {
-  const [hasHydrated, setHasHydrated] = useState<boolean>(false);
+    const [hasHydrated, setHasHydrated] = useState<boolean>(false);
 
-  useEffect(() => {
-    setHasHydrated(true);
-  }, []);
+    useEffect(() => {
+        setHasHydrated(true);
+    }, []);
 
-  return hasHydrated;
+    return hasHydrated;
 };
 
 function Screen() {
-  const config = useAppConfig();
-  const location = useLocation();
-  const isHome = location.pathname === Path.Home;
-  const isMobileScreen = useMobileScreen();
+    const config = useAppConfig();
+    const location = useLocation();
+    const isHome = location.pathname === Path.Home;
+    const isMobileScreen = useMobileScreen();
 
-  return (
-    <div
-      className={
-        styles.container +
-        ` ${
-          config.tightBorder && !isMobileScreen
-            ? styles["tight-container"]
-            : styles.container
-        }`
-      }
-    >
-      <SideBar className={isHome ? styles["sidebar-show"] : ""} />
+    return (
+        <div
+            className={
+                styles.container +
+                ` ${
+                    config.tightBorder && !isMobileScreen
+                        ? styles["tight-container"]
+                        : styles.container
+                }`
+            }
+        >
+            <SideBar className={isHome ? styles["sidebar-show"] : ""}/>
 
-      <div className={styles["window-content"]} id={SlotID.AppBody}>
-        <Routes>
-          <Route path={Path.Home} element={<Chat />} />
-          <Route path={Path.NewChat} element={<NewChat />} />
-          <Route path={Path.MaskChat} element={<MaskChat />} />
-          {/*<Route path={Path.Masks} element={<MaskPage />} />*/}
-          <Route path={Path.Chat} element={<Chat />} />
-          <Route path={Path.Settings} element={<Settings />} />
-        </Routes>
-      </div>
-    </div>
-  );
+            <div className={styles["window-content"]} id={SlotID.AppBody}>
+                <Routes>
+                    <Route path={Path.Home} element={<Chat/>}/>
+                    <Route path={Path.NewChat} element={<NewChat/>}/>
+                    <Route path={Path.MaskChat} element={<MaskChat/>}/>
+                    <Route path={Path.Chat} element={<Chat/>}/>
+                    <Route path={Path.Settings} element={<Settings/>}/>
+                </Routes>
+            </div>
+        </div>
+    );
 }
 
 export function Home() {
-  useSwitchTheme();
+    useSwitchTheme();
 
-  if (!useHasHydrated()) {
-    return <Loading />;
-  }
+    if (!useHasHydrated()) {
+        return <Loading/>;
+    }
 
-  return (
-    <div>
-      <Router>
-        <Screen />
-      </Router>
-    </div>
-  );
+    return (
+        <div>
+            <Router>
+                <Screen/>
+            </Router>
+        </div>
+    );
 }
