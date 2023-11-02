@@ -9,7 +9,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Mask, useMaskStore } from "../store/mask";
 import Locale from "../locales";
 import { useAppConfig, useChatStore } from "../store";
-// import { MaskAvatar } from "./mask";
 
 function getIntersectionArea(aRect: DOMRect, bRect: DOMRect) {
   const xmin = Math.max(aRect.x, bRect.x);
@@ -130,38 +129,12 @@ export function NewChat() {
           ></IconButton>
         )}
       </div>
-      {/*<div className={styles["mask-cards"]}>*/}
-      {/*  <div className={styles["mask-card"]}>*/}
-      {/*    <EmojiAvatar avatar="1f606" size={24} />*/}
-      {/*  </div>*/}
-      {/*  <div className={styles["mask-card"]}>*/}
-      {/*    <EmojiAvatar avatar="1f916" size={24} />*/}
-      {/*  </div>*/}
-      {/*  <div className={styles["mask-card"]}>*/}
-      {/*    <EmojiAvatar avatar="1f479" size={24} />*/}
-      {/*  </div>*/}
-      {/*</div>*/}
 
       <div className={styles["title"]}>{Locale.NewChat.Title}</div>
       {/*<div className={styles["sub-title"]}>{Locale.NewChat.SubTitle}</div>*/}
 
       <div className={styles["actions"]}>
-        {/*<IconButton*/}
-        {/*  text={Locale.NewChat.Skip}*/}
-        {/*  onClick={() => startChat()}*/}
-        {/*  icon={<LightningIcon />}*/}
-        {/*  type="primary"*/}
-        {/*  shadow*/}
-        {/*/>*/}
 
-        {/*<IconButton*/}
-        {/*  className={styles["more"]}*/}
-        {/*  text={Locale.NewChat.More}*/}
-        {/*  onClick={() => navigate(Path.Masks)}*/}
-        {/*  icon={<EyeIcon />}*/}
-        {/*  bordered*/}
-        {/*  shadow*/}
-        {/*/>*/}
       </div>
 
       <div className={styles["masks"]}>

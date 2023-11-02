@@ -120,9 +120,9 @@ export function NewChat() {
                 <br/>
             </div>
 
-
             <div className={styles["title"]}>{Locale.NewChat.Title}</div>
-            <div className={styles["sub-title"]}>{Locale.NewChat.SubTitle}</div>·
+            <div className={styles["sub-title"]}>{Locale.NewChat.SubTitle}</div>
+            ·
             <br/><br/>
             {!showMore && (
                 <IconButton
@@ -147,8 +147,6 @@ export function NewChat() {
                     </div>
                 ))}
             </div>
-
-
         </div>
     );
 }
