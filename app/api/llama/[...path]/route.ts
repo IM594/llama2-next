@@ -105,7 +105,7 @@ async function handle(
         }
     } catch (e) {
         console.error("[Llama 2] ", e);
-        return formatResponse("Please check if the backend " + requestFunction + " is turned on.");
+        return formatResponse("Please check if the backend " + params.path[3] + " is turned on.");
 
     }
 }
