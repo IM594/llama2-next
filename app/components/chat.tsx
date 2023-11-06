@@ -180,9 +180,9 @@ export function SessionConfigModel(props: { onClose: () => void }) {
                     </ListItem>
                     <ListItem title={Locale.Settings.CompressThreshold.Title}>
                         <InputRange
-                            min="0"
-                            max="1"
-                            step="0.1"
+                            min="500"
+                            max="4000"
+                            step="100"
 
                             value={session.mask.modelConfig.compressMessageLengthThreshold}
                             onChange={(e) =>

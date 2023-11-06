@@ -3,7 +3,6 @@ import {BuiltinMask} from "./typing";
 export const EN_MASKS: BuiltinMask[] = [
 
     {
-        // avatar: "1f469-200d-1f4bc",
         name: "Virtual Doctor",
         context: [
             {

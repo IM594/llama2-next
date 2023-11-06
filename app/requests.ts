@@ -28,7 +28,6 @@ const makeRequestParam = (
         ...useChatStore.getState().currentSession().mask.modelConfig,
     };
 
-
     return {
         messages: sendMessages,
         stream: options?.stream,
