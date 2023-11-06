@@ -173,7 +173,7 @@ export function SessionConfigModel(props: { onClose: () => void }) {
                             onChange={(e) =>
                                 chatStore.updateCurrentSession(
                                     (session) =>
-                                        (session.mask.modelConfig.historyMessageCount),
+                                        (session.mask.modelConfig.historyMessageCount = e.currentTarget.valueAsNumber),
                                 )
                             }
                         ></InputRange>
@@ -188,7 +188,7 @@ export function SessionConfigModel(props: { onClose: () => void }) {
                             onChange={(e) =>
                                 chatStore.updateCurrentSession(
                                     (session) =>
-                                        (session.mask.modelConfig.compressMessageLengthThreshold),
+                                        (session.mask.modelConfig.compressMessageLengthThreshold=e.currentTarget.valueAsNumber),
                                 )
                             }
                         ></InputRange>
