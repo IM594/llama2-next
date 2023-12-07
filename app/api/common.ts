@@ -1,7 +1,7 @@
 import {NextRequest} from "next/server";
 
 // const BASE_URL = "http://region-31.seetacloud.com:46766/v1/chat/completions"; // 内蒙A区 / 385机 3090 13b
-const BASE_URL = "http://region-3.seetacloud.com:30160//v1/chat/completions"; // 内蒙A区 / 094机 RTX A5000 13b
+const BASE_URL = "http://region-3.seetacloud.com:30160/v1/chat/completions"; // 内蒙A区 / 094机 RTX A5000 13b
 const MEDICAL_URL = "http://region-31.seetacloud.com:46411/v1/chat/completions"; // 内蒙A区 / 384机 3090
 const FINANCE_URL = "http://region-31.seetacloud.com:30342/v1/chat/completions"; // 内蒙A区 / 386机 3090
 
